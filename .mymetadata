@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="MiniShopping"
+  id="myeclipse.1397167156196"
+  context-root="/MiniShopping"
+  j2ee-spec="6.0"
+  archive="MiniShopping.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
