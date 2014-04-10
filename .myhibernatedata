@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Thu Apr 10 16:10:35 PDT 2014
+#Thu Apr 10 16:23:21 PDT 2014
 sessionFactoryName=DBModel.HibernateSessionFactory
 genBasicCompId=false
 profile=
@@ -11,7 +11,7 @@ reStrategyClass=
 detectO2O=false
 springDaoFile=
 useJavaTypes=true
-keyGenerator=
+keyGenerator=identity
 libInstallFolder=WebRoot/WEB-INF/lib
 addLibs2Project=true
 genVersionTag=false
@@ -22,4 +22,4 @@ reSettingsFile=
 configFile=/MiniShopping/src/hibernate.cfg.xml
 createConfigFile=true
 addLibs2Classpath=true
-baseDaoClass=BaseHibernateDAO
+baseDaoClass=DBModel.BaseHibernateDAO

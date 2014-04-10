@@ -13,14 +13,14 @@ public class Usertable extends AbstractUsertable implements
 	}
 
 	/** minimal constructor */
-	public Usertable(Long id, String name, Integer role) {
-		super(id, name, role);
+	public Usertable(String name, Integer role) {
+		super(name, role);
 	}
 
 	/** full constructor */
-	public Usertable(Long id, String name, Integer role, Integer age,
+	public Usertable(String name, Integer role, Integer age,
 			String state) {
-		super(id, name, role, age, state);
+		super( name, role, age, state);
 	}
 
 }

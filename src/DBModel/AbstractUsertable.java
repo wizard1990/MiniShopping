@@ -22,16 +22,14 @@ public abstract class AbstractUsertable implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public AbstractUsertable(Long id, String name, Integer role) {
-		this.id = id;
+	public AbstractUsertable(String name, Integer role) {
 		this.name = name;
 		this.role = role;
 	}
 
 	/** full constructor */
-	public AbstractUsertable(Long id, String name, Integer role, Integer age,
+	public AbstractUsertable(String name, Integer role, Integer age,
 			String state) {
-		this.id = id;
 		this.name = name;
 		this.role = role;
 		this.age = age;
