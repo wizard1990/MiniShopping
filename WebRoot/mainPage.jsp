@@ -23,6 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <%if(session.getAttribute("userid") != null) { %>
+    <h3>Hello, <%=session.getAttribute("userid")%></h3>
+  <%} else {%>
+    <h3>Hello, guest.</h3>
+   <%} %>
     Welcome to main page!<br>
   </body>
 </html>
