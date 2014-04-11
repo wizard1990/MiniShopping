@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>
                 <td>
                 <input type="button" value="btn" onclick="checkUser()"/>
-                <input type="submit" value="submit"/>
+                <input type="submit" value="submit" onclick="checkUser()"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>
