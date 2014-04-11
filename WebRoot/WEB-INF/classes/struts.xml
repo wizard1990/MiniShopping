@@ -11,4 +11,4 @@
               <result name="error">/signup.jsp</result>
           </action>
 </package>
-</struts>    
+</struts>
