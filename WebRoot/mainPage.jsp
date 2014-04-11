@@ -27,11 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 /*   session.invalidate();  */
   if(session.getAttribute("username") != null) { %>
     <h3>Hello, <%=session.getAttribute("username")%></h3> 
+    <a href="logout.jsp">logout</a>
   <%} else {%>
     <h3>Hello, guest.</h3>
+    <a href="signup.jsp">signup</a>
+    <a href="login.jsp">login</a>
    <%} %>
     Welcome to main page!<br>
-    
-    <a href="logout.jsp">logout</a>
+
   </body>
 </html>
