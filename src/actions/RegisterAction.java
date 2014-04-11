@@ -50,9 +50,12 @@ public class RegisterAction extends ActionSupport {
 			return "duplicate";
 		}
 		try {
-        	Usertable user = new Usertable(name, role, age, state);
-            userDAO.save(user);
-            return SUCCESS;
+			if (age < 0) throw null;
+			else {
+				Usertable user = new Usertable(name, role, age, state);
+				userDAO.save(user);
+				return SUCCESS;
+			}
         } catch (RuntimeException re) {
             return ERROR;
         }
