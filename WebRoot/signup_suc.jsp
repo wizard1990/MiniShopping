@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'signup.jsp' starting page</title>
+    <title>My JSP 'signup_suc.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,19 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <form action="Register.action" method="post">
-        <table align="center">
-            <tr>
-                <td>UserName:<input type="text" name="name"/></td>
-                <td>Role:<input type="text" name="role"/></td>
-                <td>Age:<input type="text" name="age"/></td>
-                <td>State:<input type="text" name="state"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="submit"/>
-                <input type="reset" value="reset"/></td>
-            </tr>
-        </table>
-    </form>
+    This is my JSP page. <br>
+    <%String name = request.getParameter("name");
+      if(name != null)
+      	session.setAttribute("username", name);
+      response.setHeader("refresh", "2; URL=mainPage.jsp");
+    %>
+    
   </body>
 </html>

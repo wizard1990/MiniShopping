@@ -3,8 +3,8 @@
 <struts>
 <package name="struts2" extends="struts-default">
           <action name="Register" class="actions.RegisterAction">
-              <result name="success">/mainPage.jsp</result>
-              <result name="error">/index.jsp</result>
+              <result name="success">/signup_suc.jsp</result>
+              <result name="error">/signup.jsp</result>
           </action>
 </package>
 </struts>    
