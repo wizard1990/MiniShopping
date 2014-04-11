@@ -34,14 +34,15 @@ public class UsertableDAO extends BaseHibernateDAO {
 		Transaction tran=getSession().beginTransaction();
 		try {
 			getSession().save(transientInstance);
+			tran.commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
 			throw re;
+		} finally {
+			getSession().flush(); 
+	        getSession().close();
 		}
-		tran.commit();
-        getSession().flush(); 
-        getSession().close();
 	}
 
 	public void delete(Usertable persistentInstance) {
@@ -49,14 +50,15 @@ public class UsertableDAO extends BaseHibernateDAO {
 		Transaction tran=getSession().beginTransaction();
 		try {
 			getSession().delete(persistentInstance);
+			tran.commit();
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;
+		} finally {
+			getSession().flush(); 
+	        getSession().close();
 		}
-		tran.commit();
-        getSession().flush(); 
-        getSession().close();
 	}
 
 	public Usertable findById(java.lang.Long id) {

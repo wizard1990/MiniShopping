@@ -1,5 +1,7 @@
 package actions;
 
+import java.util.List;
+
 import DBModel.Usertable;
 import DBModel.UsertableDAO;
 
@@ -40,17 +42,17 @@ public class RegisterAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception{
-        if(name!=null && role != null){
-        	    UsertableDAO userDAO = new UsertableDAO();
-        	    Usertable user = new Usertable(name, role, age, state);
-                userDAO.save(user);
-                //List l = userDAO.findAll();
-                return SUCCESS;
-//                if (l.size() > 0)
-//                	return SUCCESS;
-//                else return ERROR;
-        }else{
-                 return ERROR;
+		UsertableDAO userDAO = new UsertableDAO();
+		List l = userDAO.findByName(name);
+		if (l.size() > 0) {
+			return "duplicate";
+		}
+		try {
+        	Usertable user = new Usertable(name, role, age, state);
+            userDAO.save(user);
+            return SUCCESS;
+        } catch (RuntimeException re) {
+            return ERROR;
         }
 	}
 }
