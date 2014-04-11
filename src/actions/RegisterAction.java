@@ -50,7 +50,7 @@ public class RegisterAction extends ActionSupport {
 			return "duplicate";
 		}
 		try {
-			if (age < 0) throw null;
+			if (age != null && age < 0) throw null;
 			else {
 				Usertable user = new Usertable(name, role, age, state);
 				userDAO.save(user);
