@@ -5,10 +5,11 @@
           <action name="Register" class="actions.RegisterAction">
               <result name="success">/signup_suc.jsp</result>
               <result name="error">/signup.jsp</result>
+              <result name="duplicate">/signup.jsp</result>
           </action>
-          <action name="Login" class="actions.Login">
+          <action name="Login" class="actions.LoginAction">
               <result name="success">/signup_suc.jsp</result>
-              <result name="error">/signup.jsp</result>
+              <result name="error">/login.jsp</result>
           </action>
 </package>
 </struts>
