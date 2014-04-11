@@ -23,32 +23,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <script type="text/javascript">
-  function inputCheck()
-  {
-  var userName=document.getElementByName("name").value;
-  if(userName=="")
-  	alert("please input username");
-  else if (userName.length < 6 || userName.length > 20)
-  {
- 	 alert("username length should be between 6 ~ 20");
-  }
-  }
-  </script>
-  
+  <h1>REGISTER</h1>
+  <hr>
     <form action="Register.action" method="post">
         <table align="center">
-            <tr>
-                <td>UserName:<input type="text" name="name"/></td>
-                <td>Role:
+            <tr><td>UserName:<input type="text" name="name"/></td></tr>
+            <tr><td>Role:
                 <select name="role">
                 	<option value="0">owner</option>
                 	<option value="1">customer</option>
                 </select>
-                </td>
-                <td>Age:<input type="text" name="age"/></td>
-                <td>State:<input type="text" name="state"/></td>
-            </tr>
+            </td></tr>
+            <tr><td>Age:<input type="text" name="age"/></td></tr>
+            <tr><td>State:<input type="text" name="state"/></td></tr>
             <tr>
                 <td><input type="submit" value="submit"/>
                 <input type="reset" value="reset"/></td>

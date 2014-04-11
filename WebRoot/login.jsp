@@ -23,12 +23,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%
-  	String id = session.getId();
-  	session.setAttribute("username", "ccc");
-   %>
-   <h3>session ID: <%=id %></h3>
-   <a href="logout.jsp">logout</a>
-   <a href="mainPage.jsp">main</a>
+   <h1>REGISTER</h1>
+   <hr>
+   <form action="Register.action" method="post">
+        <table align="center">
+            <tr>
+                <td>UserName:<input type="text" name="name"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="submit"/>
+                <input type="reset" value="reset"/></td>
+            </tr>
+        </table>
+    </form>
+   
   </body>
 </html>
