@@ -23,21 +23,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <script>
+  function checkUser()
+  {
+	var val = document.getElementById("name").value;
+	var age = document.getElementById("age").value;;
+	if (val == "")
+	{
+	    var txt = "input should not be empty";
+	    alert(txt);
+	    window.location.href='signup.jsp';
+	}
+	else if (age < 0)
+	{
+	    var txt = "age should not be negative";
+	    alert(txt);
+	    window.location.href='signup.jsp';
+	}
+  }
+  </script>
   <h1>REGISTER</h1>
   <hr>
     <form action="Register.action" method="post">
         <table align="center">
-            <tr><td>UserName:<input type="text" name="name"/></td></tr>
+            <tr><td>UserName:<input type="text" name="name" id="name"/>
+            </td></tr>
             <tr><td>Role:
                 <select name="role">
                 	<option value="0">owner</option>
                 	<option value="1">customer</option>
                 </select>
             </td></tr>
-            <tr><td>Age:<input type="text" name="age"/></td></tr>
+            <tr><td>Age:<input type="text" name="age" id="age"/></td></tr>
             <tr><td>State:<input type="text" name="state"/></td></tr>
             <tr>
-                <td><input type="submit" value="submit"/>
+                <td><input type="submit" value="submit" onclick="checkUser()"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>
