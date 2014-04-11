@@ -23,8 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <form action="login.jsp" method="post">
-    
-    </form>
+  <%
+  	String id = session.getId();
+  	session.setAttribute("username", "ccc");
+   %>
+   <h3>session ID: <%=id %></h3>
+   <a href="logout.jsp">logout</a>
+   <a href="mainPage.jsp">main</a>
   </body>
 </html>

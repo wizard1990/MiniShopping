@@ -23,6 +23,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <form action="Register.action" method="post">
+        <table align="center">
+            <tr>
+                <td>UserName:<input type="text" name="name"/></td>
+                <td>Role:<input type="text" name="role"/></td>
+                <td>Age:<input type="text" name="age"/></td>
+                <td>State:<input type="text" name="state"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="submit"/>
+                <input type="reset" value="reset"/></td>
+            </tr>
+        </table>
+        <%String name = request.getParameter("name");
+        if(name != null)
+        	session.setAttribute("username", name);
+         %>
+        
+    </form>
   </body>
 </html>

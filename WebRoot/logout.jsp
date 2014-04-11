@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>MAIN PAGE!</title>
+    <title>My JSP 'logout.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,17 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%
+	response.setHeader("refresh", "2; URL=mainPage.jsp");
+	session.invalidate();
+	 %>
   </head>
   
   <body>
-  <%
-/*   session.invalidate();  */
-  if(session.getAttribute("username") != null) { %>
-    <h3>Hello, <%=session.getAttribute("username")%></h3> 
-  <%} else {%>
-    <h3>Hello, guest.</h3>
-   <%} %>
-    Welcome to main page!<br>
+    This is my JSP page. <br>
   </body>
 </html>
