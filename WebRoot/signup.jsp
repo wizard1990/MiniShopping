@@ -32,13 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	{
 	    var txt = "input should not be empty";
 	    alert(txt);
-	    window.location.href='signup.jsp';
+	    window.location.href="mainPage.jsp";
 	}
 	else if (age < 0)
 	{
 	    var txt = "age should not be negative";
 	    alert(txt);
-	    window.location.href='signup.jsp';
+	    window.location.href="mainPage.jsp";
 	}
   }
   </script>
@@ -50,14 +50,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td></tr>
             <tr><td>Role:
                 <select name="role">
-                	<option value="0">owner</option>
                 	<option value="1">customer</option>
+                	<option value="0">owner</option>
                 </select>
             </td></tr>
             <tr><td>Age:<input type="text" name="age" id="age"/></td></tr>
             <tr><td>State:<input type="text" name="state"/></td></tr>
             <tr>
-                <td><input type="submit" value="submit" onclick="checkUser()"/>
+                <td>
+                <input type="button" value="btn" onclick="checkUser()"/>
+                <input type="submit" value="submit"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>
