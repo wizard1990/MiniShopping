@@ -23,12 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
     <%String name = request.getParameter("name");
       if(name != null)
       	session.setAttribute("username", name);
       response.setHeader("refresh", "2; URL=mainPage.jsp");
     %>
-    
+    sign up successfully!<br>
   </body>
 </html>

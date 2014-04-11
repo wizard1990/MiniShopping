@@ -31,5 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h3>Hello, guest.</h3>
    <%} %>
     Welcome to main page!<br>
+    
+    <a href="logout.jsp">logout</a>
   </body>
 </html>
