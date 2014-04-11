@@ -7,5 +7,9 @@
               <result name="error">/signup.jsp</result>
               <result name="duplicate">/signup.jsp</result>
           </action>
+          <action name="Login" class="actions.Login">
+              <result name="success">/signup_suc.jsp</result>
+              <result name="error">/signup.jsp</result>
+          </action>
 </package>
 </struts>    

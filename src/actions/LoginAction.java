@@ -12,7 +12,7 @@ public class LoginAction extends ActionSupport {
 	void setName(String name) {
 		this.name = name;
 	}
-	String getName(String name) {
+	String getName() {
 		return name;
 	}
 	
@@ -20,12 +20,8 @@ public class LoginAction extends ActionSupport {
 		UsertableDAO userDAO = new UsertableDAO();
 		List l = userDAO.findByName(name);
 		if (l.size() > 0) {
-			return "duplicate";
+			return SUCCESS;
 		}
-		try {
-            return SUCCESS;
-        } catch (RuntimeException re) {
-            return ERROR;
-        }
+		else return ERROR;
 	}
 }
