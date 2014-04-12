@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <a href="logout.jsp">logout</a>
-    <% if(session.getAttribute("userrole") == "0") {%>
+    <% if(session.getAttribute("userrole").equals("0")) {%>
     <a href="category.jsp">category</a>
   <%} } else {%>
     <h3>Hello, guest.</h3>
