@@ -3,6 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@taglib uri="/struts-tags" prefix="s" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -24,9 +25,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <%String name = request.getParameter("name");
-      if(name != null)
+      if(name != null) {
       	session.setAttribute("username", name);
+      }
       response.setHeader("refresh", "2; URL=mainPage.jsp");
+      
     %>
     log in successfully!<br>
   </body>

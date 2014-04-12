@@ -2,6 +2,11 @@ package actions;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import DBModel.Usertable;
 import DBModel.UsertableDAO;
 
@@ -22,7 +27,10 @@ public class LoginAction extends ActionSupport {
 		List l = userDAO.findByName(name);
 		if (l.size() == 1) {
 			Usertable user = (Usertable) l.get(0);
-			setRole(user.getRole());
+			String r = user.getRole().toString();
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
+			session.setAttribute("userrole", r);
 			return SUCCESS;
 		}
 		else return ERROR;
