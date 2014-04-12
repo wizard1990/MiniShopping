@@ -9,7 +9,7 @@ public abstract class AbstractUsertable implements java.io.Serializable {
 
 	// Fields
 
-	private Long id;
+	private Integer id;
 	private String name;
 	private Integer role;
 	private Integer age;
@@ -38,11 +38,11 @@ public abstract class AbstractUsertable implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

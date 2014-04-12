@@ -61,7 +61,7 @@ public class UsertableDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Usertable findById(java.lang.Long id) {
+	public Usertable findById(java.lang.Integer id) {
 		log.debug("getting Usertable instance with id: " + id);
 		try {
 			Usertable instance = (Usertable) getSession().get(

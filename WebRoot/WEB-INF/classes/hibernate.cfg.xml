@@ -8,15 +8,15 @@
 
 	<session-factory>
 		<property name="dialect">
-			org.hibernate.dialect.DerbyDialect
+			org.hibernate.dialect.PostgreSQLDialect
 		</property>
 		<property name="connection.url">
-			jdbc:derby://localhost:1527/myeclipse
+			jdbc:postgresql://localhost:5432/postgres
 		</property>
-		<property name="connection.username">root</property>
+		<property name="connection.username">postgres</property>
 		<property name="connection.password">wizard</property>
 		<property name="connection.driver_class">
-			org.apache.derby.jdbc.ClientDriver
+			org.postgresql.Driver
 		</property>
 		<property name="myeclipse.connection.profile">
 			MiniShoppingDB
