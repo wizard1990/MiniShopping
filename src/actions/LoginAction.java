@@ -15,6 +15,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginAction extends ActionSupport {
 	private String name;
 	private Integer role;
+	private List list;
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -26,6 +28,7 @@ public class LoginAction extends ActionSupport {
 		UsertableDAO userDAO = new UsertableDAO();
 		List l = userDAO.findByName(name);
 		if (l.size() == 1) {
+			list = userDAO.findAll();
 			Usertable user = (Usertable) l.get(0);
 			String r = user.getRole().toString();
 			HttpServletRequest request = ServletActionContext.getRequest();
@@ -40,5 +43,11 @@ public class LoginAction extends ActionSupport {
 	}
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+	public List getList() {
+		return list;
+	}
+	public void setList(List list) {
+		this.list = list;
 	}
 }
