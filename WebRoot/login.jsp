@@ -23,6 +23,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+    <script>
+	  function checkUser()
+	  {
+		var val = document.getElementById("name").value;
+		if (val == "")
+		{
+		    var txt = "input should not be empty";
+		    alert(txt);
+		    window.location.href="login.jsp";
+		}
+	  }
+	  </script>
    <h1>LOG IN</h1>
    <hr>
    <form action="Login.action" method="post">
@@ -31,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td>UserName:<input type="text" name="name"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="submit"/>
+                <td><input type="submit" value="submit" onclick="checkUser()"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>

@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   function checkUser()
   {
 	var val = document.getElementById("name").value;
-	var age = document.getElementById("age").value;;
+	var age = document.getElementById("age").value;
 	if (val == "")
 	{
 	    var txt = "input should not be empty";
@@ -111,7 +111,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</td></tr>
             <tr>
                 <td>
-                <input type="button" value="btn" onclick="checkUser()"/>
                 <input type="submit" value="submit" onclick="checkUser()"/>
                 <input type="reset" value="reset"/></td>
             </tr>
