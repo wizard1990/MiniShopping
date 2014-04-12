@@ -51,6 +51,7 @@ public class RegisterAction extends ActionSupport {
 		}
 		try {
 			if (age != null && age < 0) throw null;
+			if (state.length() > 20) throw null;
 			else {
 				Usertable user = new Usertable(name, role, age, state);
 				userDAO.save(user);
