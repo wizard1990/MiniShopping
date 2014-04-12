@@ -24,8 +24,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <%String name = request.getParameter("name");
+      String role = request.getParameter("role");
       if(name != null)
+      {
       	session.setAttribute("username", name);
+      	session.setAttribute("userrole", role);
+      }
       response.setHeader("refresh", "2; URL=mainPage.jsp");
     %>
     sign up successfully!<br>

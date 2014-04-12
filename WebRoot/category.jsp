@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>MAIN PAGE</title>
+    <title>My JSP 'category.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,19 +23,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <h1>MINI SHOPPING</h1>
-  <%
-  if(session.getAttribute("username") != null) { %>
-    <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <a href="logout.jsp">logout</a>
-    <% if(session.getAttribute("userrole").equals("0")) {%>
-    <a href="category.jsp">category</a>
-  <%} } else {%>
-    <h3>Hello, guest.</h3>
-    <a href="signup.jsp">signup</a>
-    <a href="login.jsp">login</a>
-   <%} %>
-    Welcome to main page!<br>
-
+  <h1>CATEGORY</h1>
+  <h2>Hello, <%=session.getAttribute("username")%></h2> 
+    This is my JSP page. <br>
   </body>
 </html>
