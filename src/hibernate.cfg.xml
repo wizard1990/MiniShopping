@@ -7,12 +7,20 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+		<property name="dialect">
+			org.hibernate.dialect.PostgreSQLDialect
+		</property>
+		<property name="connection.url">
+			jdbc:postgresql://localhost:5432/postgres
+		</property>
 		<property name="connection.username">postgres</property>
 		<property name="connection.password">wizard</property>
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="myeclipse.connection.profile">MiniShoppingDB</property>
+		<property name="connection.driver_class">
+			org.postgresql.Driver
+		</property>
+		<property name="myeclipse.connection.profile">
+			MiniShoppingDB
+		</property>
 		<mapping resource="DBModel/Usertable.hbm.xml" />
 
 	</session-factory>
