@@ -24,7 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <h1>CATEGORY</h1>
+  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
+  <h2>You are not owner and you will be redirected to main page now.</h2>
+  <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ %>
   <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    This is my JSP page. <br>
+    This is CATEGORY. <br>
+    <%} %>
   </body>
 </html>
