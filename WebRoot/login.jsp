@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <form action="Login.action" method="post">
         <table align="center">
             <tr>
-                <td>UserName:<input type="text" name="name"/></td>
+                <td>UserName:<input type="text" name="name" id="name"/></td>
             </tr>
             <tr>
                 <td><input type="submit" value="submit" onclick="checkUser()"/>
