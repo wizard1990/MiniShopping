@@ -7,6 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<style type="text/css">
+	input:focus
+	{
+	background-color:CCCCFF;
+	}
+	</style>
+  
     <base href="<%=basePath%>">
     
     <title>My JSP 'login.jsp' starting page</title>
