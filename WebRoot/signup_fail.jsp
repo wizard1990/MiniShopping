@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'category.jsp' starting page</title>
+    <title>My JSP 'signup_fail.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,13 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <h1>CATEGORY</h1>
-  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
-  <h2>You are not owner and you will be redirected to main page now.</h2>
-  <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ %>
-  <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    This is CATEGORY. <br>
-    <p>----------insert category here---------------</p>
-    <%} %>
+  	
+  	<% 
+          response.setHeader("refresh", "2; URL=signup.jsp");
+    %>
+    Your signup failed!
+    
   </body>
 </html>
