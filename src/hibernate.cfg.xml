@@ -22,6 +22,7 @@
 			MiniShoppingDB
 		</property>
 		<mapping resource="DBModel/User.hbm.xml" />
+		<mapping resource="DBModel/Category.hbm.xml" />
 
 	</session-factory>
 

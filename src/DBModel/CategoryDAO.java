@@ -9,32 +9,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A data access object (DAO) providing persistence and search support for User
- * entities. Transaction control of the save(), update() and delete() operations
- * can directly support Spring container-managed transactions or they can be
- * augmented to handle user-managed Spring transactions. Each of these methods
- * provides additional information for how to configure it for the desired type
- * of transaction control.
+ * A data access object (DAO) providing persistence and search support for
+ * Category entities. Transaction control of the save(), update() and delete()
+ * operations can directly support Spring container-managed transactions or they
+ * can be augmented to handle user-managed Spring transactions. Each of these
+ * methods provides additional information for how to configure it for the
+ * desired type of transaction control.
  * 
- * @see DBModel.User
+ * @see DBModel.Category
  * @author MyEclipse Persistence Tools
  */
 
-public class UserDAO extends BaseHibernateDAO {
-	private static final Logger log = LoggerFactory.getLogger(UserDAO.class);
+public class CategoryDAO extends BaseHibernateDAO {
+	private static final Logger log = LoggerFactory
+			.getLogger(CategoryDAO.class);
 	// property constants
 	public static final String NAME = "name";
-	public static final String ROLE = "role";
-	public static final String AGE = "age";
-	public static final String STATE = "state";
+	public static final String DESCRIP = "descrip";
 
-	public void save(User transientInstance) {
-		log.debug("saving User instance");
+	public void save(Category transientInstance) {
+		log.debug("saving Category instance");
 		Transaction tran=getSession().beginTransaction();
         try {
             getSession().save(transientInstance);
             tran.commit();
-            getSession().flush(); 
+            getSession().flush();
             log.debug("save successful");
         } catch (RuntimeException re) {
             log.error("save failed", re);
@@ -44,8 +43,8 @@ public class UserDAO extends BaseHibernateDAO {
         }
 	}
 
-	public void delete(User persistentInstance) {
-		log.debug("deleting User instance");
+	public void delete(Category persistentInstance) {
+		log.debug("deleting Category instance");
 		Transaction tran = getSession().beginTransaction();
         try {
             getSession().delete(persistentInstance);
@@ -60,10 +59,11 @@ public class UserDAO extends BaseHibernateDAO {
         }
 	}
 
-	public User findById(java.lang.Integer id) {
-		log.debug("getting User instance with id: " + id);
+	public Category findById(java.lang.Integer id) {
+		log.debug("getting Category instance with id: " + id);
 		try {
-			User instance = (User) getSession().get("DBModel.User", id);
+			Category instance = (Category) getSession().get("DBModel.Category",
+					id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -71,10 +71,10 @@ public class UserDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByExample(User instance) {
-		log.debug("finding User instance by example");
+	public List findByExample(Category instance) {
+		log.debug("finding Category instance by example");
 		try {
-			List results = getSession().createCriteria("DBModel.User")
+			List results = getSession().createCriteria("DBModel.Category")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -86,10 +86,10 @@ public class UserDAO extends BaseHibernateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding User instance with property: " + propertyName
+		log.debug("finding Category instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from User as model where model."
+			String queryString = "from Category as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -104,22 +104,14 @@ public class UserDAO extends BaseHibernateDAO {
 		return findByProperty(NAME, name);
 	}
 
-	public List findByRole(Object role) {
-		return findByProperty(ROLE, role);
-	}
-
-	public List findByAge(Object age) {
-		return findByProperty(AGE, age);
-	}
-
-	public List findByState(Object state) {
-		return findByProperty(STATE, state);
+	public List findByDescrip(Object descrip) {
+		return findByProperty(DESCRIP, descrip);
 	}
 
 	public List findAll() {
-		log.debug("finding all User instances");
+		log.debug("finding all Category instances");
 		try {
-			String queryString = "from User";
+			String queryString = "from Category";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -128,10 +120,10 @@ public class UserDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public User merge(User detachedInstance) {
-		log.debug("merging User instance");
+	public Category merge(Category detachedInstance) {
+		log.debug("merging Category instance");
 		try {
-			User result = (User) getSession().merge(detachedInstance);
+			Category result = (Category) getSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -140,8 +132,8 @@ public class UserDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(User instance) {
-		log.debug("attaching dirty User instance");
+	public void attachDirty(Category instance) {
+		log.debug("attaching dirty Category instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -151,8 +143,8 @@ public class UserDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachClean(User instance) {
-		log.debug("attaching clean User instance");
+	public void attachClean(Category instance) {
+		log.debug("attaching clean Category instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
