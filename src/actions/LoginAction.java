@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import DBModel.Usertable;
-import DBModel.UsertableDAO;
+import DBModel.User;
+import DBModel.UserDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,10 +23,10 @@ public class LoginAction extends ActionSupport {
 	}
 	
 	public String execute() throws Exception{
-		UsertableDAO userDAO = new UsertableDAO();
+		UserDAO userDAO = new UserDAO();
 		List l = userDAO.findByName(name);
 		if (l.size() == 1) {
-			Usertable user = (Usertable) l.get(0);
+			User user = (User) l.get(0);
 			String r = user.getRole().toString();
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setAttribute("alllist", userDAO.findAll());

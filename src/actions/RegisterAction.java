@@ -3,9 +3,10 @@ package actions;
 
 import java.util.List;
 
-import DBModel.Usertable;
-import DBModel.UsertableDAO;
 
+
+import DBModel.User;
+import DBModel.UserDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -44,7 +45,7 @@ public class RegisterAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception{
-		UsertableDAO userDAO = new UsertableDAO();
+		UserDAO userDAO = new UserDAO();
 		List l = userDAO.findByName(name);
 		if (l.size() > 0) {
 			return "duplicate";
@@ -52,7 +53,7 @@ public class RegisterAction extends ActionSupport {
 		try {
 			if ((age != null && age < 0) || name.contains(" ") || name.length() < 1) throw null;
 			else {
-				Usertable user = new Usertable(name, role, age, state);
+				User user = new User(name, role, age, state);
 				userDAO.save(user);
 				return SUCCESS;
 			}
