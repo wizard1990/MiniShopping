@@ -58,6 +58,7 @@ public class RegisterAction extends ActionSupport {
 				return SUCCESS;
 			}
         } catch (RuntimeException re) {
+        	System.out.println(re);
             return ERROR;
         }
 	}

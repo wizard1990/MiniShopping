@@ -14,13 +14,13 @@
             <column name="name" length="20" not-null="true" unique="true" />
         </property>
         <property name="role" type="java.lang.Integer">
-            <column name="role" not-null="true" unique="true" />
+            <column name="role" not-null="true" />
         </property>
         <property name="age" type="java.lang.Integer">
-            <column name="age" not-null="true" unique="true" />
+            <column name="age" not-null="true" />
         </property>
         <property name="state" type="java.lang.String">
-            <column name="state" length="20" not-null="true" unique="true" />
+            <column name="state" length="20" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
