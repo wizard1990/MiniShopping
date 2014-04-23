@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <!-- 	updateCate.action -> para: action(update), uname() -->
 <!-- 	deleteCate.action -> para: action(delete), uname() -->
-	<s:iterator value="#request.alllist">
+	<s:iterator value="#request.categories">
 	<tr>
 		<form action="updateCate.action" method="post">
 		<input type="hidden" name="action" value="update"/>
