@@ -31,10 +31,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="product_browsing.jsp">product browsing</a>
     <% if(session.getAttribute("userrole").equals("0")) {%>
     <a href="category.jsp">category</a>
-    <form action="listCate.action" method="post">
+    <form action="ListCate.action" method="post">
     <th><input type="submit" value="category"/></th>
     </form>
-    <form action="listProd.action" method="post">
+    <form action="ListProd.action" method="post">
     <th><input type="submit" value="product"/></th>
     </form>
   <%} } else {%>
