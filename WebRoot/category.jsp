@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="hidden" name="action" value="insert"/>
 		<th><input value="" name="id" size="10" disabled=true/></th>
 		<th><input value="" name="name" size="10"/></th>
-		<th><input value="" name="description" size="10"/></th>
+		<th><input value="" name="descrip" size="10"/></th>
 		<th><input type="submit" value="Insert"/></th>
 		</form>
 	</tr>
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<td><input value=<s:property value="id" /> name="id" size="10"/ disabled=true></td>
 		<td><input value=<s:property value="name"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="description"/> name="description" size="10"/></td>
+		<td><input value=<s:property value="descrip"/> name="descrip" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="deleteCate.action" method="post">
