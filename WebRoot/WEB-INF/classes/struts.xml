@@ -17,9 +17,9 @@
           </action>
           <action name="UpdateCate" class="actions.UpdateCategoryAction">
               <!-- <result name="success">/mainPage.jsp</result> -->
-              <result name="success" type="chain">ListCate.action</result>   
+              <result name="success" type="chain">ListCate</result>   
               <!-- <result name="error">/category.jsp</result> -->
-              <result name="success" type="chain">ListCate.action</result>  
+              <result name="error" type="chain">ListCate</result>  
           </action>
           <action name="DeleteCate" class="actions.DeleteCategoryAction">
               <!-- <result name="success">/mainPage.jsp</result> -->

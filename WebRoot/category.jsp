@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
   <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ 
-    if(request.getAttribute("isSucc").equals("0"))
+    if(request.getAttribute("isSucc") != null && request.getAttribute("isSucc").equals(0))
   {%>
   <h2>Modified failed.</h2>
   <%}%>
