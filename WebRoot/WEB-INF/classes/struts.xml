@@ -20,5 +20,10 @@
               <result name="success" type="redirect">ListCate.action</result>   
               <result name="error">/category.jsp</result>
           </action>
+          <action name="DeleteCate" class="actions.DeleteCategoryAction">
+              <!-- <result name="success">/mainPage.jsp</result> -->
+              <result name="success" type="redirect">ListCate.action</result>   
+              <result name="error">/category.jsp</result>
+          </action>
 </package>
 </struts>
