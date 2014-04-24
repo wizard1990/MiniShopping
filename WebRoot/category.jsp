@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 	deleteCate.action -> para: action(delete), uname() -->
 	<s:iterator value="#request.categories">
 	<tr>
-		<form action="updateCate.action" method="post">
+		<form action="UpdateCate.action" method="post">
 		<input type="hidden" name="action" value="update"/>
 		<input type="hidden" name="id" value=<s:property value="id" />/>
 		
