@@ -16,7 +16,6 @@ public class ListCategoriesAction extends ActionSupport {
 	public String execute() throws Exception{
 		CategoryDAO cateDAO = new CategoryDAO();
 		List l = cateDAO.findAll();
-		System.out.println(l.size());
 		if (l.size() > 0) {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setAttribute("categories", l);

@@ -29,8 +29,8 @@ public class CategoryDAO extends BaseHibernateDAO {
 
 	public void save(Category transientInstance) {
 		log.debug("saving Category instance");
-		Transaction tran=getSession().beginTransaction();
         try {
+        	Transaction tran=getSession().beginTransaction();
             getSession().save(transientInstance);
             tran.commit();
             getSession().flush();
@@ -45,8 +45,8 @@ public class CategoryDAO extends BaseHibernateDAO {
 
 	public void delete(Category persistentInstance) {
 		log.debug("deleting Category instance");
-		Transaction tran = getSession().beginTransaction();
         try {
+        	Transaction tran = getSession().beginTransaction();
             getSession().delete(persistentInstance);
             tran.commit();
             getSession().flush();
@@ -135,11 +135,16 @@ public class CategoryDAO extends BaseHibernateDAO {
 	public void attachDirty(Category instance) {
 		log.debug("attaching dirty Category instance");
 		try {
+			Transaction tran=getSession().beginTransaction();
 			getSession().saveOrUpdate(instance);
+			tran.commit();
+			getSession().flush();
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
+		} finally {
+			getSession().close();
 		}
 	}
 

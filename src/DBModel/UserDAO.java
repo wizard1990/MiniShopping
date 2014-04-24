@@ -30,8 +30,8 @@ public class UserDAO extends BaseHibernateDAO {
 
 	public void save(User transientInstance) {
 		log.debug("saving User instance");
-		Transaction tran=getSession().beginTransaction();
         try {
+        	Transaction tran=getSession().beginTransaction();
             getSession().save(transientInstance);
             tran.commit();
             getSession().flush(); 
@@ -46,8 +46,8 @@ public class UserDAO extends BaseHibernateDAO {
 
 	public void delete(User persistentInstance) {
 		log.debug("deleting User instance");
-		Transaction tran = getSession().beginTransaction();
         try {
+        	Transaction tran = getSession().beginTransaction();
             getSession().delete(persistentInstance);
             tran.commit();
             getSession().flush();
