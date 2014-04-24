@@ -3,6 +3,7 @@ package DBModel;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
@@ -28,34 +29,52 @@ public class CategoryDAO extends BaseHibernateDAO {
 	public static final String DESCRIP = "descrip";
 
 	public void save(Category transientInstance) {
+		Session session = null;
+    	Transaction tran = null;
 		log.debug("saving Category instance");
         try {
-        	Transaction tran=getSession().beginTransaction();
-            getSession().save(transientInstance);
+        	session = getSession();
+        	tran = session.beginTransaction();
+            session.save(transientInstance);
             tran.commit();
-            getSession().flush();
             log.debug("save successful");
         } catch (RuntimeException re) {
             log.error("save failed", re);
+            try{
+    			tran.rollback();
+    		}catch(RuntimeException rbe){
+    			log.error("Couldn’t roll back transaction", rbe);
+    			throw rbe;
+    		}
             throw re;
         } finally {
-            getSession().close();
+        	if (session != null) {
+        		getSession().close();
+        	}
         }
 	}
 
 	public void delete(Category persistentInstance) {
 		log.debug("deleting Category instance");
+		Session session = null;
+    	Transaction tran = null;
         try {
-        	Transaction tran = getSession().beginTransaction();
-            getSession().delete(persistentInstance);
+        	session = getSession();
+        	tran = session.beginTransaction();
+            session.delete(persistentInstance);
             tran.commit();
-            getSession().flush();
             log.debug("delete successful");
         } catch (RuntimeException re) {
             log.error("delete failed", re);
+            try{
+    			tran.rollback();
+    		}catch(RuntimeException rbe){
+    			log.error("Couldn’t roll back transaction", rbe);
+    			throw rbe;
+    		}
             throw re;
         } finally {
-            getSession().close();
+        	if(session != null) session.close();
         }
 	}
 
@@ -134,17 +153,25 @@ public class CategoryDAO extends BaseHibernateDAO {
 
 	public void attachDirty(Category instance) {
 		log.debug("attaching dirty Category instance");
+		Session session = null;
+		Transaction tran = null;
 		try {
-			Transaction tran=getSession().beginTransaction();
-			getSession().saveOrUpdate(instance);
+			session = getSession();
+			tran = session.beginTransaction();
+			session.saveOrUpdate(instance);
 			tran.commit();
-			getSession().flush();
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
-			throw re;
+			try{
+    			tran.rollback();
+    		}catch(RuntimeException rbe){
+    			log.error("Couldn’t roll back transaction", rbe);
+    			throw rbe;
+    		}
+            throw re;
 		} finally {
-			getSession().close();
+			if(session != null) session.close();
 		}
 	}
 

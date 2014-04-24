@@ -16,11 +16,15 @@ public class ListCategoriesAction extends ActionSupport {
 	public String execute() throws Exception{
 		CategoryDAO cateDAO = new CategoryDAO();
 		List l = cateDAO.findAll();
+		HttpServletRequest request = ServletActionContext.getRequest();
 		if (l.size() > 0) {
-			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setAttribute("categories", l);
+			request.setAttribute("isSucc", 1);
 			return SUCCESS;
 		}
-		else return "empty";
+		else {
+			request.setAttribute("isSucc", 0);
+			return "empty";
+		}
 	}
 }
