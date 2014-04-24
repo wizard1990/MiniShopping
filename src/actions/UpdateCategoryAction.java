@@ -31,10 +31,15 @@ public class UpdateCategoryAction extends ActionSupport {
 		CategoryDAO cateDAO = new CategoryDAO();
 		try {
 			Category cate = cateDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
-			cate.setName(name);
-			cate.setDescrip(descrip);
-			cateDAO.attachDirty(cate);
-			return SUCCESS;
+			if(cate != null) {
+				cate.setName(name);
+				cate.setDescrip(descrip);
+				cateDAO.attachDirty(cate);
+				return SUCCESS;
+			}
+			else {
+				return ERROR;
+			}
         } catch (RuntimeException re) {
         	System.out.println(re);
             return ERROR;
