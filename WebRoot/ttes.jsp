@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table>
 	<s:iterator value="#request.categories">
 	<tr>
-		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
+		<td><input value=<s:property value="id"/> name="id" size="10"/></td>
 		<td><input value=<s:property value="name"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="descrip"/> name="descrip" size="10"/></td>
 	</tr>
