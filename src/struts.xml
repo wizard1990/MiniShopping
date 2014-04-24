@@ -12,7 +12,7 @@
               <result name="error">/login_fail.jsp</result>
           </action>
           <action name="ListCate" class="actions.ListCategoriesAction">
-              <result name="success">/category.jsp</result>
+              <result name="success">/ttes.jsp</result>
               <result name="empty">/mainPage.jsp</result>
           </action>
 </package>
