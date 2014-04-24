@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td><input value=<s:property value="descrip"/> name="descrip" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
-        <form action="deleteCate.action" method="post">
+        <form action="DeleteCate.action" method="post">
 			<input type="hidden" name="action" value="delete"/>
 			<input type="hidden" name="id" value=<s:property value="id" />/>
 			<%-- Button --%>
