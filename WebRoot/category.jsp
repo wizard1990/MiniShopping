@@ -52,16 +52,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 	deleteCate.action -> para: action(delete), uname() -->
 	<s:iterator value="#request.categories">
 	<tr>
-		<form action="updateCate.action" method="post">
+		<form action="UpdateCate.action" method="post">
 		<input type="hidden" name="action" value="update"/>
 		<input type="hidden" name="id" value=<s:property value="id" />/>
 		
-		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
-		<td><input value=<s:property value="name"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="descrip"/> name="descrip" size="10"/></td>
+		<td><input value=<s:property value="id" /> name="id" size="10" disabled=true/></td>
+		<td><input value=<s:property value="name" /> name="name" size="10"/></td>
+		<td><input value=<s:property value="descrip" /> name="descrip" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
-        <form action="deleteCate.action" method="post">
+        <form action="DeleteCate.action" method="post">
 			<input type="hidden" name="action" value="delete"/>
 			<input type="hidden" name="id" value=<s:property value="id" />/>
 			<%-- Button --%>
