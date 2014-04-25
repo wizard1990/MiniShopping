@@ -24,6 +24,11 @@
               <result name="success" type="chain">ListCate</result>   
               <result name="error" type="chain">ListCate</result>
           </action>
+          <action name="InsertCate" class="actions.AddCategoryAction">
+          	  <result name="duplicate" type="chain">ListCate</result>
+              <result name="success" type="chain">ListCate</result>   
+              <result name="error" type="chain">ListCate</result>
+          </action>
           
 </package>
 </struts>

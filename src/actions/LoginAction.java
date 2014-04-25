@@ -29,7 +29,6 @@ public class LoginAction extends ActionSupport {
 			User user = (User) l.get(0);
 			String r = user.getRole().toString();
 			HttpServletRequest request = ServletActionContext.getRequest();
-			request.setAttribute("alllist", userDAO.findAll());
 			HttpSession session = request.getSession();
 			session.setAttribute("userrole", r);
 			return SUCCESS;
