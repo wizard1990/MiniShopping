@@ -10,3 +10,8 @@
 	right:90px;
 	top:10px
 }
+
+input:focus
+{
+background-color:CCCCFF;
+}

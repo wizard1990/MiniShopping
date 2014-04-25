@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<LINK REL=StyleSheet HREF="topright.css" TYPE="text/css">
     <base href="<%=basePath%>">
     
     <title>My JSP 'shopping_cart.jsp' starting page</title>
@@ -34,5 +35,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h3>Please log in first.</h3>
     <a href="login.jsp">login</a>
    <%} %>
+   
+ 	<div class="mainpg">
+ 	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
+ 	</div>
+ 	<div class="cartpg">
+ 	<button type="button" onclick="window.location='shopping_cart.jsp'">myCart</button>
+ 	</div>
+
   </body>
 </html>

@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<LINK REL=StyleSheet HREF="topright.css" TYPE="text/css">
 	<style type="text/css">
 	input:focus
 	{
@@ -123,5 +124,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
         </table>
     </form>
+    <div class="mainpg">
+ 	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
+ 	</div>
+    
   </body>
 </html>
