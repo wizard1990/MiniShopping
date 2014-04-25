@@ -63,19 +63,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
 	  <script type="text/javascript">
-	  function checkCate()
+	  function checkCate(cate)
 	  {
-		var val = document.getElementById("name").value;
-		var dsp = document.getElementById("descrip").value;
+		var val = cate.name.value;
+		var dsp = cate.descrip.value;
 		if (val == "" || dsp == "")
 		{
 		    var txt = "input should not be empty";
- 		    alert(txt);  
-		    return false;
+ 		    alert(txt);
+		    cate.name.value = '<s:property value="#newL.name"/>';
+ 		    cate.desc.value = '<s:property value="#newL.desc"/>';
+ 		    return false;
 		}
 	  }
 	  </script>
-		<form action="UpdateCate.action" method="post" onsubmit="return checkCate();">
+		<form action="UpdateCate.action" method="post" onsubmit="return checkCate(this);">
 		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
