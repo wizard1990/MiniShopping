@@ -57,8 +57,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:sort comparator="sortref" source="#request.categories" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-
+<!-- 	  <script type="text/javascript">
+	  function checkCate(cate)
+	  {
+		var val = cate.name.value;
+		var dsp = cate.descrip.value;
+		if (val == "" || dsp == "")
+		{
+		    var txt = "input should not be empty";
+ 		    alert(txt);
+/* 		    cate.name.value = '<s:property value="#newL.name"/>';
+ 		    cate.desc.value = '<s:property value="#newL.desc"/>'; */
+ 		    return false;
+		}
+	  }
+	  </script> -->
+		<!-- <form action="UpdateCate.action" method="post" onsubmit="return checkCate(this);"> -->
 		<form action="UpdateCate.action" method="post">
+		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
