@@ -8,7 +8,7 @@
               <result name="duplicate">/signup_fail.jsp</result>
           </action>
           <action name="Login" class="actions.LoginAction">
-              <result name="success">/test.jsp</result>
+              <result name="success">/login_suc.jsp</result>
               <result name="error">/login_fail.jsp</result>
           </action>
           <action name="ListCate" class="actions.ListCategoriesAction">

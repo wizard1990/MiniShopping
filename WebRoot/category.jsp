@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<LINK REL=StyleSheet HREF="topright.css" TYPE="text/css">
     <base href="<%=basePath%>">
     
     <title>My JSP 'category.jsp' starting page</title>
@@ -59,10 +60,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form action="UpdateCate.action" method="post">
 		<input type="hidden" name="action" value="update"/>
 		<input type="hidden" name="id" value=<s:property value="id" />/>
-		
 		<td><input value=<s:property value="id" /> name="id" size="10" disabled=true/></td>
 		<td><input value=<s:property value="name" /> name="name" size="10"/></td>
-		<td><input value=<s:property value="descrip" /> name="descrip" size="20"/></td>
+		<td><input value=<s:property value="descrip" escape="false"/> name="descrip" size="20"/></td>
+		
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="DeleteCate.action" method="post">
@@ -74,8 +75,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 	</s:iterator>
 	</table>
-	
 	    <%} %>
-	    
+ 	<div class="mainpg">
+ 	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
+ 	</div>
+ 	<div class="cartpg">
+ 	<button type="button" onclick="window.location='shopping_cart.jsp'">myCart</button>
+ 	</div>
   </body>
 </html>

@@ -27,22 +27,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <a href="logout.jsp">logout</a>
-    <a href="product_browsing.jsp">product browsing</a>
     <% if(session.getAttribute("userrole").equals("0")) {%>
-    <a href="category.jsp">category</a>
     <form action="ListCate.action" method="post">
-    <th><input type="submit" value="category"/></th>
+    <input type="submit" value="category"/>
     </form>
     <form action="ListProd.action" method="post">
-    <th><input type="submit" value="product"/></th>
+    <input type="submit" value="product"/>
     </form>
-  <%} } else {%>
+  	<% } %> 
+  	<button type="button" onclick="window.location='product_browsing.jsp'">see product</button><br>
+  	<button type="button" onclick="window.location='logout.jsp'">logout</button><br>
+  	<% } else { %>
     <h3>Hello, guest.</h3>
-    <a href="signup.jsp">signup</a>
-    <a href="login.jsp">login</a>
+    <button type="button" onclick="window.location='signup.jsp'">sign up</button><br>
+    <button type="button" onclick="window.location='login.jsp'">login</button><br>
    <%} %>
-    Welcome to main page!<br>
+
 
   </body>
 </html>
