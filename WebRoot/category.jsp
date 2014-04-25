@@ -57,25 +57,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <!-- 	UpdateCate.action -> para: action(update), uname() -->
 <!-- 	DeleteCate.action -> para: action(delete), uname() -->
-	<s:iterator value="#request.categories">
+
+	<s:bean name="SortCategory" var="sortref"></s:bean>
+	<s:sort comparator="sortref" source="#request.categories" var="newList">
+	<s:iterator var="newL" value="#attr.newList">
 	<tr>
 		<form action="UpdateCate.action" method="post">
 		<input type="hidden" name="action" value="update"/>
-		<input type="hidden" name="id" value=<s:property value="id" />/>
-		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
-		<td><input value=<s:property value="name" escape="false"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="descrip" escape="false"/> name="descrip" size="20"/></td>
+		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
+		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
+		<td><input value=<s:property value="#newL.descrip" escape="false"/> name="descrip" size="20"/></td>
 		
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="DeleteCate.action" method="post">
 			<input type="hidden" name="action" value="delete"/>
-			<input type="hidden" name="name" value=<s:property value="name" />/>
+			<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
 			<%-- Button --%>
 			<td><input type="submit" value="Delete"/></td>
  		</form>
 	</tr>
-	</s:iterator>
+	</s:iterator> 
+	</s:sort>
+
 	</table>
 	    <%} %>
  	<div class="mainpg">
