@@ -42,9 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th>description</th>
 	</tr>
 
-<!-- insertCate.action -> para: action(insert) -->
+<!-- InsertCate.action -> para: action(insert) -->
 	<tr>
-		<form action="insertCate.action" method="post">
+		<form action="InsertCate.action" method="post">
 		<input type="hidden" name="action" value="insert"/>
 		<th><input value="" name="id" size="10" disabled=true/></th>
 		<th><input value="" name="name" size="10"/></th>
@@ -53,8 +53,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 	</tr>
 	
-<!-- 	updateCate.action -> para: action(update), uname() -->
-<!-- 	deleteCate.action -> para: action(delete), uname() -->
+<!-- 	UpdateCate.action -> para: action(update), uname() -->
+<!-- 	DeleteCate.action -> para: action(delete), uname() -->
 	<s:iterator value="#request.categories">
 	<tr>
 		<form action="UpdateCate.action" method="post">

@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -31,6 +31,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h2>Hello, <%=session.getAttribute("username")%></h2> 
     This is PRODUCT. <br>
     <p>----------insert product here---------------</p>
+
+	<table>
+	<tr>
+	<form action="SearchProd.action" method="post">
+	<input type="hidden" name="action" value="search"/>
+	<td>
+	<select name="role">
+		<option value="allprod">All products</option>
+	<s:iterator value="#request.categories">
+    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+    </s:iterator>
+    </select>
+	</td>
+	<td>search here: <input value="" name="keyword" size="20"/></td>
+	<td><input type="submit" value="search"/></td>
+	</form>
+	</tr>
+	</table>
+
+	<table border="1">
+	<tr>
+		<th>id</th>
+		<th>name</th>
+		<th>SKU</th>
+		<th>category</th>
+		<th>price</th>
+	</tr>
+
+	<tr>
+		<form action="InsertProd.action" method="post">
+		<input type="hidden" name="action" value="insert"/>
+		<th><input value="" name="id" size="10" disabled=true/></th>
+		<th><input value="" name="name" size="10"/></th>
+		<th><input value="" name="SKU" size="20"/></th>
+		<th><input value="" name="category" size="10"/></th>
+		<th><input value="" name="price" size="10"/></th>
+		<th><input type="submit" value="Insert"/></th>
+		</form>
+	</tr>
+	
+	<s:iterator value="#request.products">
+	<tr>
+		<form action="UpdateProd.action" method="post">
+		<input type="hidden" name="action" value="update"/>
+		<input type="hidden" name="id" value=<s:property value="id" />/>
+		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
+		<td><input value=<s:property value="name" escape="false"/> name="name" size="10"/></td>
+		<td><input value=<s:property value="SKU" escape="false"/> name="SKU" size="20"/></td>
+		<td><input value=<s:property value="category" escape="false"/> name="category" size="10"/></td>
+		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
+		<td><input type="submit" value="Update"></td>
+		</form>
+        <form action="DeleteProd.action" method="post">
+			<input type="hidden" name="action" value="delete"/>
+			<input type="hidden" name="name" value=<s:property value="name" />/>
+			<%-- Button --%>
+			<td><input type="submit" value="Delete"/></td>
+ 		</form>
+	</tr>
+	</s:iterator>
+	</table>
+    
     <%} %>
     
  	<div class="mainpg">
