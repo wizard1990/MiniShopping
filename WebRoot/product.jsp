@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form action="SearchProd.action" method="post">
 	<input type="hidden" name="action" value="search"/>
 	<td>
-	<select name="role">
+	<select name="cate1">
 		<option value="allprod">All products</option>
 	<s:iterator value="#request.categories">
     	<option value=<s:property value="name"/>><s:property value="name"/></option>
@@ -65,7 +65,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th><input value="" name="id" size="10" disabled=true/></th>
 		<th><input value="" name="name" size="10"/></th>
 		<th><input value="" name="SKU" size="20"/></th>
-		<th><input value="" name="category" size="10"/></th>
+		<th>
+		<select name="cate2">
+			<option value="allprod">All products</option>
+		<s:iterator value="#request.categories">
+	    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+	    </s:iterator>
+	    </select>
+		</th>
 		<th><input value="" name="price" size="10"/></th>
 		<th><input type="submit" value="Insert"/></th>
 		</form>
@@ -79,7 +86,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
 		<td><input value=<s:property value="name" escape="false"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="SKU" escape="false"/> name="SKU" size="20"/></td>
-		<td><input value=<s:property value="category" escape="false"/> name="category" size="10"/></td>
+		<td>
+		<select name="cate3">
+			<option value="allprod">All products</option>
+		<s:iterator value="#request.categories">
+	    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+	    </s:iterator>
+	    </select>
+		</td>
 		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
