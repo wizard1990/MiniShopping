@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
+  <body>  
   <h1>CATEGORY</h1>
   <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- InsertCate.action -> para: action(insert) -->
 	<tr>
 		<form action="InsertCate.action" method="post">
-		<input type="hidden" name="action" value="insert"/>
+		<!-- <input type="hidden" name="action" value="insert"/> -->
 		<th><input value="" name="id" size="10" disabled=true/></th>
 		<th><input value="" name="name" size="10"/></th>
 		<th><input value="" name="descrip" size="20"/></th>
@@ -62,17 +62,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:sort comparator="sortref" source="#request.categories" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<form action="UpdateCate.action" method="post">
-		<input type="hidden" name="action" value="update"/>
+	  <script type="text/javascript">
+	  function checkCate()
+	  {
+		var val = document.getElementById("name").value;
+		var dsp = document.getElementById("descrip").value;
+		if (val == "" || dsp == "")
+		{
+		    var txt = "input should not be empty";
+ 		    alert(txt);  
+		    return false;
+		}
+	  }
+	  </script>
+		<form action="UpdateCate.action" method="post" onsubmit="return checkCate();">
+		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
-		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="#newL.descrip" escape="false"/> name="descrip" size="20"/></td>
+		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" id="name" size="10"/></td>
+		<td><input value=<s:property value="#newL.descrip" escape="false"/> name="descrip" id="descrip" size="20"/></td>
 		
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="DeleteCate.action" method="post">
-			<input type="hidden" name="action" value="delete"/>
+			<!-- <input type="hidden" name="action" value="delete"/> -->
 			<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
 			<%-- Button --%>
 			<td><input type="submit" value="Delete"/></td>

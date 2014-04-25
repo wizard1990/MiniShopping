@@ -31,21 +31,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var val = document.getElementById("name").value;
 		if (val == "")
 		{
-		    var txt = "input should not be empty";
+		    var txt = "username should not be empty";
 		    alert(txt);
-		    window.location.href="login.jsp";
+		    return false;
 		}
 	  }
 	  </script>
    <h1>LOG IN</h1>
    <hr>
-   <form action="Login.action" method="post">
+   <form action="Login.action" method="post" onsubmit="return checkUser();">
         <table align="center">
             <tr>
                 <td>UserName:<input type="text" name="name" id="name"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="submit" onclick="checkUser()"/>
+                <td><input type="submit" value="submit"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>

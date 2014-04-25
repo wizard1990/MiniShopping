@@ -38,21 +38,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var age = document.getElementById("age").value;
 	if (val == "")
 	{
-	    var txt = "input should not be empty";
+	    var txt = "username should not be empty";
 	    alert(txt);
-	    window.location.href="mainPage.jsp";
+	    return false;
 	}
 	else if (age < 0)
 	{
 	    var txt = "age should not be negative";
 	    alert(txt);
-	    window.location.href="mainPage.jsp";
+	    return false;
 	}
   }
   </script>
   <h1>REGISTER</h1>
   <hr>
-    <form action="Register.action" method="post">
+    <form action="Register.action" method="post"  onsubmit="return checkUser();">
         <table align="center">
             <tr><td>UserName:<input type="text" name="name" id="name"/>
             </td></tr>
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</td></tr>
             <tr>
                 <td>
-                <input type="submit" value="submit" onclick="checkUser()"/>
+                <input type="submit" value="submit"/>
                 <input type="reset" value="reset"/></td>
             </tr>
         </table>
