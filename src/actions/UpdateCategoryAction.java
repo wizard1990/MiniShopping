@@ -35,6 +35,14 @@ public class UpdateCategoryAction extends ActionSupport {
 		try {
 			Category cate = cateDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
 			if(cate != null) {
+				System.out.println("check empty");
+				System.out.println(name);
+				System.out.println(descrip);
+				if(name.equals("") || descrip.equals(""))
+				{
+					request.setAttribute("isSucc", 0);
+					return ERROR;
+				}
 				name = name.replaceAll("&nbsp;", " ");
 				descrip = descrip.replaceAll("&nbsp;", " ");
 				cate.setName(name);
