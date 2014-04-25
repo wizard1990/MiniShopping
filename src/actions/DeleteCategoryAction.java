@@ -22,7 +22,6 @@ public class DeleteCategoryAction extends ActionSupport{
 	
 	public String execute() throws Exception {
 		name = name.substring(0, name.length() - 1);
-		
 		CategoryDAO categoryDAO = new CategoryDAO();
 		List l = categoryDAO.findByName(name);
 		if (l.size() != 1) {
