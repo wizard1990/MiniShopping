@@ -61,9 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:bean name="SortCategory" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.categories" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
+	<s:set id="tName" value="<s:property value="#newL.name"/>"/>
+	<s:set id="tDesc" value="<s:property value="#newL.desc"/>"/>
 	<tr>
 	  <script type="text/javascript">
-	  function checkCate(cate)
+	  function checkCate(cate, name, desc)
 	  {
 		var val = cate.name.value;
 		var dsp = cate.descrip.value;
@@ -71,13 +73,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		{
 		    var txt = "input should not be empty";
  		    alert(txt);
-		    cate.name.value = '<s:property value="#newL.name"/>';
- 		    cate.desc.value = '<s:property value="#newL.desc"/>';
+		    cate.name.value = name;
+ 		    cate.desc.value = desc;
  		    return false;
 		}
 	  }
 	  </script>
-		<form action="UpdateCate.action" method="post" onsubmit="return checkCate(this);">
+		<form action="UpdateCate.action" method="post" onsubmit="return checkCate(this, #tName, #tDesc);">
 		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
