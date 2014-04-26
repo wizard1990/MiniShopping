@@ -28,7 +28,7 @@ public class ListProductsAction extends ActionSupport {
 				cate.setName(name);
 				cate.setDescrip(desc);
 			}
-			for (int i = 0; i < lc.size(); i++) {
+			for (int i = 0; i < l.size(); i++) {
 				Product prod = (Product) l.get(i);
 				String name = prod.getName().replaceAll(" ", "&nbsp;");
 				String sku = prod.getSku().replaceAll(" ", "&nbsp;");

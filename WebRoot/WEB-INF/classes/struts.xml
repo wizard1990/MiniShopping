@@ -30,5 +30,9 @@
               <result name="error" type="chain">ListCate</result>
           </action>
           
+          <action name="ListProd" class="actions.ListProductsAction">
+              <result name="success">product.jsp</result>   
+              <result name="empty">mainPage.jsp</result>
+          </action>          
 </package>
 </struts>
