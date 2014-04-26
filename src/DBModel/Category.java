@@ -12,8 +12,7 @@ public class Category extends AbstractCategory implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Category(String name, String descrip) {
-		super(name, descrip);
+	public Category(String name, String descrip, Integer products) {
+		super(name, descrip, products);
 	}
-
 }

@@ -35,9 +35,9 @@ public class AddCategoryAction extends ActionSupport {
 			return "duplicate";
 		}
 		try {
-			if(name.length() > 20) throw null;
+			if(name == null || name.equals("") || name.length() > 20) throw new RuntimeException("illegal name");
 			else {
-				Category cate = new Category(name, descrip);
+				Category cate = new Category(name, descrip, 0);
 				cateDAO.save(cate);
 				request.setAttribute("isSucc", 1);
 				return SUCCESS;

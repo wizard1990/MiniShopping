@@ -51,7 +51,7 @@ public class RegisterAction extends ActionSupport {
 			return "duplicate";
 		}
 		try {
-			if ((age != null && age < 0) || name.contains(" ") || name.length() < 1) throw null;
+			if ((age != null && age < 0) || name.contains(" ") || name.length() < 1) throw new RuntimeException("illegal name");
 			else {
 				User user = new User(name, role, age, state);
 				userDAO.save(user);

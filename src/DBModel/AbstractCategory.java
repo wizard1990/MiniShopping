@@ -12,6 +12,7 @@ public abstract class AbstractCategory implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private String descrip;
+	private Integer products;
 
 	// Constructors
 
@@ -20,9 +21,10 @@ public abstract class AbstractCategory implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AbstractCategory(String name, String descrip) {
+	public AbstractCategory(String name, String descrip, Integer products) {
 		this.name = name;
 		this.descrip = descrip;
+		this.products = products;
 	}
 
 	// Property accessors
@@ -49,6 +51,14 @@ public abstract class AbstractCategory implements java.io.Serializable {
 
 	public void setDescrip(String descrip) {
 		this.descrip = descrip;
+	}
+
+	public Integer getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(Integer products) {
+		this.products = products;
 	}
 
 }

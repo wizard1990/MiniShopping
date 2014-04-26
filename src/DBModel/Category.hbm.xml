@@ -16,5 +16,8 @@
         <property name="descrip" type="java.lang.String">
             <column name="descrip" not-null="true" />
         </property>
+        <property name="products" type="java.lang.Integer">
+            <column name="products" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

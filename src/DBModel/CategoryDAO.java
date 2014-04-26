@@ -27,56 +27,57 @@ public class CategoryDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String NAME = "name";
 	public static final String DESCRIP = "descrip";
+	public static final String PRODUCTS = "products";
 
 	public void save(Category transientInstance) {
-		Session session = null;
-    	Transaction tran = null;
-		log.debug("saving Category instance");
+        Session session = null;
+        Transaction tran = null;
+        log.debug("saving Category instance");
         try {
-        	session = getSession();
-        	tran = session.beginTransaction();
+            session = getSession();
+            tran = session.beginTransaction();
             session.save(transientInstance);
             tran.commit();
             log.debug("save successful");
         } catch (RuntimeException re) {
             log.error("save failed", re);
             try{
-    			tran.rollback();
-    		}catch(RuntimeException rbe){
-    			log.error("Couldn’t roll back transaction", rbe);
-    			throw rbe;
-    		}
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                log.error("Couldn’t roll back transaction", rbe);
+                throw rbe;
+            }
             throw re;
         } finally {
-        	if (session != null) {
-        		getSession().close();
-        	}
+            if (session != null) {
+                getSession().close();
+            }
         }
-	}
+    }
 
-	public void delete(Category persistentInstance) {
-		log.debug("deleting Category instance");
-		Session session = null;
-    	Transaction tran = null;
+    public void delete(Category persistentInstance) {
+        log.debug("deleting Category instance");
+        Session session = null;
+        Transaction tran = null;
         try {
-        	session = getSession();
-        	tran = session.beginTransaction();
+            session = getSession();
+            tran = session.beginTransaction();
             session.delete(persistentInstance);
             tran.commit();
             log.debug("delete successful");
         } catch (RuntimeException re) {
             log.error("delete failed", re);
             try{
-    			tran.rollback();
-    		}catch(RuntimeException rbe){
-    			log.error("Couldn’t roll back transaction", rbe);
-    			throw rbe;
-    		}
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                log.error("Couldn’t roll back transaction", rbe);
+                throw rbe;
+            }
             throw re;
         } finally {
-        	if(session != null) session.close();
+            if(session != null) session.close();
         }
-	}
+    }
 
 	public Category findById(java.lang.Integer id) {
 		log.debug("getting Category instance with id: " + id);
@@ -127,6 +128,10 @@ public class CategoryDAO extends BaseHibernateDAO {
 		return findByProperty(DESCRIP, descrip);
 	}
 
+	public List findByProducts(Object products) {
+		return findByProperty(PRODUCTS, products);
+	}
+
 	public List findAll() {
 		log.debug("finding all Category instances");
 		try {
@@ -152,28 +157,28 @@ public class CategoryDAO extends BaseHibernateDAO {
 	}
 
 	public void attachDirty(Category instance) {
-		log.debug("attaching dirty Category instance");
-		Session session = null;
-		Transaction tran = null;
-		try {
-			session = getSession();
-			tran = session.beginTransaction();
-			session.saveOrUpdate(instance);
-			tran.commit();
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			try{
-    			tran.rollback();
-    		}catch(RuntimeException rbe){
-    			log.error("Couldn’t roll back transaction", rbe);
-    			throw rbe;
-    		}
+        log.debug("attaching dirty Category instance");
+        Session session = null;
+        Transaction tran = null;
+        try {
+            session = getSession();
+            tran = session.beginTransaction();
+            session.saveOrUpdate(instance);
+            tran.commit();
+            log.debug("attach successful");
+        } catch (RuntimeException re) {
+            log.error("attach failed", re);
+            try{
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                log.error("Couldn’t roll back transaction", rbe);
+                throw rbe;
+            }
             throw re;
-		} finally {
-			if(session != null) session.close();
-		}
-	}
+        } finally {
+            if(session != null) session.close();
+        }
+    }
 
 	public void attachClean(Category instance) {
 		log.debug("attaching clean Category instance");
