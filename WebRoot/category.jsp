@@ -53,26 +53,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 	</tr>
 
+	<s:if test="#request.categories!=null">
+
 	<s:bean name="SortCategory" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.categories" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-<!-- 	  <script type="text/javascript">
-	  function checkCate(cate)
-	  {
-		var val = cate.name.value;
-		var dsp = cate.descrip.value;
-		if (val == "" || dsp == "")
-		{
-		    var txt = "input should not be empty";
- 		    alert(txt);
-/* 		    cate.name.value = '<s:property value="#newL.name"/>';
- 		    cate.desc.value = '<s:property value="#newL.desc"/>'; */
- 		    return false;
-		}
-	  }
-	  </script> -->
-		<!-- <form action="UpdateCate.action" method="post" onsubmit="return checkCate(this);"> -->
+
 		<form action="UpdateCate.action" method="post">
 		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
@@ -82,16 +69,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<td><input type="submit" value="Update"></td>
 		</form>
+		
+		<s:if test="#newL.products==0">
         <form action="DeleteCate.action" method="post">
 			<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
 			<%-- Button --%>
 			<td><input type="submit" value="Delete"/></td>
  		</form>
+ 		</s:if>
+ 		
 	</tr>
 	</s:iterator> 
 	</s:sort>
-
+	
+	</s:if>
 	</table>
+	
 	    <%} %>
  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
