@@ -35,7 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table>
 	<tr>
 	<form action="SearchProd.action" method="post">
-	<input type="hidden" name="action" value="search"/>
 	<td>
 	<select name="cate1">
 		<option value="allprod">All products</option>
@@ -61,7 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<tr>
 		<form action="InsertProd.action" method="post">
-		<input type="hidden" name="action" value="insert"/>
 		<th><input value="" name="id" size="10" disabled=true/></th>
 		<th><input value="" name="name" size="10"/></th>
 		<th><input value="" name="SKU" size="20"/></th>
@@ -78,33 +76,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 	</tr>
 	
-	<s:iterator value="#request.products">
+	<s:if test="#request.products!=null">
+
+	<s:bean name="SortCategory" var="sortref"></s:bean>
+	<s:sort comparator="sortref" source="#request.products" var="newList">
+	<s:iterator var="newL" value="#attr.newList">
+	
 	<tr>
 		<form action="UpdateProd.action" method="post">
-		<input type="hidden" name="action" value="update"/>
-		<input type="hidden" name="id" value=<s:property value="id" />/>
-		<td><input value=<s:property value="id"/> name="id" size="10" disabled=true/></td>
-		<td><input value=<s:property value="name" escape="false"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="SKU" escape="false"/> name="SKU" size="20"/></td>
+		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
+		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
+		<td><input value=<s:property value="#newL.sku" escape="false"/> name="sku" size="20"/></td>
 		<td>
+	
+
 		<select name="cate3">
-			<option value="allprod">All products</option>
+		<s:set name="oldcate" value="#newL.category"></s:set>
+		<!-- <option value="allprod">All products</option> -->
 		<s:iterator value="#request.categories">
+			<s:if test="id==#newL.category.id">
+			<option value=<s:property value="name"/> selected="selected"><s:property value="name"/></option>
+			</s:if>
+			<s:else>
 	    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+	    	</s:else>
 	    </s:iterator>
+	    <option value="allprod">All products</option>
 	    </select>
 		</td>
 		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="DeleteProd.action" method="post">
-			<input type="hidden" name="action" value="delete"/>
-			<input type="hidden" name="name" value=<s:property value="name" />/>
+			<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
 			<%-- Button --%>
 			<td><input type="submit" value="Delete"/></td>
  		</form>
 	</tr>
 	</s:iterator>
+	</s:sort>
+	</s:if>
+	
 	</table>
     
     <%} %>
