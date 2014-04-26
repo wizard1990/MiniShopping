@@ -8,7 +8,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_CORE"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.hibernate.MYECLIPSE_HIBERNATE3_3_EM"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/derbyclient.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/postgresql-9.3-1101.jdbc4.jar"/>
+	<classpathentry kind="lib" path="/Users/wizard1990/.myeclipse/libs/derby_10.2.2.0/derbyclient.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

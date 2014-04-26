@@ -23,6 +23,7 @@
 		</property>
 		<mapping resource="DBModel/User.hbm.xml" />
 		<mapping resource="DBModel/Category.hbm.xml" />
+		<mapping resource="DBModel/Product.hbm.xml" />
 
 	</session-factory>
 
