@@ -40,7 +40,6 @@ public class DeleteCategoryAction extends ActionSupport{
 	            return ERROR;
 			}
 		}
-			
 	}
 	
 }
