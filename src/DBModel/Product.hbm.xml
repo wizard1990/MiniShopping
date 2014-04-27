@@ -10,17 +10,17 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="category" class="DBModel.Category" fetch="select">
-            <column name="cid" not-null="true" />
-        </many-to-one>
         <property name="name" type="java.lang.String">
             <column name="name" length="20" not-null="true" />
         </property>
         <property name="sku" type="java.lang.String">
             <column name="sku" not-null="true" unique="true" />
         </property>
-        <property name="price" type="java.lang.Double">
-            <column name="price" scale="0" not-null="true" />
+        <property name="cid" type="java.lang.Integer">
+            <column name="cid" not-null="true" />
+        </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="price" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

@@ -24,7 +24,7 @@ public class DeleteProductAction extends ActionSupport {
 			List l = proDAO.findBySku(sku.substring(0, sku.length() - 1));
 			if (l.size() == 0) throw new RuntimeException("product not exists");
 			Product prod = (Product) l.get(0);
-			Category cate = prod.getCategory();
+			Category cate = cateDAO.findById(prod.getCid());
 			proDAO.delete(prod);
 			cate.setProducts(cate.getProducts() - 1);
 			cateDAO.attachDirty(cate);

@@ -12,8 +12,8 @@ public class Product extends AbstractProduct implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Product(Category category, String name, String sku, Double price) {
-		super(category, name, sku, price);
+	public Product(String name, String sku, Integer cid, Integer price) {
+		super(name, sku, cid, price);
 	}
 
 }

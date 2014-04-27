@@ -1,14 +1,10 @@
 package actions;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.Query;
-
 import DBModel.Category;
 import DBModel.CategoryDAO;
 import DBModel.Product;
@@ -18,8 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class InsertProductAction extends ActionSupport {
 	private String sku;
-	private String cname;
-	private double price;
+	private Integer cid;
+	private Integer price;
 	private String name;
 	
 	public String execute() throws Exception{
@@ -27,21 +23,21 @@ public class InsertProductAction extends ActionSupport {
 		CategoryDAO cateDAO = new CategoryDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		try {
+			System.out.println(sku);
+			System.out.println(cid);
 			List l = proDAO.findBySku(sku);
-			List lc = cateDAO.findByName(cname);
-			if (lc.size() == 0) throw new RuntimeException("category not exists");
-			Category cate = (Category) lc.get(0);
+			Category cate = cateDAO.findById(cid);
+			if (cate == null) throw new RuntimeException("category not exists");
 			if (l.size() > 0) {
 				request.setAttribute("isSucc", 0);
 				return "duplicate";
 			}
 			if(name == null || name.equals("") || name.length() > 20) throw new RuntimeException("illegal name");
 			else {
-				Product prod = new Product(cate, name, sku, price);
+				Product prod = new Product(name, sku, cid, price);
 				System.out.println(prod.getName());
 				System.out.println(prod.getSku());
-				System.out.println(prod.getPrice());
-				System.out.println(prod.getCategory().getId());
+				System.out.println(prod.getCid());
 				proDAO.save(prod);
 				cate.setProducts(cate.getProducts() + 1);
 				cateDAO.attachDirty(cate);
@@ -63,19 +59,19 @@ public class InsertProductAction extends ActionSupport {
 		this.sku = sku;
 	}
 
-	public String getCname() {
-		return cname;
+	public Integer getCid() {
+		return cid;
 	}
 
-	public void setCname(String cname) {
-		this.cname = cname;
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
 
-	public double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getName() {

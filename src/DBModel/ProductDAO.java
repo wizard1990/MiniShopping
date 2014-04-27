@@ -3,8 +3,6 @@ package DBModel;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,56 +24,29 @@ public class ProductDAO extends BaseHibernateDAO {
 	// property constants
 	public static final String NAME = "name";
 	public static final String SKU = "sku";
+	public static final String CID = "cid";
 	public static final String PRICE = "price";
 
 	public void save(Product transientInstance) {
-		Session session = null;
-        Transaction tran = null;
-        log.debug("saving Category instance");
-        try {
-            session = getSession();
-            tran = session.beginTransaction();
-            session.save(transientInstance);
-            tran.commit();
-            log.debug("save successful");
-        } catch (RuntimeException re) {
-            log.error("save failed", re);
-            try{
-                tran.rollback();
-            }catch(RuntimeException rbe){
-                log.error("Couldn’t roll back transaction", rbe);
-                throw rbe;
-            }
-            throw re;
-        } finally {
-            if (session != null) {
-                getSession().close();
-            }
-        }
+		log.debug("saving Product instance");
+		try {
+			getSession().save(transientInstance);
+			log.debug("save successful");
+		} catch (RuntimeException re) {
+			log.error("save failed", re);
+			throw re;
+		}
 	}
 
 	public void delete(Product persistentInstance) {
-		log.debug("deleting Category instance");
-        Session session = null;
-        Transaction tran = null;
-        try {
-            session = getSession();
-            tran = session.beginTransaction();
-            session.delete(persistentInstance);
-            tran.commit();
-            log.debug("delete successful");
-        } catch (RuntimeException re) {
-            log.error("delete failed", re);
-            try{
-                tran.rollback();
-            }catch(RuntimeException rbe){
-                log.error("Couldn’t roll back transaction", rbe);
-                throw rbe;
-            }
-            throw re;
-        } finally {
-            if(session != null) session.close();
-        }
+		log.debug("deleting Product instance");
+		try {
+			getSession().delete(persistentInstance);
+			log.debug("delete successful");
+		} catch (RuntimeException re) {
+			log.error("delete failed", re);
+			throw re;
+		}
 	}
 
 	public Product findById(java.lang.Integer id) {
@@ -125,6 +96,10 @@ public class ProductDAO extends BaseHibernateDAO {
 
 	public List findBySku(Object sku) {
 		return findByProperty(SKU, sku);
+	}
+
+	public List findByCid(Object cid) {
+		return findByProperty(CID, cid);
 	}
 
 	public List findByPrice(Object price) {

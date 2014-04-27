@@ -10,10 +10,10 @@ public abstract class AbstractProduct implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Category category;
 	private String name;
 	private String sku;
-	private Double price;
+	private Integer cid;
+	private Integer price;
 
 	// Constructors
 
@@ -22,11 +22,10 @@ public abstract class AbstractProduct implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public AbstractProduct(Category category, String name, String sku,
-			Double price) {
-		this.category = category;
+	public AbstractProduct(String name, String sku, Integer cid, Integer price) {
 		this.name = name;
 		this.sku = sku;
+		this.cid = cid;
 		this.price = price;
 	}
 
@@ -38,14 +37,6 @@ public abstract class AbstractProduct implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public String getName() {
@@ -64,11 +55,19 @@ public abstract class AbstractProduct implements java.io.Serializable {
 		this.sku = sku;
 	}
 
-	public Double getPrice() {
+	public Integer getCid() {
+		return this.cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
+
+	public Integer getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
