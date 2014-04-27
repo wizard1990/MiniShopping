@@ -70,10 +70,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th><input value="" name="name" size="10"/></th>
 		<th><input value="" name="sku" size="20"/></th>
 		<th>
-		<select name="cname">
+		<select name="cid">
 			<option value="allprod">All products</option>
 		<s:iterator value="#request.categories">
-	    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+	    	<option value=<s:property value="id"/>><s:property value="id"/></option>
 	    </s:iterator>
 	    </select>
 		</th>
