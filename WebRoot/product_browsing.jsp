@@ -66,11 +66,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 		<form action="OrderProd.action" method="post">
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
-		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="#newL.sku" escape="false"/> name="sku" size="20"/></td>
-		<td><input value=<s:property value="#newL.category.name" escape="false"/> name="sku" size="20"/></td>
-		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
+		<td><s:property value="#newL.id"/></td>
+		<td><s:property value="#newL.name" escape="false"/></td>
+		<td><s:property value="#newL.sku" escape="false"/></td>
+		<td><s:property value="#newL.category.name" escape="false"/></td>
+		<td><s:property value="price" escape="false"/></td>
 		<td><input type="submit" value="Order"></td>
 		</form>
 	</tr>
