@@ -33,6 +33,11 @@
           <action name="ListProd" class="actions.ListProductsAction">
               <result name="success">product.jsp</result>   
               <result name="empty">mainPage.jsp</result>
-          </action>          
+          </action>
+          <action name="InsertProd" class="actions.InsertProductAction">
+          	  <result name="duplicate" type="chain">ListProd</result>
+              <result name="success" type="chain">ListProd</result>   
+              <result name="error" type="chain">ListProd</result>
+          </action>       
 </package>
 </struts>

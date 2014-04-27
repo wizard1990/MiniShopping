@@ -1,10 +1,13 @@
 package actions;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.Query;
 
 import DBModel.Category;
 import DBModel.CategoryDAO;
@@ -35,6 +38,10 @@ public class InsertProductAction extends ActionSupport {
 			if(name == null || name.equals("") || name.length() > 20) throw new RuntimeException("illegal name");
 			else {
 				Product prod = new Product(cate, name, sku, price);
+				System.out.println(prod.getName());
+				System.out.println(prod.getSku());
+				System.out.println(prod.getPrice());
+				System.out.println(prod.getCategory().getId());
 				proDAO.save(prod);
 				cate.setProducts(cate.getProducts() + 1);
 				cateDAO.attachDirty(cate);

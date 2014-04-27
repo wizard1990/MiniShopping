@@ -40,6 +40,7 @@ public class ListProductsAction extends ActionSupport {
 			return SUCCESS;
 		}
 		else {
+			System.out.println("empty");
 			return "empty";
 		}
 	}

@@ -21,7 +21,6 @@ public abstract class AbstractProduct implements java.io.Serializable {
 	public AbstractProduct() {
 	}
 
-	
 	/** full constructor */
 	public AbstractProduct(Category category, String name, String sku,
 			Double price) {
