@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -29,6 +29,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <p>-----------insert product browsing------------------</p>
+    
+    
+	<table>
+	<tr>
+	<form action="SearchProd.action" method="post">
+	<td>
+	<select name="cate1">
+		<option value="allprod">All products</option>
+	<s:iterator value="#request.categories">
+    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+    </s:iterator>
+    </select>
+	</td>
+	<td>search here: <input value="" name="keyword" size="20"/></td>
+	<td><input type="submit" value="search"/></td>
+	</form>
+	</tr>
+	</table>
+
+	<table border="1">
+	<tr>
+		<th>id</th>
+		<th>name</th>
+		<th>SKU</th>
+		<th>category</th>
+		<th>price</th>
+	</tr>
+	
+	<s:if test="#request.products!=null">
+
+	<s:bean name="SortCategory" var="sortref"></s:bean>
+	<s:sort comparator="sortref" source="#request.products" var="newList">
+	<s:iterator var="newL" value="#attr.newList">
+	
+	<tr>
+		<form action="OrderProd.action" method="post">
+		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<td><s:property value="#newL.id"/></td>
+		<td><s:property value="#newL.name" escape="false"/></td>
+		<td><s:property value="#newL.sku" escape="false"/></td>
+		<td><s:property value="#newL.category.name" escape="false"/></td>
+		<td><s:property value="price" escape="false"/></td>
+		<td><input type="submit" value="Order"></td>
+		</form>
+	</tr>
+	</s:iterator>
+	</s:sort>
+	</s:if>
+	</table>  
+    
     <a href="product_order.jsp">product order</a>
   <%} else {%>
     <h3>Please log in first.</h3>
