@@ -71,7 +71,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th><input value="" name="sku" size="20"/></th>
 		<th>
 		<select name="cid">
-			<option value="allprod">All products</option>
 		<s:iterator value="#request.categories">
 	    	<option value=<s:property value="id"/>><s:property value="name"/></option>
 	    </s:iterator>
@@ -98,17 +97,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 		<select name="cate3">
-		<s:set name="oldcate" value="#newL.category"></s:set>
+		<s:set name="oldcate" value="#newL.id"></s:set>
 		<!-- <option value="allprod">All products</option> -->
 		<s:iterator value="#request.categories">
-			<s:if test="id==#newL.category.id">
-			<option value=<s:property value="name"/> selected="selected"><s:property value="name"/></option>
+			<s:if test="id==#newL.id">
+			<option value=<s:property value="id"/> selected="selected"><s:property value="name"/></option>
 			</s:if>
 			<s:else>
-	    	<option value=<s:property value="name"/>><s:property value="name"/></option>
+	    	<option value=<s:property value="id"/>><s:property value="name"/></option>
 	    	</s:else>
 	    </s:iterator>
-	    <option value="allprod">All products</option>
 	    </select>
 		</td>
 		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
