@@ -31,7 +31,7 @@
           </action>
           
           <action name="ListProd" class="actions.ListProductsAction">
-              <result name="success">product_browsing.jsp</result>   
+              <result name="success">product.jsp</result>   
               <result name="empty">mainPage.jsp</result>
           </action>          
 </package>
