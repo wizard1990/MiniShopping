@@ -42,6 +42,10 @@
           <action name="DeleteProd" class="actions.DeleteProductAction">
               <result name="success" type="chain">ListProd</result>   
               <result name="error" type="chain">ListProd</result>
-          </action>    
+          </action>
+          <action name="UpdateProd" class="actions.UpdateProductAction">
+              <result name="success" type="chain">ListProd</result>   
+              <result name="error" type="chain">ListProd</result>
+          </action>   
 </package>
 </struts>

@@ -89,18 +89,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 		<form action="UpdateProd.action" method="post">
-		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
+ 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+ 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="#newL.sku" escape="false"/> name="sku" size="20"/></td>
+<!-- 		<s:set name="oldcid" value="#newL.cid"></s:set> -->
+		<input type="hidden" name="oldCid" value=<s:property value="#newL.cid" />/>
 		<td>
-	
-
-		<select name="cate3">
-		<s:set name="oldcate" value="#newL.id"></s:set>
-		<!-- <option value="allprod">All products</option> -->
+		<select name="cid">
 		<s:iterator value="#request.categories">
-			<s:if test="id==#newL.id">
+			<s:if test="id==#newL.cid">
 			<option value=<s:property value="id"/> selected="selected"><s:property value="name"/></option>
 			</s:if>
 			<s:else>
@@ -109,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </s:iterator>
 	    </select>
 		</td>
-		<td><input value=<s:property value="price" escape="false"/> name="price" size="10"/></td>
+		<td><input value=<s:property value="#newL.price" escape="false"/> name="price" size="10"/></td>
 		<td><input type="submit" value="Update"></td>
 		</form>
         <form action="DeleteProd.action" method="post">

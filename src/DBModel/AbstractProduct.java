@@ -59,8 +59,8 @@ public abstract class AbstractProduct implements java.io.Serializable {
 		return this.cid;
 	}
 
-	public void setCid(Integer cid) {
-		this.cid = cid;
+	public void setCid(Integer cid2) {
+		this.cid = cid2;
 	}
 
 	public Integer getPrice() {
