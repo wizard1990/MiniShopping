@@ -32,7 +32,7 @@
           
           <action name="ListProd" class="actions.ListProductsAction">
               <result name="success">product.jsp</result>   
-              <result name="empty">mainPage.jsp</result>
+              <result name="empty">product.jsp</result>
           </action>
           <action name="InsertProd" class="actions.InsertProductAction">
           	  <result name="duplicate" type="chain">ListProd</result>
