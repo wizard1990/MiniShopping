@@ -59,18 +59,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:if test="#request.products!=null">
 
-	<s:bean name="SortCategory" var="sortref"></s:bean>
+	<s:bean name="SortProduct" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.products" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	
 	<tr>
-		<form action="OrderProd.action" method="post">
+		<form action="ClickProd.action" method="post">
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<td width="400"><s:property value="#newL.id"/></td>
-		<td width="400"><s:property value="#newL.name" escape="false"/></td>
-		<td width="400"><s:property value="#newL.sku" escape="false"/></td>
-		<td width="400"><s:property value="#newL.category.name" escape="false"/></td>
-		<td width="400"><s:property value="price" escape="false"/></td>
+		<td width="300"><s:property value="#newL.id"/></td>
+		<td width="300"><s:property value="#newL.name" escape="false"/></td>
+		<td width="300"><s:property value="#newL.sku" escape="false"/></td>
+		<td width="300">
+		<s:iterator value="#request.categories">
+			<s:if test="id==#newL.cid">
+			<s:property value="name"/>
+			</s:if>
+	    </s:iterator>
+		</td>
+		<td width="300"><s:property value="#newL.price" escape="false"/></td>
 		<td><input type="submit" value="Order"></td>
 		</form>
 	</tr>
@@ -82,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="product_order.jsp">product order</a>
   <%} else {%>
     <h3>Please log in first.</h3>
-    <a href="login.jsp">login</a>
+    <a href="mainPage.jsp">mainPage</a>
    <%} %>
    
  	<div class="mainpg">

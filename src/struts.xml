@@ -47,5 +47,11 @@
               <result name="success" type="chain">ListProd</result>   
               <result name="error" type="chain">ListProd</result>
           </action>   
+          
+          <action name="BrowseProd" class="actions.ListProductsAction">
+              <result name="success">product_browsing.jsp</result>   
+              <result name="empty">product_browsing.jsp</result>
+          </action>
+          
 </package>
 </struts>
