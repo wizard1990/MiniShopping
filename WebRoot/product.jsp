@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:if test="#request.products!=null">
 
-	<s:bean name="SortCategory" var="sortref"></s:bean>
+	<s:bean name="SortProduct" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.products" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	
