@@ -35,10 +35,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="ListProd.action" method="post">
     <input type="submit" value="product"/>
     </form>
-  	<% } %> 
+  	<% } else {%> 
   	<form action="BrowseProd.action" method="post">
     <input type="submit" value="see product"/>
     </form>
+    <%} %>
   	<button type="button" onclick="window.location='logout.jsp'">logout</button><br>
   	<% } else { %>
     <h3>Hello, guest.</h3>
