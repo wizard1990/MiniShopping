@@ -20,14 +20,15 @@ public class ListProductsAction extends ActionSupport {
 		CategoryDAO cateDAO = new CategoryDAO();
 		List lc = cateDAO.findAll(); 
 		HttpServletRequest request = ServletActionContext.getRequest();
+		for (int i = 0; i < lc.size(); i++) {
+			Category cate = (Category) lc.get(i);
+			String name = cate.getName().replaceAll(" ", "&nbsp;");
+			String desc = cate.getDescrip().replaceAll(" ", "&nbsp;");
+			cate.setName(name);
+			cate.setDescrip(desc);
+		}
+		request.setAttribute("categories", lc);
 		if (l.size() > 0) {
-			for (int i = 0; i < lc.size(); i++) {
-				Category cate = (Category) lc.get(i);
-				String name = cate.getName().replaceAll(" ", "&nbsp;");
-				String desc = cate.getDescrip().replaceAll(" ", "&nbsp;");
-				cate.setName(name);
-				cate.setDescrip(desc);
-			}
 			for (int i = 0; i < l.size(); i++) {
 				Product prod = (Product) l.get(i);
 				String name = prod.getName().replaceAll(" ", "&nbsp;");
@@ -35,7 +36,6 @@ public class ListProductsAction extends ActionSupport {
 				prod.setName(name);
 				prod.setSku(sku);
 			}
-			request.setAttribute("categories", lc);
 			request.setAttribute("products", l);
 			return SUCCESS;
 		}
