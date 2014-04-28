@@ -3,6 +3,7 @@ package actions;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -49,7 +50,10 @@ public class SearchProductAction extends ActionSupport {
 				cate.setDescrip(desc);
 			}
 			request.setAttribute("categories", lc);
-			return SUCCESS;
+			HttpSession session = request.getSession();
+			String userrole = (String) session.getAttribute("userrole");
+			if (userrole.equals("0")) return "admin_succ";
+			else return "custom_succ";
 		} catch (RuntimeException re) {
         	System.out.println(re);
             return ERROR;

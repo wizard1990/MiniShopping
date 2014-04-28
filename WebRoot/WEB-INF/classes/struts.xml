@@ -53,7 +53,8 @@
               <result name="empty">product_browsing.jsp</result>
           </action>
           <action name="SearchProd" class="actions.SearchProductAction">
-              <result name="success">product.jsp</result>   
+              <result name="admin_succ">product.jsp</result> 
+              <result name="customer_succ">product_browsing.jsp</result>  
               <result name="error">product.jsp</result>
           </action> 
           
