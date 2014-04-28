@@ -52,6 +52,10 @@
               <result name="success">product_browsing.jsp</result>   
               <result name="empty">product_browsing.jsp</result>
           </action>
+          <action name="SearchProd" class="actions.SearchProductAction">
+              <result name="success">product.jsp</result>   
+              <result name="error">product.jsp</result>
+          </action> 
           
 </package>
 </struts>

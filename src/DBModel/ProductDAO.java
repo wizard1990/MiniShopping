@@ -166,4 +166,29 @@ public class ProductDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	public List searchProduct(Integer cid, String key) {
+		Session session = null;
+        Transaction tran = null;
+        try {
+        	session = getSession();
+        	tran = session.beginTransaction();
+        	String strSQL;
+        	if (cid < 0) {
+        		strSQL = "from Product as p where p.name like :key";
+        	}
+        	else {
+        		strSQL = String.format("from Product as p where p.cid = %d and p.name like :key", cid);
+        	}
+        	Query query = session.createQuery(strSQL);
+        	query.setString("key", "%"+key+"%");
+        	List result=query.list();
+        	tran.commit();
+        	return result;
+        }
+        catch (RuntimeException re) {
+			log.error("search name failed", re);
+			throw re;
+		}
+	}
 }
