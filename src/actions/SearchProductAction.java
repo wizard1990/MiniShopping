@@ -52,8 +52,9 @@ public class SearchProductAction extends ActionSupport {
 			request.setAttribute("categories", lc);
 			HttpSession session = request.getSession();
 			String userrole = (String) session.getAttribute("userrole");
+			System.out.println(userrole);
 			if (userrole.equals("0")) return "admin_succ";
-			else return "custom_succ";
+			else return "customer_succ";
 		} catch (RuntimeException re) {
         	System.out.println(re);
             return ERROR;

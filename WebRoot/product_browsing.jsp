@@ -35,14 +35,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<form action="SearchProd.action" method="post">
 	<td>
-	<select name="cate1">
+	<select name="cid">
 		<option value="">All products</option>
 	<s:iterator value="#request.categories">
     	<option value=<s:property value="id"/>><s:property value="name"/></option>
     </s:iterator>
     </select>
 	</td>
-	<td>search here: <input value="" name="keyword" size="20"/></td>
+	<td>search here: <input value="" name="keyWord" size="20"/></td>
 	<td><input type="submit" value="search"/></td>
 	</form>
 	</tr>
