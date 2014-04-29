@@ -3,6 +3,11 @@ package actions;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 
 
 import DBModel.User;
@@ -55,6 +60,10 @@ public class RegisterAction extends ActionSupport {
 			else {
 				User user = new User(name, role, age, state);
 				userDAO.save(user);
+				HttpServletRequest request = ServletActionContext.getRequest();
+				HttpSession session = request.getSession();
+				session.setAttribute("userrole", role);
+				session.setAttribute("userid", user.getId());
 				return SUCCESS;
 			}
         } catch (RuntimeException re) {
