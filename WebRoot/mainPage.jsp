@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
+    <h2>Hello, <%=session.getAttribute("userid")%></h2> 
     <% if(session.getAttribute("userrole").equals("0")) {%>
     <form action="ListCate.action" method="post">
     <input type="submit" value="category"/>
