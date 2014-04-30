@@ -62,7 +62,7 @@
               <result name="order">product_order.jsp</result>  
               <result name="error">shopping_cart.jsp</result>
           </action>
-          <action name="InsertCart" class="actions.InsertTransactionAct">
+          <action name="InsertCart" class="actions.InsertTransactionAction">
               <result name="success">shopping_cart.jsp</result>
               <result name="error">shopping_cart.jsp</result>
           </action>
