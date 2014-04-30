@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="product_browsing.jsp">product browsing</a>
     <a href="purchase_confirmation.jsp">purchase confirmation</a>
     
-    
     <table border="1">
 	<tr>
 		<th>product name</th>
@@ -42,13 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 
 	<s:if test="#request.transactions!=null">
+	<s:set var="totprc" value="0"/>
 
 	<s:bean name="SortTransactions" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.transactions" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<s:set var="totprc" value="0"/>
 		<s:set var="break" value="%{false}"/>
 		<s:iterator value="#request.products">
 		<s:if test="!#break">
@@ -65,15 +63,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</s:if>
 	    </s:iterator>
 		<td width="300"><s:property value="#newL.quantity"/></td>
-		<td width="300">
-    	<s:property value="%{#newL.quantity * #attr.prc}"/></td>
-    	<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
+		<td width="300"><s:property value="%{#newL.quantity * #attr.prc}"/></td>
+		<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
 	</tr>
 	</s:iterator> 
 	</s:sort>
-	<tr>total price:</tr>
+	<tr><td>total price:</td>
+	<td><s:property value="#attr.totprc"/></td>
+	</tr>
 	<tr>Pay for it</tr>
-	<tr><s:proerty value="%{#attr.totprc}"/></tr>
 	<form action="PayProd.action" method="post">
 	<tr>
 	<td>credit card: <input name="creditCard"/></td>

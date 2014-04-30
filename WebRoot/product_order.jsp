@@ -33,55 +33,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p>-----------insert product order------------------</p>  
 
 	<table border="1">
+    <table border="1">
 	<tr>
-		<th>id</th>
-		<th>name</th>
-		<th>SKU</th>
-		<th>category</th>
+		<th>product name</th>
 		<th>price</th>
 		<th>quantity</th>
+		<th>total price</th>
 	</tr>
+	<form action="InsertCart" method="post">
 	<tr>
-		<s:iterator value="#request.justBuy">
-		<form action="OrderProd.action" method="post">
-		<input type="hidden" name="id" value=<s:property value="id" />/>
-		<td width="300"><s:property value="id"/></td>
-		<td width="300"><s:property value="name" escape="false"/></td>
-		<td width="300"><s:property value="sku" escape="false"/></td>
-		<td width="300">
-		<s:iterator value="#request.categories">
-			<s:if test="id==cid">
-			<s:property value="name"/>
-			</s:if>
-	    </s:iterator>
-		</td>
-		<td width="300"><s:property value="price" escape="false"/></td>
-		<td width="300"><input name="qty"></td>
-		<td><input type="submit" value="submit"></td>
-		</form>
-		</s:iterator>
+		<input type="hidden" name="id" value="<%=request.getAttribute("id")%>"/>
+		<td width="300"><%=request.getAttribute("name") %></td>
+		<td width="300"><%=request.getAttribute("price") %></td>
+		<td width="300"><input type="text" name="qty"></td>
+		<td width="300"><input type="submit" value="Add"></td>
 	</tr>
-	
-	<s:if test="#request.cartProd!=null">
-	<s:bean name="SortBuy" var="sortref"></s:bean>
-	<s:sort comparator="sortref" source="#request.cartProd" var="newList">
+	</form>
+	<s:if test="#request.transactions!=null">
+	<s:set var="totprc" value="0"/>
+
+	<s:bean name="SortTransactions" var="sortref"></s:bean>
+	<s:sort comparator="sortref" source="#request.transactions" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<td width="300"><s:property value="#newL.id"/></td>
-		<td width="300"><s:property value="#newL.name" escape="false"/></td>
-		<td width="300"><s:property value="#newL.sku" escape="false"/></td>
-		<td width="300">
-		<s:iterator value="#request.categories">
-			<s:if test="id==#newL.cid">
+		<s:set var="break" value="%{false}"/>
+		<s:iterator value="#request.products">
+		<s:if test="!#break">
+			<s:if test="id==#newL.pid">
+			<s:set var = "break" value="%{true}"/>
+			<td>
 			<s:property value="name"/>
+			</td>
+			<td>
+			<s:property value="price"/>
+			<s:set var="prc" value="price"/>
+			</td>
 			</s:if>
+		</s:if>
 	    </s:iterator>
-		</td>
-		<td width="300"><s:property value="#newL.price" escape="false"/></td>
-		<td width="300"><s:property value="#newL.qty" escape="false"/></td>
+		<td width="300"><s:property value="#newL.quantity"/></td>
+		<td width="300"><s:property value="%{#newL.quantity * #attr.prc}"/></td>
+		<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
 	</tr>
-	</s:iterator>
+	</s:iterator> 
 	</s:sort>
+	<tr><td>current total price:</td>
+	<td><s:property value="#attr.totprc"/></td>
+	</tr>
+	
 	</s:if>
 	</table>  
     

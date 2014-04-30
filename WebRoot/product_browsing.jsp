@@ -64,8 +64,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:iterator var="newL" value="#attr.newList">
 	
 	<tr>
-		<form action="ClickProd.action" method="post">
+		<form action="ListCart.action" method="post">
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
+		<input type="hidden" name="price" value=<s:property value="#newL.price" />/>
+		<input type="hidden" name="po" value="1"/>
 		<td width="300"><s:property value="#newL.id"/></td>
 		<td width="300"><s:property value="#newL.name" escape="false"/></td>
 		<td width="300"><s:property value="#newL.sku" escape="false"/></td>

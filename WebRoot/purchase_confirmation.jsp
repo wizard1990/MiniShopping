@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <h1>PURCHASE CONFIRMATION</h1>
+  <h2>Please confirm the following transaction information:</h2>
     <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
@@ -40,13 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 
 	<s:if test="#request.transactions!=null">
+	<s:set var="totprc" value="0"/>
 
 	<s:bean name="SortTransactions" var="sortref"></s:bean>
 	<s:sort comparator="sortref" source="#request.transactions" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<s:set var="totprc" value="0"/>
 		<s:set var="break" value="%{false}"/>
 		<s:iterator value="#request.products">
 		<s:if test="!#break">
@@ -63,14 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</s:if>
 	    </s:iterator>
 		<td width="300"><s:property value="#newL.quantity"/></td>
-		<td width="300">
-    	<s:property value="%{#newL.quantity * #attr.prc}"/></td>
-    	<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
+		<td width="300"><s:property value="%{#newL.quantity * #attr.prc}"/></td>
+		<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
 	</tr>
 	</s:iterator> 
 	</s:sort>
-	<tr>total price:</tr>
-	
+	<tr><td>total price:</td>
+	<td><s:property value="#attr.totprc"/></td>
+	</tr>
 	</s:if>
 	</table>
     
