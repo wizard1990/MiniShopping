@@ -1,12 +1,12 @@
 import java.util.Comparator;
 
-import DBModel.Product;
+import DBModel.Transaction;
 
 
-public class SortTransactions implements Comparator<Product> {
+public class SortTransactions implements Comparator<Transaction> {
 
 	@Override
-	public int compare(Product arg0, Product arg1) {
+	public int compare(Transaction arg0, Transaction arg1) {
 		if (arg0.getId() > arg1.getId()) {
 			return 1;
 		}
