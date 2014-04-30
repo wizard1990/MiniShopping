@@ -35,40 +35,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <table border="1">
 	<tr>
-		<th>id</th>
 		<th>product name</th>
-		<th>SKU</th>
-		<th>quantity</th>
 		<th>price</th>
-		<th>tot price?</th>
+		<th>quantity</th>
+		<th>total price</th>
 	</tr>
-    <s:if test="#request.cartProd!=null">
-	<s:bean name="SortBuy" var="sortref"></s:bean>
-	<s:sort comparator="sortref" source="#request.cartProd" var="newList">
+
+	<s:if test="#request.transactions!=null">
+
+	<s:bean name="SortTransactions" var="sortref"></s:bean>
+	<s:sort comparator="sortref" source="#request.transactions" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<td width="300"><s:property value="#newL.id"/></td>
-		<td width="300"><s:property value="#newL.name" escape="false"/></td>
-		<td width="300"><s:property value="#newL.sku" escape="false"/></td>
-		<td width="300"><s:property value="#newL.qty" escape="false"/></td>
+		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<s:set var="break" value="%{false}"/>
+		<s:iterator value="#request.products">
+		<s:if test="!#break">
+			<s:if test="id==#newL.id">
+			<s:set var = "break" value="%{true}"/>
+			<td>
+			<s:property value="name"/>
+			</td>
+			<td>
+			<s:property value="price"/>
+			</td>
+			</s:if>
+		</s:if>
+	    </s:iterator>
+		<td width="300"><s:property value="#newL.quantity"/></td>
 		<td width="300"><s:property value="#newL.price" escape="false"/></td>
-		<td width="300"><s:property value="#newL.price" escape="false"/></td>
+		<td><input type="submit" value="Order"></td>
 	</tr>
-	</s:iterator>
+	</s:iterator> 
 	</s:sort>
-	<tr>total price:</tr>
-	<tr>Pay for it</tr>
-	<form action="PayProd.action" method="post">
-	<tr>
-	<td>credit card: <input name="creditCard"/></td>
-	<td><input type="hidden" name="username" value=<%=session.getAttribute("username") %>/></td>
-	</tr>
-	<tr>
-	<td><input type="submit" value="purchase"></td>
-	</tr>
-	</form>
 	</s:if>
-    </table>
+	</table>
     
   <%} else {%>
     <h3>Please log in first.</h3>
