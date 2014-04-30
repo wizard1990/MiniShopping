@@ -36,7 +36,7 @@ public class FinishPurchaseAction extends ActionSupport {
 				if(!trans.getFinished()) {
 					trans.setFinished(true);
 					trans.setCreditnum(creditCard);
-					transDAO.attachDirty(trans);
+					transDAO.attachDirty((org.hibernate.Transaction) trans);
 					Product prod = proDAO.findById(trans.getPid());
 					lt.add(trans);
 					lp.add(prod);
