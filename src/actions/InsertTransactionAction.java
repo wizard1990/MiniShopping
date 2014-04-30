@@ -1,17 +1,19 @@
 package actions;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import DBModel.ProductDAO;
+import DBModel.Transaction;
+import DBModel.TransactionDAO;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class InsertTransactionAction extends ActionSupport {
-	private Integer uid;
 	private Integer pid;
 	private Integer quantity;
-	public Integer getUid() {
-		return uid;
-	}
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
 	public Integer getPid() {
 		return pid;
 	}
@@ -25,4 +27,23 @@ public class InsertTransactionAction extends ActionSupport {
 		this.quantity = quantity;
 	}
 	
+	public String execute() throws Exception{
+		TransactionDAO transDAO = new TransactionDAO();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		ProductDAO proDAO = new ProductDAO();
+		if (proDAO.findById(pid) == null) {
+			return ERROR;
+		}
+		try {
+			
+			Transaction tran = new Transaction((Integer) session.getAttribute("userid"), pid, quantity, false);
+			transDAO.save(tran);
+			return SUCCESS;
+        } catch (RuntimeException re) {
+        	System.out.println(re);
+        	request.setAttribute("isSucc", 0);
+            return ERROR;
+        }
+	}
 }

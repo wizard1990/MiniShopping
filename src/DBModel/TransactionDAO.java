@@ -33,13 +33,28 @@ public class TransactionDAO extends BaseHibernateDAO {
 
 	public void save(DBModel.Transaction transientInstance) {
 		log.debug("saving Transaction instance");
-		try {
-			getSession().save(transientInstance);
-			log.debug("save successful");
-		} catch (RuntimeException re) {
-			log.error("save failed", re);
-			throw re;
-		}
+		Session session = null;
+        Transaction tran = null;
+        try {
+            session = getSession();
+            tran = session.beginTransaction();
+            session.save(transientInstance);
+            tran.commit();
+            log.debug("save successful");
+        } catch (RuntimeException re) {
+            log.error("save failed", re);
+            try{
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                log.error("Couldn’t roll back transaction", rbe);
+                throw rbe;
+            }
+            throw re;
+        } finally {
+            if (session != null) {
+                getSession().close();
+            }
+        }
 	}
 
 	public void delete(DBModel.Transaction persistentInstance) {

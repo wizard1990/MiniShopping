@@ -58,7 +58,12 @@
               <result name="error">product.jsp</result>
           </action> 
           <action name="ListCart" class="actions.ListCartAction">
-              <result name="success">shopping_cart.jsp</result>   
+              <result name="success">shopping_cart.jsp</result>
+              <result name="order">product_order.jsp</result>  
+              <result name="error">shopping_cart.jsp</result>
+          </action>
+          <action name="InsertCart" class="actions.InsertTransactionAct">
+              <result name="success">shopping_cart.jsp</result>
               <result name="error">shopping_cart.jsp</result>
           </action>
 </package>
