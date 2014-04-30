@@ -59,6 +59,10 @@ public class UpdateProductAction extends ActionSupport {
 		CategoryDAO cateDAO = new CategoryDAO();
 		ProductDAO proDAO = new ProductDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		if (sku.length() <= 0 || name.length() <= 0) {
+			request.setAttribute("isSucc", 0);
+            return ERROR;
+		}
 		try {
 			System.out.println(oldCid.substring(0, oldCid.length() - 1));
 			System.out.println(id);
