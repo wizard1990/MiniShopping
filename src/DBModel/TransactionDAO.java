@@ -31,7 +31,7 @@ public class TransactionDAO extends BaseHibernateDAO {
 	public static final String QUANTITY = "quantity";
 	public static final String FINISHED = "finished";
 
-	public void save(Transaction transientInstance) {
+	public void save(DBModel.Transaction transientInstance) {
 		log.debug("saving Transaction instance");
 		try {
 			getSession().save(transientInstance);
@@ -42,7 +42,7 @@ public class TransactionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void delete(Transaction persistentInstance) {
+	public void delete(DBModel.Transaction persistentInstance) {
 		log.debug("deleting Transaction instance");
 		try {
 			getSession().delete(persistentInstance);
@@ -53,10 +53,10 @@ public class TransactionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Transaction findById(java.lang.Integer id) {
+	public DBModel.Transaction findById(java.lang.Integer id) {
 		log.debug("getting Transaction instance with id: " + id);
 		try {
-			Transaction instance = (Transaction) getSession().get(
+			DBModel.Transaction instance = (DBModel.Transaction) getSession().get(
 					"DBModel.Transaction", id);
 			return instance;
 		} catch (RuntimeException re) {
@@ -65,7 +65,7 @@ public class TransactionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public List findByExample(Transaction instance) {
+	public List findByExample(DBModel.Transaction instance) {
 		log.debug("finding Transaction instance by example");
 		try {
 			List results = getSession().createCriteria("DBModel.Transaction")
@@ -126,10 +126,10 @@ public class TransactionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public Transaction merge(Transaction detachedInstance) {
+	public DBModel.Transaction merge(DBModel.Transaction detachedInstance) {
 		log.debug("merging Transaction instance");
 		try {
-			Transaction result = (Transaction) getSession().merge(
+			DBModel.Transaction result = (DBModel.Transaction) getSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -139,7 +139,7 @@ public class TransactionDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public void attachDirty(Transaction instance) {
+	public void attachDirty(DBModel.Transaction instance) {
 		log.debug("attaching dirty Category instance");
         Session session = null;
         Transaction tran = null;
@@ -163,7 +163,7 @@ public class TransactionDAO extends BaseHibernateDAO {
         }
 	}
 
-	public void attachClean(Transaction instance) {
+	public void attachClean(DBModel.Transaction instance) {
 		log.debug("attaching clean Transaction instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
