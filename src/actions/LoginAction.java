@@ -31,6 +31,7 @@ public class LoginAction extends ActionSupport {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
 			session.setAttribute("userrole", r);
+			session.setAttribute("userid", user.getId());
 			return SUCCESS;
 		}
 		else return ERROR;

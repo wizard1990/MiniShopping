@@ -26,6 +26,7 @@ public class TransactionDAO extends BaseHibernateDAO {
 	public static final String UID = "uid";
 	public static final String PID = "pid";
 	public static final String CREDITNUM = "creditnum";
+	public static final String QUANTITY = "quantity";
 	public static final String FINISHED = "finished";
 
 	public void save(Transaction transientInstance) {
@@ -101,6 +102,10 @@ public class TransactionDAO extends BaseHibernateDAO {
 
 	public List findByCreditnum(Object creditnum) {
 		return findByProperty(CREDITNUM, creditnum);
+	}
+
+	public List findByQuantity(Object quantity) {
+		return findByProperty(QUANTITY, quantity);
 	}
 
 	public List findByFinished(Object finished) {

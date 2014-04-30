@@ -12,10 +12,15 @@ public class Transaction extends AbstractTransaction implements
 	public Transaction() {
 	}
 
-	/** full constructor */
-	public Transaction(Integer uid, Integer pid, String creditnum,
+	/** minimal constructor */
+	public Transaction(Integer uid, Integer pid, Integer quantity,
 			Boolean finished) {
-		super(uid, pid, creditnum, finished);
+		super(uid, pid, quantity, finished);
 	}
-
+	
+	/** full constructor */
+	public Transaction(Integer uid, Integer pid, String creditNum, Integer quantity,
+			Boolean finished) {
+		super(uid, pid, quantity, finished);
+	}
 }
