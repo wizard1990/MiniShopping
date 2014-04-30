@@ -28,9 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <p>-----------insert product browsing------------------</p>
-    <a href="product_browsing.jsp">product browsing</a>
-    <a href="purchase_confirmation.jsp">purchase confirmation</a>
     
     <table border="1">
 	<tr>
@@ -71,9 +68,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr><td>total price:</td>
 	<td><s:property value="#attr.totprc"/></td>
 	</tr>
-	<tr>Pay for it</tr>
 	<form action="PayProd.action" method="post">
 	<tr>
+	<td>Pay for it</td>
 	<td>credit card: <input name="creditCard"/></td>
 	<td><input type="submit" value="purchase"></td>
 	</tr>

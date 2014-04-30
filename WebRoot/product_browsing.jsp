@@ -87,8 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</s:sort>
 	</s:if>
 	</table>  
-    
-    <a href="product_order.jsp">product order</a>
   <%} else {%>
     <h3>Please log in first.</h3>
     <a href="mainPage.jsp">mainPage</a>

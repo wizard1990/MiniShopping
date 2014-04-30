@@ -73,7 +73,7 @@
 		  
 		  <action name="PayProd" class="actions.FinishPurchaseAction">
               <result name="success">purchase_confirmation.jsp</result>
-              <result name="error">purchase_confirmation.jsp</result>
+              <result name="error">purchase_fail.jsp</result>
 		  </action>
 </package>
 </struts>
