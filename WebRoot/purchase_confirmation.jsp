@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p>-----------insert product browsing------------------</p>
     <a href="product_browsing.jsp">product browsing</a>
     
-    <table border="1">
+    <table>
 	<tr>
 		<th>product name</th>
 		<th>price</th>
@@ -46,26 +46,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
+		<s:set var="totprc" value="0"/>
 		<s:set var="break" value="%{false}"/>
 		<s:iterator value="#request.products">
 		<s:if test="!#break">
-			<s:if test="id==#newL.id">
+			<s:if test="id==#newL.pid">
 			<s:set var = "break" value="%{true}"/>
 			<td>
 			<s:property value="name"/>
 			</td>
 			<td>
 			<s:property value="price"/>
+			<s:set var="prc" value="price"/>
 			</td>
 			</s:if>
 		</s:if>
 	    </s:iterator>
 		<td width="300"><s:property value="#newL.quantity"/></td>
-		<td width="300"><s:property value="#newL.price" escape="false"/></td>
-		<td><input type="submit" value="Order"></td>
+		<td width="300">
+    	<s:property value="%{#newL.quantity * #attr.prc}"/></td>
+    	<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
 	</tr>
 	</s:iterator> 
 	</s:sort>
+	<tr>total price:</tr>
+	
 	</s:if>
 	</table>
     
@@ -77,8 +82,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
- 	<div class="cartpg">
- 	<button type="button" onclick="window.location='shopping_cart.jsp'">myCart</button>
+ 	 	<div class="cartpg">
+ 	<form action="ListCart.action" method="get">
+ 	<input type="submit" value="shopping_cart"/>
+ 	</form>
  	</div>
    
   </body>

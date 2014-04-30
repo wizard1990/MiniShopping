@@ -57,6 +57,9 @@
               <result name="customer_succ">product_browsing.jsp</result>  
               <result name="error">product.jsp</result>
           </action> 
-          
+          <action name="ListCart" class="actions.ListCartAction">
+              <result name="success">shopping_cart.jsp</result>   
+              <result name="error">shopping_cart.jsp</result>
+          </action>
 </package>
 </struts>

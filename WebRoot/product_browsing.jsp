@@ -95,7 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
  	<div class="cartpg">
- 	<button type="button" onclick="window.location='shopping_cart.jsp'">myCart</button>
+ 	<form action="ListCart.action" method="get">
+ 	<input type="submit" value="shopping_cart"/>
+ 	</form>
  	</div>
  	
   </body>
