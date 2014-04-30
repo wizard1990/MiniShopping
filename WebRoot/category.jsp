@@ -26,6 +26,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>  
+  <script>
+  function checkCate()
+  {
+	var val = document.getElementById("iname").value;
+	var dsp = document.getElementById("idsp").value;
+	if (val == "" || dsp=="")
+	{
+		alert("do not be empty");
+	    return false;
+	}
+  }
+  </script>
+  
+  
   <h1>CATEGORY</h1>
   <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
@@ -45,10 +59,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 
 	<tr>
-		<form action="InsertCate.action" method="post">
+		<form action="InsertCate.action" method="post" onsubmit="return checkCate();">
 		<th><input value="" name="id" size="10" disabled=true/></th>
-		<th><input value="" name="name" size="10"/></th>
-		<th><input value="" name="descrip" size="20"/></th>
+		<th><input value="" name="name" id="iname" size="10"/></th>
+		<th><input value="" name="descrip" id="idsp" size="20"/></th>
 		<th><input type="submit" value="Insert"/></th>
 		</form>
 	</tr>

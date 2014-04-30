@@ -24,6 +24,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  
+  <script>
+  function checkProd()
+  {
+	var val = document.getElementById("iname").value;
+	var sku = document.getElementById("isku").value;
+	var price = document.getElementById("iprice").value;
+	if (val == "" || sku == "" || price == "")
+	{
+		alert("do not be empty");
+	    return false;
+	}
+  }
+  </script>
+  
+  
   <h1>PRODUCT</h1>
   <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
@@ -65,10 +81,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 
 	<tr>
-		<form action="InsertProd.action" method="post">
+		<form action="InsertProd.action" method="post" onsubmit="return checkProd();">
 		<th><input value="" name="id" size="10" disabled=true/></th>
-		<th><input value="" name="name" size="10"/></th>
-		<th><input value="" name="sku" size="20"/></th>
+		<th><input value="" name="name" id="iname" size="10"/></th>
+		<th><input value="" name="sku" id="isku" size="20"/></th>
 		<th>
 		<select name="cid">
 		<s:iterator value="#request.categories">
@@ -76,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </s:iterator>
 	    </select>
 		</th>
-		<th><input value="" name="price" size="10"/></th>
+		<th><input value="" name="price" id="iprice" size="10"/></th>
 		<th><input type="submit" value="Insert"/></th>
 		</form>
 	</tr>
