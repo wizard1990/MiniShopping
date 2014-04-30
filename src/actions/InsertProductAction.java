@@ -22,6 +22,10 @@ public class InsertProductAction extends ActionSupport {
 		ProductDAO proDAO = new ProductDAO();
 		CategoryDAO cateDAO = new CategoryDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		if (sku.length() <= 0 || name.length() <= 0) {
+			request.setAttribute("isSucc", 0);
+            return ERROR;
+		}
 		try {
 			System.out.println(sku);
 			System.out.println(cid);

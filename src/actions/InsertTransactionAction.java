@@ -36,7 +36,6 @@ public class InsertTransactionAction extends ActionSupport {
 			return ERROR;
 		}
 		try {
-			
 			Transaction tran = new Transaction((Integer) session.getAttribute("userid"), pid, quantity, false);
 			transDAO.save(tran);
 			return SUCCESS;

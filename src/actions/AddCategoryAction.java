@@ -29,6 +29,10 @@ public class AddCategoryAction extends ActionSupport {
 	public String execute() throws Exception{
 		CategoryDAO cateDAO = new CategoryDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		if (name.length() <= 0 || descrip.length() <= 0) {
+			request.setAttribute("isSucc", 0);
+            return ERROR;
+		}
 		List l = cateDAO.findByName(name);
 		if (l.size() > 0) {
 			request.setAttribute("isSucc", 0);
