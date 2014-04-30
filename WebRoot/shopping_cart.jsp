@@ -73,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</s:sort>
 	<tr>total price:</tr>
 	<tr>Pay for it</tr>
+	<tr><s:proerty value="%{#attr.totprc}"/></tr>
 	<form action="PayProd.action" method="post">
 	<tr>
 	<td>credit card: <input name="creditCard"/></td>
