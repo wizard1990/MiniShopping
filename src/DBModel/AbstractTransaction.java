@@ -13,6 +13,7 @@ public abstract class AbstractTransaction implements java.io.Serializable {
 	private Integer uid;
 	private Integer pid;
 	private String creditnum;
+	private Integer quantity;
 	private Boolean finished;
 
 	// Constructors
@@ -21,12 +22,22 @@ public abstract class AbstractTransaction implements java.io.Serializable {
 	public AbstractTransaction() {
 	}
 
-	/** full constructor */
-	public AbstractTransaction(Integer uid, Integer pid, String creditnum,
+	/** minimal constructor */
+	public AbstractTransaction(Integer uid, Integer pid, Integer quantity,
 			Boolean finished) {
 		this.uid = uid;
 		this.pid = pid;
+		this.quantity = quantity;
+		this.finished = finished;
+	}
+
+	/** full constructor */
+	public AbstractTransaction(Integer uid, Integer pid, String creditnum,
+			Integer quantity, Boolean finished) {
+		this.uid = uid;
+		this.pid = pid;
 		this.creditnum = creditnum;
+		this.quantity = quantity;
 		this.finished = finished;
 	}
 
@@ -62,6 +73,14 @@ public abstract class AbstractTransaction implements java.io.Serializable {
 
 	public void setCreditnum(String creditnum) {
 		this.creditnum = creditnum;
+	}
+
+	public Integer getQuantity() {
+		return this.quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Boolean getFinished() {
