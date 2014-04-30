@@ -62,9 +62,14 @@
               <result name="order">product_order.jsp</result>  
               <result name="error">shopping_cart.jsp</result>
           </action>
-          <action name="InsertCart" class="actions.InsertTransactionAct">
-              <result name="success">product_browsing.jsp</result>
-              <result name="error">product_browsing.jsp</result>
-          </action>
+          <action name="InsertCart" class="actions.InsertTransactionAction">
+              <result name="success">mainPage.jsp</result>
+              <result name="error">mainPage.jsp</result>
+		  </action>
+		  
+		  <action name="PayProd" class="actions.FinishPurchaseAction">
+              <result name="success">purchase_confirmation.jsp</result>
+              <result name="error">purchase_confirmation.jsp</result>
+		  </action>
 </package>
 </struts>

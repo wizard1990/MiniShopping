@@ -40,10 +40,13 @@ public class FinishPurchaseAction extends ActionSupport {
 					Product prod = proDAO.findById(trans.getPid());
 					lt.add(trans);
 					lp.add(prod);
+					System.out.println(trans);
+					System.out.println(prod);
 				}
 			}
-			session.setAttribute("transactions", lt);
-			session.setAttribute("products", lp);
+			request.setAttribute("transactions", lt);
+			request.setAttribute("products", lp);
+			System.out.println(lt.size());
 			return SUCCESS;
         } catch (RuntimeException re) {
         	System.out.println(re);

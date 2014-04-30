@@ -29,10 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <p>-----------insert product browsing------------------</p>
     <a href="product_browsing.jsp">product browsing</a>
     
-    <table>
+    <table border="1">
 	<tr>
 		<th>product name</th>
 		<th>price</th>

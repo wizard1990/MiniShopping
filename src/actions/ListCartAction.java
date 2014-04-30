@@ -35,7 +35,7 @@ public class ListCartAction extends ActionSupport {
 			}
 			request.setAttribute("transactions", lt);
 			request.setAttribute("products", lp);
-			if (po.equals("1")) {
+			if (po != null && po.equals("1")) {
 				return "order";
 			}
 			return SUCCESS;

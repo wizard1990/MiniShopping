@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <p>-----------insert product order------------------</p>  
 
-	<table border="1">
     <table border="1">
 	<tr>
 		<th>product name</th>
@@ -40,15 +39,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th>quantity</th>
 		<th>total price</th>
 	</tr>
+	
 	<form action="InsertCart" method="post">
 	<tr>
-		<input type="hidden" name="id" value="<%=request.getAttribute("id")%>"/>
-		<td width="300"><%=request.getAttribute("name") %></td>
-		<td width="300"><%=request.getAttribute("price") %></td>
-		<td width="300"><input type="text" name="qty"></td>
+	<%String name = request.getParameter("name");
+	name = name.substring(0, name.length() - 1);
+	String price = request.getParameter("price");
+	price = price.substring(0, price.length() - 1);
+	String pid = request.getParameter("id");
+	pid = pid.substring(0, pid.length() - 1); %>
+		<input type="hidden" name="pid" value="<%=pid%>"/>
+		<td width="300"><%=name %></td>
+		<td width="300"><%=price %></td>
+		<td width="300"><input type="text" name="quantity"></td>
 		<td width="300"><input type="submit" value="Add"></td>
 	</tr>
 	</form>
+	
 	<s:if test="#request.transactions!=null">
 	<s:set var="totprc" value="0"/>
 
