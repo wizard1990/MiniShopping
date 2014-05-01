@@ -53,6 +53,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h2>Hello, <%=session.getAttribute("username")%></h2> 
     This is PRODUCT. <br>
     <p>----------insert product here---------------</p>
+	<s:iterator value="#request.categories">
+    	<form action="SearchProd.action" method="get">
+    	<input type="hidden" name="cid" value=<s:property value="id"/>>
+    	<input type="hidden" name="keyWord" value="">
+    	<input type="submit" value=<s:property value="name"/>>
+    	</form>
+    </s:iterator>
 
 	<table>
 	<tr>
