@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <base href="<%=basePath%>">
     
-    <title>My JSP 'login_fail.jsp' starting page</title>
+    <title>log in failed</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

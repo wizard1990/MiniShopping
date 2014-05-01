@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<LINK REL=StyleSheet HREF="topright.css" TYPE="text/css">
     <base href="<%=basePath%>">
     
-    <title>My JSP 'product_order.jsp' starting page</title>
+    <title>product order</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
