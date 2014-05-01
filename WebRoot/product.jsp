@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<table>
 	<tr>
-	<form action="SearchProd.action" method="post">
+	<form action="SearchProd.action" method="get">
 	<td>
 	<select name="cid">
 		<option value="">All products</option>

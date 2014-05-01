@@ -29,14 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <% if(session.getAttribute("userrole").equals("0")) {%>
-    <form action="ListCate.action" method="post">
+    <form action="ListCate.action" method="get">
     <input type="submit" value="category"/>
     </form>
-    <form action="ListProd.action" method="post">
+    <form action="ListProd.action" method="get">
     <input type="submit" value="product"/>
     </form>
   	<% } else {%> 
-  	<form action="BrowseProd.action" method="post">
+  	<form action="BrowseProd.action" method="get">
     <input type="submit" value="see product"/>
     </form>
     <%} %>
