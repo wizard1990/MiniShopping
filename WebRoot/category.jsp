@@ -53,14 +53,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p>----------insert category here---------------</p>
 	<table border="1">
 	<tr>
-		<th>id</th>
+		<!-- <th>id</th> -->
 		<th>name</th>
 		<th>description</th>
 	</tr>
 
 	<tr>
 		<form action="InsertCate.action" method="post" onsubmit="return checkCate();">
-		<th><input value="" name="id" size="10" disabled=true/></th>
+		<!-- <th><input value="" name="id" size="10" disabled=true/></th> -->
 		<th><input value="" name="name" id="iname" size="10"/></th>
 		<th><input value="" name="descrip" id="idsp" size="20"/></th>
 		<th><input type="submit" value="Insert"/></th>
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form action="UpdateCate.action" method="post">
 		<!-- <input type="hidden" name="action" value="update"/> -->
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
-		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
+		<!-- <td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td> -->
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="#newL.descrip" escape="false"/> name="descrip" size="20"/></td>
 		

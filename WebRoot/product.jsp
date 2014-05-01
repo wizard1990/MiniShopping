@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>
 	<table border="1">
 	<tr>
-		<th>id</th>
+		<!-- <th>id</th> -->
 		<th>name</th>
 		<th>SKU</th>
 		<th>category</th>
@@ -96,11 +96,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<tr>
 		<form action="InsertProd.action" method="post" onsubmit="return checkProd();">
-		<th><input value="" name="id" size="10" disabled=true/></th>
+		<!-- <th><input value="" name="id" size="10" disabled=true/></th> -->
 		<th><input value="" name="name" id="iname" size="10"/></th>
 		<th><input value="" name="sku" id="isku" size="20"/></th>
 		<th>
-		<select name="id==#newL.cid">
+		<select name="cid">
 		<s:iterator value="#request.categories">
 	    	<option value=<s:property value="id"/>><s:property value="name"/></option>
 	    </s:iterator>
@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 		<form action="UpdateProd.action" method="post">
  		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
- 		<td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td>
+ 		<!-- <td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td> -->
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="#newL.sku" escape="false"/> name="sku" size="20"/></td>
 <!-- 		<s:set name="oldcid" value="#newL.cid"></s:set> -->

@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<table border="1">
 	<tr>
-		<th>id</th>
+		<!-- <th>id</th> -->
 		<th>name</th>
 		<th>SKU</th>
 		<th>category</th>
@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="hidden" name="name" value=<s:property value="#newL.name"/>/>
 		<input type="hidden" name="price" value=<s:property value="#newL.price" />/>
 		<input type="hidden" name="po" value="1"/>
-		<td width="300"><s:property value="#newL.id"/></td>
+		<!-- <td width="300"><s:property value="#newL.id"/></td> -->
 		<td width="300"><s:property value="#newL.name" escape="false"/></td>
 		<td width="300"><s:property value="#newL.sku" escape="false"/></td>
 		<td width="300">

@@ -25,7 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <h1>PRODUCT ORDER</h1>
-    <a href="product_browsing.jsp">product browsing</a>
     
     <%
   if(session.getAttribute("username") != null) { %>
@@ -90,8 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</s:if>
 	</table>  
-    
-    <a href="product_order.jsp">product order</a>
+
   <%} else {%>
     <h3>Please log in first.</h3>
     <a href="mainPage.jsp">mainPage</a>
