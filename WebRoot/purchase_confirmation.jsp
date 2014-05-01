@@ -80,11 +80,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
- 	 	<div class="cartpg">
+ 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) {%>
+ 	<div class="cartpg">
  	<form action="ListCart.action" method="get">
  	<input type="submit" value="shopping_cart"/>
  	</form>
  	</div>
+ 	<%} %>
    
   </body>
 </html>
