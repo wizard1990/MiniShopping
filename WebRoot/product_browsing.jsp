@@ -28,25 +28,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <p>-----------insert product browsing------------------</p>
+
+    <table>
+    <tr>
+    <td>
     
-    
-	<table>
-	<tr>
+    <table>
+     <tr>
 	<form action="SearchProd.action" method="get">
-	<td>
-	<select name="cid">
-		<option value="">All products</option>
-	<s:iterator value="#request.categories">
-    	<option value=<s:property value="id"/>><s:property value="name"/></option>
-    </s:iterator>
-    </select>
-	</td>
+	<input type="hidden" name="cid" value="<%=request.getAttribute("currentcid") %>">
 	<td>search here: <input value="" name="keyWord" size="20"/></td>
 	<td><input type="submit" value="search"/></td>
 	</form>
 	</tr>
-	</table>
+    </table>
+    
+    <table>
+    <tr>
+    <td>
+    <form action="SearchProd.action" method="get">
+    	<input type="hidden" name="cid" value="">
+    	<input type="hidden" name="keyWord" value="">
+    	<input type="submit" value="all products" style="background: #CCCCCC">
+    </form>
+	<s:iterator value="#request.categories">
+    	<form action="SearchProd.action" method="get">
+    	<input type="hidden" name="cid" value=<s:property value="id"/>>
+    	<input type="hidden" name="keyWord" value="">
+    	<input type="submit" value=<s:property value="name"/> style="background: #CCCCCC">
+    	</form>
+    </s:iterator>
+    </td>
+    
+    <td>
 
 	<table border="1">
 	<tr>
@@ -87,6 +101,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</s:sort>
 	</s:if>
 	</table>  
+	
+	</td>
+	</tr>
+    </table>
+    
   <%} else {%>
     <h3>Please log in first.</h3>
     <a href="mainPage.jsp">mainPage</a>

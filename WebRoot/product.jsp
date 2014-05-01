@@ -56,19 +56,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <table>
     <tr>
     <td>
-    <p>----------insert product here---------------</p>
     
     <table>
      <tr>
 	<form action="SearchProd.action" method="get">
-<!-- 	<td>
-	<select name="cid">
-		<option value="">All products</option>
-	<s:iterator value="#request.categories">
-    	<option value=<s:property value="id"/>><s:property value="name"/></option>
-    </s:iterator>
-    </select>
-	</td> -->
 	<input type="hidden" name="cid" value="<%=request.getAttribute("currentcid") %>">
 	<td>search here: <input value="" name="keyWord" size="20"/></td>
 	<td><input type="submit" value="search"/></td>
@@ -82,13 +73,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="SearchProd.action" method="get">
     	<input type="hidden" name="cid" value="">
     	<input type="hidden" name="keyWord" value="">
-    	<input type="submit" value="all products">
+    	<input type="submit" value="all products" style="background: #CCCCCC">
     </form>
 	<s:iterator value="#request.categories">
     	<form action="SearchProd.action" method="get">
     	<input type="hidden" name="cid" value=<s:property value="id"/>>
     	<input type="hidden" name="keyWord" value="">
-    	<input type="submit" value=<s:property value="name"/>>
+    	<input type="submit" value=<s:property value="name"/> style="background: #CCCCCC">
     	</form>
     </s:iterator>
     </td>
@@ -109,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th><input value="" name="name" id="iname" size="10"/></th>
 		<th><input value="" name="sku" id="isku" size="20"/></th>
 		<th>
-		<select name="cid">
+		<select name="id==#newL.cid">
 		<s:iterator value="#request.categories">
 	    	<option value=<s:property value="id"/>><s:property value="name"/></option>
 	    </s:iterator>
