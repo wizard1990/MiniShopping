@@ -26,7 +26,7 @@ public class DeleteCategoryAction extends ActionSupport{
 		CategoryDAO categoryDAO = new CategoryDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		List l = categoryDAO.findByName(name);
-		if (l.size() != 1) {
+		if (l.size() != 1 || ((Category)l.get(0)).getProducts() > 0) {
 			request.setAttribute("isSucc", 0);
 			return ERROR;  
 		}
