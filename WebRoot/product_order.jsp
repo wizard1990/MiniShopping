@@ -24,10 +24,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+      <script>
+	  function checkQty()
+	  {
+		var val = document.getElementById("qty").value;
+		if (val < 0 )
+		{
+		    var txt = "illegal quantity";
+		    alert(txt);
+		    return false;
+		}
+	  }
+	  </script>
+  
     <h1>PRODUCT ORDER</h1>
     
     <%
-  if(session.getAttribute("username") != null) { %>
+  if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <p>-----------insert product order------------------</p>  
 
@@ -39,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<th>total price</th>
 	</tr>
 	
-	<form action="InsertCart" method="post">
+	<form action="InsertCart" method="post" onsubmit="return checkQty();">
 	<tr>
 	<%String name = request.getParameter("name");
 	name = name.substring(0, name.length() - 1);
@@ -50,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="hidden" name="pid" value="<%=pid%>"/>
 		<td width="300"><%=name %></td>
 		<td width="300"><%=price %></td>
-		<td width="300"><input type="text" name="quantity"></td>
+		<td width="300"><input type="text" name="quantity" id="qty"></td>
 		<td width="300"><input type="submit" value="Add"></td>
 	</tr>
 	</form>
@@ -91,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>  
 
   <%} else {%>
-    <h3>Please log in first.</h3>
+    <h3>You are not customer, lease log in as customer first.</h3>
     <a href="mainPage.jsp">mainPage</a>
    <%} %>
    

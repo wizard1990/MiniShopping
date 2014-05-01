@@ -32,7 +32,7 @@ public class InsertTransactionAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		ProductDAO proDAO = new ProductDAO();
-		if (proDAO.findById(pid) == null) {
+		if (proDAO.findById(pid) == null || quantity <= 0) {
 			return ERROR;
 		}
 		try {
