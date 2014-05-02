@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <tr>
   <td width="100"><s:property value="#request.inserted.name" escape="false"/></td>
   <td width="100"><s:property value="#request.inserted.sku" escape="false"/></td>
-  <td width="100"><s:property value="#request.inserted.cid" escape="false"/></td>
+  <td width="100"><s:property value="#request.cname" escape="false"/></td>
   <td width="100"><s:property value="#request.inserted.price" escape="false"/></td>
   </tr>
   </table>
