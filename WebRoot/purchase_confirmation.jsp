@@ -25,11 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <h1>PURCHASE CONFIRMATION</h1>
-  <h2>Please confirm the following transaction information:</h2>
     <%
   if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    
+    <h3>Please confirm the following transaction information:</h3>
     <table border="1">
 	<tr>
 		<th>product name</th>
@@ -71,7 +70,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 	</s:if>
 	</table>
-    
+    <form action="BrowseProd.action" method="get">
+    <input type="submit" value="see product"/>
+    </form>
   <%} else {%>
     <h3>You are not customer, please log in as customer first.</h3>
     <a href="login.jsp">login</a>
