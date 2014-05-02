@@ -47,6 +47,7 @@ public class InsertProductAction extends ActionSupport {
 				cateDAO.attachDirty(cate);
 				request.setAttribute("isSucc", 1);
 				request.setAttribute("inserted", prod);
+				request.setAttribute("cname", cate.getName());
 				return SUCCESS;
 			}
         } catch (RuntimeException re) {
