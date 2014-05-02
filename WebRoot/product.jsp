@@ -47,9 +47,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     if(request.getAttribute("isSucc") != null && request.getAttribute("isSucc").equals(0))
   {%>
   <h2>Modified failed.</h2>
-  <%}%>
+  <%} else if(request.getAttribute("isSucc") != null && request.getAttribute("isSucc").equals(2)) {%>
+  <h2>Failure to insert new product.</h2>
+  <%} else if(request.getAttribute("inserted") != null) {%>
+  <h3>you just inserted successfully as below</h3>
+  <table border="1">
+  <tr>
+  <td>name</td>
+  <td>sku</td>
+  <td>category</td>
+  <td>price</td>
+  </tr>
+  <tr>
+  <td width="100"><s:property value="#request.inserted.name" escape="false"/></td>
+  <td width="100"><s:property value="#request.inserted.sku" escape="false"/></td>
+  <td width="100"><s:property value="#request.inserted.cid" escape="false"/></td>
+  <td width="100"><s:property value="#request.inserted.price" escape="false"/></td>
+  </tr>
+  </table>
   
-  
+  <%} %>
   <h2>Hello, <%=session.getAttribute("username")%></h2> 
     This is PRODUCT. <br>
     
