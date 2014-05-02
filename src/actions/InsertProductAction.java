@@ -23,7 +23,7 @@ public class InsertProductAction extends ActionSupport {
 		CategoryDAO cateDAO = new CategoryDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (sku.length() <= 0 || name.length() <= 0 || price <= 0) {
-			request.setAttribute("isSucc", 0);
+			request.setAttribute("isSucc", 2);
             return ERROR;
 		}
 		try {
@@ -33,7 +33,7 @@ public class InsertProductAction extends ActionSupport {
 			Category cate = cateDAO.findById(cid);
 			if (cate == null) throw new RuntimeException("category not exists");
 			if (l.size() > 0) {
-				request.setAttribute("isSucc", 0);
+				request.setAttribute("isSucc", 2);
 				return "duplicate";
 			}
 			if(name == null || name.equals("") || name.length() > 20) throw new RuntimeException("illegal name");
@@ -51,7 +51,7 @@ public class InsertProductAction extends ActionSupport {
 			}
         } catch (RuntimeException re) {
         	System.out.println(re);
-        	request.setAttribute("isSucc", 0);
+        	request.setAttribute("isSucc", 2);
             return ERROR;
         }
 	}
