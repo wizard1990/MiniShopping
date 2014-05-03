@@ -75,5 +75,11 @@
               <result name="success">purchase_confirmation.jsp</result>
               <result name="error">purchase_fail.jsp</result>
 		  </action>
+		  
+		  <action name="Dashboard" class="actions.ListCategoriesAction">
+              <result name="success">/dashboard.jsp</result>
+              <result name="empty">/dashboard.jsp</result>
+		  </action> 
+		  
 </package>
 </struts>
