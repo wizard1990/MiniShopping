@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td>
-	<select name="CusSta">
+	<select name="rowType">
 		<option value="customer">customer</option>
 		<option value="state">state</option>
     </select>
