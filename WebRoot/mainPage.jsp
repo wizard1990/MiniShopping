@@ -35,6 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="ListProd.action" method="get">
     <input type="submit" value="product"/>
     </form>
+    <form action="dashboard.jsp" method="get">
+ 	<input type="submit" value="dashboard"/>
+ 	</form>
   	<% } else {%> 
   	<form action="BrowseProd.action" method="get">
     <input type="submit" value="see product"/>
