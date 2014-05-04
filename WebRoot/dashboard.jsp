@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>
     <table>
     <!-- customer -->
-    <s:iterator value="#request.collist">
+    <s:iterator value="#request.rolelist">
     <tr><s:property value="name" escape="false"/></tr>
     </s:iterator>
     <tr>
