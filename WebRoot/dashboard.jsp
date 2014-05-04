@@ -147,13 +147,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
 <%--     <td>&nbsp;</td>
     <!-- product -->
-    <s:iterator value="#request.resproduct">
+    <s:iterator value="#request.collist">
     <td width="200"><s:property value="name" escape="false"/></td>
     </s:iterator>
     <td>
     <form action="nextProd.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("rowPage"))+1 %>"/>
-    <%if(Integer.parseInt(request.getParameter("rowPage")) < Integer.parseInt(request.getParameter("maxRowPage"))) {%>
+    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("colPage"))+1 %>"/>
+    <%if(Integer.parseInt(request.getParameter("colPage")) < Integer.parseInt(request.getParameter("maxColPage"))) {%>
     <input type="submit" value="next">
     <%} else{ %>
     <input type="submit" value="next" disabled="true">
@@ -162,8 +162,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </td>
     <td>
     <form action="prevProd.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("rowPage"))-1 %>"/>
-    <%if(Integer.parseInt(request.getParameter("rowPage")) > 0) {%>
+    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("colPage"))-1 %>"/>
+    <%if(Integer.parseInt(request.getParameter("colPage")) > 0) {%>
     <input type="submit" value="prev">
     <%} else{ %>
     <input type="submit" value="prev" disabled="true">
@@ -176,13 +176,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>
     <table>
     <!-- customer -->
-    <s:iterator value="#request.rescustomer">
+    <s:iterator value="#request.collist">
     <tr><s:property value="name" escape="false"/></tr>
     </s:iterator>
     <tr>
     <form action="nextCus.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("colPage"))+1 %>"/>
-    <%if(Integer.parseInt(request.getParameter("colPage")) < Integer.parseInt(request.getParameter("maxColPage"))) {%>
+    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("rowPage"))+1 %>"/>
+    <%if(Integer.parseInt(request.getParameter("rowPage")) < Integer.parseInt(request.getParameter("maxRowPage"))) {%>
     <input type="submit" value="next">
     <%} else{ %>
     <input type="submit" value="next" disabled="true">
@@ -191,8 +191,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr>
     <form action="prevCus.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("colPage"))-1 %>"/>
-    <%if(Integer.parseInt(request.getParameter("colPage")) > 0) {%>
+    <input type="hidden" name="pagenum" value="<%=Integer.parseInt(request.getParameter("rowPage"))-1 %>"/>
+    <%if(Integer.parseInt(request.getParameter("rowPage")) > 0) {%>
     <input type="submit" value="prev">
     <%} else{ %>
     <input type="submit" value="prev" disabled="true">
