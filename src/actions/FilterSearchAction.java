@@ -73,7 +73,8 @@ public class FilterSearchAction extends ActionSupport {
             Query colQuery = session.createQuery(colhql);
             List rowlist = rowQuery.list();
             List collist = colQuery.list();
-            for(Object obj:rowlist){
+            System.out.println(collist.size());
+            for(Object obj:collist){
                 Object[] objs = (Object[])obj;
                 System.out.println("len:"+objs.length);
                 System.out.println("id:"+objs[0]);
@@ -83,20 +84,22 @@ public class FilterSearchAction extends ActionSupport {
             HttpServletRequest request = ServletActionContext.getRequest();
             
 			request.setAttribute("rowPage", 1);
-			Integer maxRowPage = rowlist.size();
+			Integer maxRowPage = rowlist.size() / 10;
 			if (rowlist.size() % 10 != 0) maxRowPage++;
 			request.setAttribute("maxRowPage", maxRowPage);
 			Integer rowLen = 10;
 			if (rowlist.size() < 10) rowLen = rowlist.size();
-			request.setAttribute("rowlist", rowlist.subList(0, rowLen - 1));
+			request.setAttribute("rowlist", rowlist.subList(0, rowLen));
 			
 			request.setAttribute("colPage", 1);
-			Integer maxColPage = collist.size();
+			Integer maxColPage = collist.size() / 10;
 			if (collist.size() % 10 != 0) maxColPage++;
 			request.setAttribute("maxColPage", maxColPage);
 			Integer colLen = 10;
 			if (collist.size() < 10) colLen = collist.size();
-			request.setAttribute("collist", collist.subList(0, colLen - 1));
+			List subList = collist.subList(0, colLen);
+			System.out.println(subList);
+;			request.setAttribute("collist", collist.subList(0, colLen));
 			
 			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
 			for (int i = 0; i < rowLen*colLen; i++) {

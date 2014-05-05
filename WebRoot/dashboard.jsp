@@ -144,13 +144,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <br>
     
     <p><%=request.getAttribute("colPage")%></p>
+    <p><%=request.getAttribute("maxColPage")%></p>
+    <p><%=request.getAttribute("collist")%></p>
+    <p><%=request.getAttribute("rowlist")%></p>
     <% if(request.getAttribute("colPage") != null) { %>
     <table>
     <tr>
     <td>&nbsp;</td>
     <!-- product -->
-    <s:iterator value="#request.collist">
-    <td width="200"><s:property value="name" escape="false"/></td>
+    <s:iterator var="colL" value="#request.collist">
+    <td width="200"><s:property value="colL.length()" escape="false"/></td>
     </s:iterator>
     <td>
     <form action="nextProd.action" method="get">
@@ -160,12 +163,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%} else{ %>
     <input type="submit" value="next" disabled="true">
     <%} %>
-    </form>d
+    </form>
     </td>
     <td>
     <form action="prevProd.action" method="get">
     <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("colPage")-1 %>"/>
-    <%if((Integer)request.getAttribute("colPage") > 0) {%>
+    <%if((Integer)request.getAttribute("colPage") > 1) {%>
     <input type="submit" value="prev">
     <%} else{ %>
     <input type="submit" value="prev" disabled="true">
@@ -178,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>
     <table>
     <!-- customer -->
-    <s:iterator value="#request.rolelist">
+    <s:iterator value="#request.rowlist">
     <tr><s:property value="name" escape="false"/></tr>
     </s:iterator>
     <tr>
@@ -194,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
     <form action="prevCus.action" method="get">
     <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("rowPage")-1 %>"/>
-    <%if((Integer)request.getAttribute("rowPage") > 0) {%>
+    <%if((Integer)request.getAttribute("rowPage") > 1) {%>
     <input type="submit" value="prev">
     <%} else{ %>
     <input type="submit" value="prev" disabled="true">
