@@ -2,19 +2,19 @@ package DBModel;
 
 import java.io.Serializable;
 
-public class ProductListElement implements Serializable {
+public class CustomerListElement implements Serializable {
 	private Integer id;
 	private String name;
-	private Integer profit;
+	private Integer cost;
 	/** default constructor */
-	public ProductListElement() {
+	public CustomerListElement() {
 	}
 
 	/** full constructor */
-	public ProductListElement(Integer id, String name, Integer profit) {
+	public CustomerListElement(Integer id, String name, Integer cost) {
 		this.id = id;
 		this.name = name;
-		this.setProfit(profit);
+		this.setCost(cost);
 	}
 
 	// Property accessors
@@ -35,11 +35,11 @@ public class ProductListElement implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getProfit() {
-		return profit;
+	public Integer getCost() {
+		return cost;
 	}
 
-	public void setProfit(Integer profit) {
-		this.profit = profit;
+	public void setCost(Integer cost) {
+		this.cost = cost;
 	}
 }

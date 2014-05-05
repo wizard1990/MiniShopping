@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*, DBModel.CustomerListElement, DBModel.ProductListElement" pageEncoding="ISO-8859-1"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -142,18 +143,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <br>
     <br>
-    
-    <p><%=request.getAttribute("colPage")%></p>
-    <p><%=request.getAttribute("maxColPage")%></p>
-    <p><%=request.getAttribute("collist")%></p>
-    <p><%=request.getAttribute("rowlist")%></p>
+
     <% if(request.getAttribute("colPage") != null) { %>
     <table>
     <tr>
     <td>&nbsp;</td>
     <!-- product -->
-    <s:iterator var="colL" value="#request.collist">
-    <td width="200"><s:property value="colL.length()" escape="false"/></td>
+    <s:iterator value="#request.collist">
+    <td width="200"><s:property value="name" escape="false"/></td>
     </s:iterator>
     <td>
     <form action="nextProd.action" method="get">
@@ -182,7 +179,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <table>
     <!-- customer -->
     <s:iterator value="#request.rowlist">
-    <tr><s:property value="name" escape="false"/></tr>
+    <tr><s:property value="name" escape="false"/><br></tr>
     </s:iterator>
     <tr>
     <form action="nextCus.action" method="get">
@@ -210,21 +207,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td>
     <table border="1">
     <!-- big table -->
-    <%int i,j; %>
-    <s:iterator value="#request.bigResult">
-    <%for(i=0;i<10;i++) { %>
+    <%int i,j; 
+    int rownum=((List)request.getAttribute("rowlist")).size();
+    int colnum=((List)request.getAttribute("collist")).size();
+    %>
     <tr>
-    <%for(j=0;j<10;j++) {%>
-    <td width="200"><s:property value="amount" escape="false"/></td>
+    <td width="200">&nbsp;</td>
+    <td width="200">&nbsp;</td>
+    <%for(j=0;j<colnum;j++) { %>
+    <td width="200"><%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getName() %></td>
+    <%} %>
+    </tr>
+    <tr>
+    <td width="200">&nbsp;</td>
+    <td width="200">&nbsp;</td>
+    <%for(j=0;j<colnum;j++) { %>
+    <td width="200"><%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getProfit() %></td>
+    <%} %>
+    </tr>
+    <%for(i=0;i<rownum;i++) { %>
+    <tr>
+    <td width="200"><%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getName() %></td>
+    <td width="200"><%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getCost() %></td>
+    <%for(j=0;j<colnum;j++) { %>
+    <td width="200"><%=((List)request.getAttribute("bigResult")).get(colnum*i+j) %></td>
     <%} %>
     </tr>
     <%} %>
-    </s:iterator>
     </table>
     </td>
     </tr>
     </table> 
-    
     
   <%} } %>
   </body>
