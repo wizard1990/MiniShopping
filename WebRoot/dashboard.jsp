@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h2>You are not owner and you will be redirected to main page now.</h2>
   <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ %>
   
- 	<form action="filter.action" method="get">
+ 	<form action="Filter.action" method="get">
     <table>
     
     <tr>
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td>
-	<select name="CusSta">
+	<select name="rowType">
 		<option value="customer">customer</option>
 		<option value="state">state</option>
     </select>
