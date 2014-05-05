@@ -75,14 +75,14 @@ public class FilterSearchAction extends ActionSupport {
             Query colQuery = session.createQuery(colhql);
             List rowlist = rowQuery.list();
             List collist = colQuery.list();
-            List<ProductListElement> rowList = new ArrayList<ProductListElement>(rowlist.size());
-            for(Object obj:rowlist){
+            List<ProductListElement> colList = new ArrayList<ProductListElement>(rowlist.size());
+            for(Object obj:collist){
                 Object[] objs = (Object[])obj;
                 System.out.println("len:"+objs.length);
                 System.out.println("id:"+objs[0]);
                 System.out.println("name:"+objs[1]);
                 System.out.println("sum:"+objs[2]);
-                rowList.add(new ProductListElement((Integer)objs[0], (String)objs[1], (Integer)objs[2]));
+                colList.add(new ProductListElement((Integer)objs[0], (String)objs[1], (Integer)objs[2]));
             }
             HttpServletRequest request = ServletActionContext.getRequest();
             
@@ -91,8 +91,8 @@ public class FilterSearchAction extends ActionSupport {
 			if (rowlist.size() % 10 != 0) maxRowPage++;
 			request.setAttribute("maxRowPage", maxRowPage);
 			Integer rowLen = 10;
-			if (rowlist.size() < 10) rowLen = rowList.size();
-			request.setAttribute("rowlist", rowList.subList(0, rowLen));
+			if (rowlist.size() < 10) rowLen = colList.size();
+			request.setAttribute("rowlist", colList.subList(0, rowLen));
 			
 			request.setAttribute("colPage", 1);
 			Integer maxColPage = collist.size() / 10;
