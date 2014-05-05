@@ -100,11 +100,13 @@ public class FilterSearchAction extends ActionSupport {
 			
 			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
 			for (int i = 0; i < rowLen*colLen; i++) {
-				String hql = String.format("select * from from Transaction t where t.uid = %d and t.pid = %d", ((Object[])rowlist.get(i/rowLen))[0], ((Object[])collist.get(i % colLen))[0]);
+				String hql = String.format("select sum(t.quantity) from Transaction t where t.uid = %d and t.pid = %d", ((Object[])rowlist.get(i/rowLen))[0], ((Object[])collist.get(i % colLen))[0]);
 				Query q = session.createQuery(hql);
-				List count = q.list();
-				resultList.set(i, count.size());
-				System.out.println("result:"+count.size());
+				List sales = q.list();
+				System.out.println("sales:\n" + sales.get(0));
+				resultList.add(((Long)sales.get(0)).intValue());
+				//System.out
+				//System.out.println("result:"+count.size());
 			}
             isSucc = true;
         } catch (RuntimeException re) {
