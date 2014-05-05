@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <table>
     <tr>
-<%--     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <!-- product -->
     <s:iterator value="#request.collist">
     <td width="200"><s:property value="name" escape="false"/></td>
@@ -200,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </form>
     </tr>
     </table>
-    </td> --%>
+    </td> 
     
     <td>
     <table border="1">

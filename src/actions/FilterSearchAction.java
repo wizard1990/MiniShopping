@@ -89,8 +89,8 @@ public class FilterSearchAction extends ActionSupport {
 			Integer rowLen = 10;
 			if (rowlist.size() < 10) rowLen = rowlist.size();
 			request.setAttribute("rowlist", rowlist.subList(0, rowLen - 1));
-			request.setAttribute("rowPage", 1);
 			
+			request.setAttribute("colPage", 1);
 			Integer maxColPage = collist.size();
 			if (collist.size() % 10 != 0) maxColPage++;
 			request.setAttribute("maxColPage", maxColPage);
@@ -108,6 +108,7 @@ public class FilterSearchAction extends ActionSupport {
 				//System.out
 				//System.out.println("result:"+count.size());
 			}
+			request.setAttribute("bigResult", resultList);
             isSucc = true;
         } catch (RuntimeException re) {
             System.out.println(re);
