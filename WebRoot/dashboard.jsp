@@ -32,33 +32,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<form action="Filter.action" method="get">
     <table>
     
-    <tr>
+	<tr>
 	<td>
-	<select name="quarter">
-		<option value="">All quarters</option>
-		<option value="spring">spring</option>
-		<option value="summer">summer</option>
-		<option value="fall">fall</option>
-		<option value="winter">winter</option>
+	<select name="rowType">
+		<option value="customer">customer</option>
+		<option value="state">state</option>
     </select>
-	</td>
-	<td>
-	<select name="age">
-		<option value="">All ages</option>
-		<option value="0">0~9</option>
-		<option value="10">10~19</option>
-		<option value="20">20~29</option>
-		<option value="30">30~39</option>
-		<option value="40">40~49</option>
-		<option value="50">50~59</option>
-		<option value="60">60~69</option>
-		<option value="70">70~79</option>
-		<option value="80">80~89</option>
-		<option value="90">above 90</option>
-    </select>
-	</td>
-	</tr>
-	
+    </td>
+    </tr>
+    
 	<tr>
 	<td>
 	<select name="cid">
@@ -127,12 +109,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td>
-	<select name="rowType">
-		<option value="customer">customer</option>
-		<option value="state">state</option>
+	<select name="age">
+		<option value="">All ages</option>
+		<option value="0">0~9</option>
+		<option value="10">10~19</option>
+		<option value="20">20~29</option>
+		<option value="30">30~39</option>
+		<option value="40">40~49</option>
+		<option value="50">50~59</option>
+		<option value="60">60~69</option>
+		<option value="70">70~79</option>
+		<option value="80">80~89</option>
+		<option value="90">above 90</option>
     </select>
-    </td>
-    </tr>
+	</td>
+	</tr>
+	
 	<tr>
 	<td>
 	<input type="submit" value="Run Query">
@@ -149,55 +141,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
     <td>&nbsp;</td>
     <!-- product -->
-    <s:iterator value="#request.collist">
+<!--     <s:iterator value="#request.collist">
     <td width="200"><s:property value="name" escape="false"/></td>
-    </s:iterator>
+    </s:iterator> -->
     <td>
     <form action="nextProd.action" method="get">
     <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("colPage")+1 %>"/>
     <%if((Integer)request.getAttribute("colPage") < (Integer)request.getAttribute("maxColPage")) {%>
-    <input type="submit" value="next">
+    <input type="submit" value="next 10">
     <%} else{ %>
-    <input type="submit" value="next" disabled="true">
+    <input type="submit" value="next 10" disabled="true">
     <%} %>
     </form>
     </td>
-    <td>
-    <form action="prevProd.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("colPage")-1 %>"/>
-    <%if((Integer)request.getAttribute("colPage") > 1) {%>
-    <input type="submit" value="prev">
-    <%} else{ %>
-    <input type="submit" value="prev" disabled="true">
-    <%} %>
-    </form>
-    </td>  
     </tr>
     
     <tr>
     <td>
     <table>
     <!-- customer -->
-    <s:iterator value="#request.rowlist">
+<!--     <s:iterator value="#request.rowlist">
     <tr><s:property value="name" escape="false"/><br></tr>
-    </s:iterator>
+    </s:iterator> -->
     <tr>
     <form action="nextCus.action" method="get">
     <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("rowPage")+1 %>"/>
     <%if((Integer)request.getAttribute("rowPage") < (Integer)request.getAttribute("maxRowPage")) {%>
-    <input type="submit" value="next">
+    <input type="submit" value="next 20">
     <%} else{ %>
-    <input type="submit" value="next" disabled="true">
-    <%} %>
-    </form>
-    </tr>
-    <tr>
-    <form action="prevCus.action" method="get">
-    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("rowPage")-1 %>"/>
-    <%if((Integer)request.getAttribute("rowPage") > 1) {%>
-    <input type="submit" value="prev">
-    <%} else{ %>
-    <input type="submit" value="prev" disabled="true">
+    <input type="submit" value="next 20" disabled="true">
     <%} %>
     </form>
     </tr>
