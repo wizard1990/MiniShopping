@@ -1,6 +1,7 @@
 package actions;
 
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +11,14 @@ import org.apache.struts2.ServletActionContext;
 
 
 
-import DBModel.User;
-import DBModel.UserDAO;
+import DBModel.Users;
+import DBModel.UsersDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class RegisterAction extends ActionSupport {
 	private String name;
-	private Integer role;
+	private String role;
 	private Integer age;
 	private String state;
 	
@@ -28,10 +29,10 @@ public class RegisterAction extends ActionSupport {
 		this.name = userName;
 	}
 	
-	public Integer getRole() {
+	public String getRole() {
     	return role;
 	}
-	public void setRole(Integer role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	
@@ -50,16 +51,16 @@ public class RegisterAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception{
-		UserDAO userDAO = new UserDAO();
-		List l = userDAO.findByName(name);
+		UsersDAO usersDAO = new UsersDAO();
+		List l = usersDAO.findByName(name);
 		if (l.size() > 0) {
 			return "duplicate";
 		}
 		try {
 			if ((age != null && age < 0) || name.contains(" ") || name.length() < 1) throw new RuntimeException("illegal name");
 			else {
-				User user = new User(name, role, age, state);
-				userDAO.save(user);
+				Users user = new Users(name, role, age, state, new HashSet(0), new HashSet(0));
+				usersDAO.save(user);
 				HttpServletRequest request = ServletActionContext.getRequest();
 				HttpSession session = request.getSession();
 				session.setAttribute("userrole", role);

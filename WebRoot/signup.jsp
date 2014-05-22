@@ -58,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td></tr>
             <tr><td>Role:
                 <select name="role">
-                	<option value="1">customer</option>
-                	<option value="0">owner</option>
+                	<option value="customer">customer</option>
+                	<option value="owner">owner</option>
                 </select>
             </td></tr>
             <tr><td>Age:<input type="text" name="age" id="age"/></td></tr>

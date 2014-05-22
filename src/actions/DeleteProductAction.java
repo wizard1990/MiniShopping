@@ -5,35 +5,41 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.Transaction;
 
-import DBModel.Category;
-import DBModel.CategoryDAO;
-import DBModel.Product;
-import DBModel.ProductDAO;
+import DBModel.Products;
+import DBModel.ProductsDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteProductAction extends ActionSupport {
 	private String sku;
 	public String execute() throws Exception {
-		ProductDAO proDAO = new ProductDAO();
-		CategoryDAO cateDAO = new CategoryDAO();
+		ProductsDAO proDAO = new ProductsDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		Transaction tran = null;
 		try {
-			System.out.println(sku);
+			tran = proDAO.getSession().beginTransaction();
 			List l = proDAO.findBySku(sku.substring(0, sku.length() - 1));
 			if (l.size() == 0) throw new RuntimeException("product not exists");
-			Product prod = (Product) l.get(0);
-			Category cate = cateDAO.findById(prod.getCid());
+			Products prod = (Products) l.get(0);
 			proDAO.delete(prod);
-			cate.setProducts(cate.getProducts() - 1);
-			cateDAO.attachDirty(cate);
 			request.setAttribute("isSucc", 1);
+			tran.commit();
 			return SUCCESS;
         } catch (RuntimeException re) {
         	System.out.println(re);
         	request.setAttribute("isSucc", 0);
+        	try{
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                throw rbe;
+            }
             return ERROR;
+        } finally {
+        	if(proDAO.getSession() != null) {
+        		proDAO.getSession().close();
+        	}
         }
 	}
 	public String getSku() {

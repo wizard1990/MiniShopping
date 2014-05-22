@@ -141,11 +141,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
 		<td><input value=<s:property value="#newL.sku" escape="false"/> name="sku" size="20"/></td>
 <!-- 		<s:set name="oldcid" value="#newL.cid"></s:set> -->
-		<input type="hidden" name="oldCid" value=<s:property value="#newL.cid" />/>
+		<input type="hidden" name="oldCid" value=<s:property value="#newL.categories.id" />/>
 		<td>
 		<select name="cid">
 		<s:iterator value="#request.categories">
-			<s:if test="id==#newL.cid">
+			<s:if test="id==#newL.categories.id">
 			<option value=<s:property value="id"/> selected="selected"><s:property value="name"/></option>
 			</s:if>
 			<s:else>

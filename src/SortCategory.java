@@ -1,11 +1,11 @@
 import java.util.Comparator;
-import DBModel.Category;
+import DBModel.Categories;
 
 
-public class SortCategory implements Comparator<Category> {
+public class SortCategory implements Comparator<Categories> {
 
 	@Override
-	public int compare(Category arg0, Category arg1) {
+	public int compare(Categories arg0, Categories arg1) {
 		if (arg0.getId() > arg1.getId()) {
 			return 1;
 		}

@@ -3,11 +3,12 @@ package actions;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.Transaction;
 
-import DBModel.Category;
-import DBModel.CategoryDAO;
-import DBModel.Product;
-import DBModel.ProductDAO;
+import DBModel.Categories;
+import DBModel.CategoriesDAO;
+import DBModel.Products;
+import DBModel.ProductsDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -56,38 +57,41 @@ public class UpdateProductAction extends ActionSupport {
 	}
 	
 	public String execute() throws Exception{
-		CategoryDAO cateDAO = new CategoryDAO();
-		ProductDAO proDAO = new ProductDAO();
+		CategoriesDAO cateDAO = new CategoriesDAO();
+		ProductsDAO proDAO = new ProductsDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (sku.length() <= 0 || name.length() <= 0 || Integer.parseInt(price) <= 0 ) {
 			request.setAttribute("isSucc", 0);
             return ERROR;
 		}
+		Transaction tran = null;
 		try {
-			System.out.println(oldCid.substring(0, oldCid.length() - 1));
-			System.out.println(id);
-			System.out.println(name);
-			System.out.println(sku);
-			Product prod = proDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
-			prod.setCid(Integer.parseInt(cid));
+			tran = proDAO.getSession().beginTransaction();
+			Products prod = proDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
+			if (!oldCid.substring(0, oldCid.length() - 1).equals(cid)) {
+				Categories cate = cateDAO.findById(Integer.parseInt(cid));
+				prod.setCategories(cate);
+			}
 			prod.setName(name);
 			prod.setPrice(Integer.parseInt(price));
 			prod.setSku(sku);
 			proDAO.attachDirty(prod);
-			if (!oldCid.substring(0, oldCid.length() - 1).equals(cid)) {
-				Category oldCate = cateDAO.findById(Integer.parseInt(oldCid.substring(0, oldCid.length() - 1)));
-				Category cate = cateDAO.findById(Integer.parseInt(cid));
-				oldCate.setProducts(oldCate.getProducts() - 1);
-				cate.setProducts(cate.getProducts() + 1);
-				cateDAO.attachDirty(oldCate);
-				cateDAO.attachDirty(cate);
-			}
 			request.setAttribute("isSucc", 1);
+			tran.commit();
 			return SUCCESS;
         } catch (RuntimeException re) {
         	System.out.println(re);
+            try{
+                tran.rollback();
+            }catch(RuntimeException rbe){
+                throw rbe;
+            }
         	request.setAttribute("isSucc", 0);
             return ERROR;
+        } finally {
+        	if(proDAO.getSession() != null) {
+        		proDAO.getSession().close();
+        	}
         }
 	}
 }
