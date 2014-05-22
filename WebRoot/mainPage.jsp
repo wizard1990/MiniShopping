@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>DASHBOARD</h1>
+        <h1>MAIN PAGE</h1>
         <%
         if(session.getAttribute("username") != null) { %>
           <h2>Hello, <%=session.getAttribute("username")%></h2> 
