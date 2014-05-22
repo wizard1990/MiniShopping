@@ -26,9 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <h1>DASHBOARD</h1>
-  <%out.println(session.getAttribute("sCate")); %>
-<%--       <%out.println(session.getAttribute("sCate"));
-      out.println(session.getAttribute("sState"));%> --%>
   
     <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("customer")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
@@ -59,16 +56,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     
 	<tr>
-<!-- 	<td>
-	category:
-	<select name="cid">
-		<option value="">All categories</option>
-	<s:iterator value="#request.categories">
-    	<option value=<s:property value="id"/>><s:property value="name"/></option>
-    </s:iterator>
-    </select>
-	</td> -->
-	
     <td>
 	category:
 	<select name="cid">
