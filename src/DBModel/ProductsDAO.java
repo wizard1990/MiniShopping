@@ -159,10 +159,10 @@ public class ProductsDAO extends BaseHibernateDAO {
         	tran = session.beginTransaction();
         	String strSQL;
         	if (cid < 0) {
-        		strSQL = "from Products as p where p.name like :key";
+        		strSQL = "from minishopping_schema.Products as p where p.name like :key";
         	}
         	else {
-        		strSQL = String.format("from Products as p where p.cid = %d and p.name like :key", cid);
+        		strSQL = String.format("from minishopping_schema.Products as p where p.cid = %d and p.name like :key", cid);
         	}
         	Query query = session.createQuery(strSQL);
         	query.setString("key", "%"+key+"%");

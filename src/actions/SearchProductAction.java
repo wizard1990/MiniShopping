@@ -33,10 +33,10 @@ public class SearchProductAction extends ActionSupport {
 		CategoriesDAO cateDAO = new CategoriesDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		try {
-			System.out.println(cid);
 			System.out.println(keyWord);
 			Integer cateId = -1;
-			if (cid.length() > 0) {
+			if (cid != null && cid.length() > 0) {
+				System.out.println(cid);
 				cateId = Integer.parseInt(cid);
 			}
 			List l = proDAO.searchProduct(cateId, keyWord);
