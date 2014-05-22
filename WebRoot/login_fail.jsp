@@ -7,11 +7,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-  	<LINK REL=StyleSheet HREF="topright.css" TYPE="text/css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  	<link href="topright.css" type="text/css" rel="stylesheet">
   
     <base href="<%=basePath%>">
     
-    <title>log in failed</title>
+    <title>log in page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -25,35 +30,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <script>
-	  function checkUser()
-	  {
-		var val = document.getElementById("name").value;
-		if (val == "")
-		{
-		    var txt = "input should not be empty";
-		    alert(txt);
-		    window.location.href="login.jsp";
-		}
-	  }
-	  </script>
-   <h1>LOG IN</h1>
-   <hr>
-   <%String name = request.getParameter("name"); %>
-   The provided name "<%=name%>" is not known.<br>
-   <form action="Login.action" method="post">
-        <table align="center">
-            <tr>
-                <td>UserName:<input type="text" name="name" id="name"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="submit" onclick="checkUser()"/>
-                <input type="reset" value="reset"/></td>
-            </tr>
-        </table>
+    <div class="container">
+    <form class="form-signin" action="Login.action" method="post">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <p><%String name = request.getParameter("name"); %>
+      - The provided name "<%=name%>" is not known.<br></p>
+      <input type="text" class="form-control" name="name" id="name" placeholder="username" required autofocus>
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-    <div class="mainpg">
+  <div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
+  <div class="container">
   </body>
 </html>

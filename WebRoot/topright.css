@@ -11,11 +11,6 @@
 	top:10px
 }
 
-input:focus
-{
-	background-color:CCCCFF;
-}
-
 table.fixed
 {
 	table-layout:fixed; 
