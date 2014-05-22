@@ -1,6 +1,7 @@
 package actions;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.hibernate.Session;
 
 import DBModel.ProductListElement;
 import DBModel.CustomerListElement;
+import DBModel.CategoryDAO;
 
 public class FilterSearchAction extends ActionSupport {
 	private String age;
@@ -49,9 +51,10 @@ public class FilterSearchAction extends ActionSupport {
 	public String execute() throws Exception{
 		Session session = null;
         boolean isSucc = false;
+        CategoryDAO cateDAO = new CategoryDAO();
         String stateFilter = "";
         if (state.length() > 0) {
-        	String.format("and u.state = '%s' ", state);
+        	stateFilter = String.format("and u.state = '%s' ", state);
         }
         String ageFilter = "";
         if (age.length() > 0) {
@@ -61,7 +64,7 @@ public class FilterSearchAction extends ActionSupport {
         if (cid.length() > 0) {
         	categoryFilter = String.format("and p.cid = %d", Integer.parseInt(cid));
         }
-        String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from User u, Transaction t, Product p where t.uid = u.id and t.pid = p.id " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
+        String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from User u, Transaction t, Product p where t.uid = u.id and t.pid = p.id and t.finished = 't' " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
         String colhql = "select p.id, p.name as pName, sum(t.quantity * p.price) from Transaction t, Product p where t.pid = p.id " + categoryFilter + "group by p.id order by sum(t.quantity * p.price) desc";
         try {
             session = HibernateSessionFactory.getSession();
@@ -80,6 +83,8 @@ public class FilterSearchAction extends ActionSupport {
                 colList.add(new ProductListElement((Integer)objs[0], (String)objs[1], ((Long)objs[2]).intValue()));
             }
             HttpServletRequest request = ServletActionContext.getRequest();
+            List cateList = cateDAO.findAll();
+            request.setAttribute("categories", cateList);
             
 			request.setAttribute("rowPage", 1);
 			Integer maxRowPage = rowList.size() / 10;
@@ -95,15 +100,12 @@ public class FilterSearchAction extends ActionSupport {
 			request.setAttribute("maxColPage", maxColPage);
 			Integer colLen = 10;
 			if (colList.size() < 10) colLen = colList.size();
-			List subList = colList.subList(0, colLen);
-			System.out.println(subList);
 			request.setAttribute("collist", colList.subList(0, colLen));
 			
 			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
 			for (int i = 0; i < rowLen*colLen; i++) {
 				Integer uid = (Integer)((Object[])rowlist.get(i / colLen))[0];
 				Integer pid = (Integer)((Object[])collist.get(i % colLen))[0];
-				System.out.println(uid+" "+pid);
 				String hql = String.format("select sum(t.quantity) from Transaction t where t.uid = %d and t.pid = %d", uid, pid);
 				Query q = session.createQuery(hql);
 				List sales = q.list();
