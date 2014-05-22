@@ -1,13 +1,14 @@
 package actions;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import DBModel.Category;
-import DBModel.CategoryDAO;
+import DBModel.Categories;
+import DBModel.CategoriesDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddCategoryAction extends ActionSupport {
@@ -27,7 +28,7 @@ public class AddCategoryAction extends ActionSupport {
 	}
 
 	public String execute() throws Exception{
-		CategoryDAO cateDAO = new CategoryDAO();
+		CategoriesDAO cateDAO = new CategoriesDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (name.length() <= 0 || descrip.length() <= 0) {
 			request.setAttribute("isSucc", 0);
@@ -41,7 +42,7 @@ public class AddCategoryAction extends ActionSupport {
 		try {
 			if(name == null || name.equals("") || name.length() > 20) throw new RuntimeException("illegal name");
 			else {
-				Category cate = new Category(name, descrip, 0);
+				Categories cate = new Categories(name, descrip, new HashSet(0));
 				cateDAO.save(cate);
 				request.setAttribute("isSucc", 1);
 				return SUCCESS;

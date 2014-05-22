@@ -8,11 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.Transaction;
 
-import DBModel.Product;
-import DBModel.ProductDAO;
-import DBModel.Transaction;
-import DBModel.TransactionDAO;
+import DBModel.Products;
+import DBModel.ProductsDAO;
+import DBModel.Carts;
+import DBModel.CartsDAO;
+import DBModel.Sales;
+import DBModel.SalesDAO;
+import DBModel.UsersDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,34 +27,55 @@ public class FinishPurchaseAction extends ActionSupport {
 		if (creditCard.length() != 16 || !StringUtils.isNumeric(creditCard)) {
 			return ERROR;
 		}
-		TransactionDAO transDAO = new TransactionDAO();
-		ProductDAO proDAO = new ProductDAO();
+		CartsDAO transDAO = new CartsDAO();
+		ProductsDAO proDAO = new ProductsDAO();
+		SalesDAO saleDAO = new SalesDAO();
+		UsersDAO userDAO = new UsersDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
+		List<Carts> lc = new ArrayList<Carts>();
+		List<Products> lp = new ArrayList<Products>();
+		List<Sales> ls = new ArrayList<Sales>();
+		Transaction tran = null;
+		Integer userid = (Integer)session.getAttribute("userid");
 		try {
-			List l = transDAO.findByUid(session.getAttribute("userid"));
-			List<Transaction> lt = new ArrayList<Transaction>();
-			List<Product> lp = new ArrayList<Product>();
+			tran = transDAO.getSession().beginTransaction();
+			boolean flag = true;
+			List l = transDAO.findByProperty("uid", userid);
+			if (l.size() == 0) return ERROR;
 			for (int i = 0; i < l.size(); i++) {
-				Transaction trans = (Transaction)l.get(i);
-				if(!trans.getFinished()) {
-					trans.setFinished(true);
-					trans.setCreditnum(creditCard);
-					transDAO.attachDirty(trans);
-					Product prod = proDAO.findById(trans.getPid());
-					lt.add(trans);
-					lp.add(prod);
-					System.out.println(trans);
-					System.out.println(prod);
+				Carts c = (Carts)l.get(i);
+				if(c.getProducts() == null || proDAO.findById(c.getProducts().getId()) != null) {
+					flag = false;
+					transDAO.delete(c);
+				}
+				else {
+					lc.add(c);
+					lp.add(c.getProducts());
+					ls.add(new Sales(userDAO.findById(userid), c.getProducts(), c.getQuantity(), c.getPrice()));
 				}
 			}
-			request.setAttribute("transactions", lt);
-			request.setAttribute("products", lp);
-			System.out.println(lt.size());
-			return SUCCESS;
+			if (!flag) {
+				tran.commit();
+				return ERROR;
+			}
+			else {
+				for (int i = 0; i < l.size(); i++) {
+					transDAO.delete(lc.get(i));
+					saleDAO.save(ls.get(i));
+				}
+				request.setAttribute("transactions", lc);
+				request.setAttribute("products", lp);
+				tran.commit();
+				return SUCCESS;
+			}
         } catch (RuntimeException re) {
         	System.out.println(re);
             return ERROR;
+        } finally {
+        	if (transDAO.getSession() != null) {
+        		transDAO.getSession().close();
+        	}
         }
 	}
 	public String getCreditCard() {

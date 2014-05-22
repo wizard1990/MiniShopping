@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%
   if(session.getAttribute("username") != null) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
-    <% if(session.getAttribute("userrole").equals("0")) {%>
+    <% if(session.getAttribute("userrole").equals("owner")) {%>
     <form action="ListCate.action" method="get">
     <input type="submit" value="category"/>
     </form>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <button type="button" onclick="window.location='login.jsp'">login</button><br>
    <%} %>
 
- 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) {%>
+ 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("customer")) {%>
  	<div class="cartpg">
  	<form action="ListCart.action" method="get">
  	<input type="submit" value="shopping_cart"/>

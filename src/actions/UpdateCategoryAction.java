@@ -1,9 +1,9 @@
 package actions;
 
 import javax.servlet.http.HttpServletRequest;
-import DBModel.Category;
+import DBModel.Categories;
 import org.apache.struts2.ServletActionContext;
-import DBModel.CategoryDAO;
+import DBModel.CategoriesDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateCategoryAction extends ActionSupport {
@@ -30,10 +30,10 @@ public class UpdateCategoryAction extends ActionSupport {
 	}
 	
 	public String execute() throws Exception{
-		CategoryDAO cateDAO = new CategoryDAO();
+		CategoriesDAO cateDAO = new CategoriesDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		try {
-			Category cate = cateDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
+			Categories cate = cateDAO.findById(Integer.parseInt(id.substring(0, id.length() - 1)));
 			if(cate != null) {
 				if(name.equals("") || descrip.equals(""))
 				{
@@ -43,7 +43,7 @@ public class UpdateCategoryAction extends ActionSupport {
 				name = name.replaceAll("&nbsp;", " ");
 				descrip = descrip.replaceAll("&nbsp;", " ");
 				cate.setName(name);
-				cate.setDescrip(descrip);
+				cate.setDescription(descrip);
 				cateDAO.attachDirty(cate);
 				request.setAttribute("isSucc", 1);
 				return SUCCESS;

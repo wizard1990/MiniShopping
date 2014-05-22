@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import DBModel.Category;
-import DBModel.CategoryDAO;
+import DBModel.Categories;
+import DBModel.CategoriesDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteCategoryAction extends ActionSupport{
@@ -23,16 +23,16 @@ public class DeleteCategoryAction extends ActionSupport{
 	
 	public String execute() throws Exception {
 		name = name.substring(0, name.length() - 1);
-		CategoryDAO categoryDAO = new CategoryDAO();
+		CategoriesDAO categoriesDAO = new CategoriesDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		List l = categoryDAO.findByName(name);
-		if (l.size() != 1 || ((Category)l.get(0)).getProducts() > 0) {
+		List l = categoriesDAO.findByName(name);
+		if (l.size() != 1 || ((Categories)l.get(0)).getProductses().size() > 0) {
 			request.setAttribute("isSucc", 0);
-			return ERROR;  
+			return ERROR;
 		}
 		else {
 			try {
-				categoryDAO.delete((Category)l.get(0));
+				categoriesDAO.delete((Categories)l.get(0));
 				request.setAttribute("isSucc", 1);
 				return SUCCESS;		
 			}catch (RuntimeException re) {	
@@ -41,5 +41,4 @@ public class DeleteCategoryAction extends ActionSupport{
 			}
 		}
 	}
-	
 }

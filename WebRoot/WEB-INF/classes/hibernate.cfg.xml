@@ -27,6 +27,11 @@
 		<mapping resource="DBModel/Category.hbm.xml" />
 		<mapping resource="DBModel/Product.hbm.xml" />
 		<mapping resource="DBModel/Transaction.hbm.xml" />
+		<mapping resource="DBModel/Carts.hbm.xml" />
+		<mapping resource="DBModel/Categories.hbm.xml" />
+		<mapping resource="DBModel/Products.hbm.xml" />
+		<mapping resource="DBModel/Sales.hbm.xml" />
+		<mapping resource="DBModel/Users.hbm.xml" />
 
 	</session-factory>
 

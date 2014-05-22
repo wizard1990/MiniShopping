@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import DBModel.Category;
-import DBModel.CategoryDAO;
-import DBModel.ProductDAO;
+import DBModel.Categories;
+import DBModel.CategoriesDAO;
+import DBModel.ProductsDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,8 +29,8 @@ public class SearchProductAction extends ActionSupport {
 		this.keyWord = keyWord;
 	}
 	public String execute() throws Exception{
-		ProductDAO proDAO = new ProductDAO();
-		CategoryDAO cateDAO = new CategoryDAO();
+		ProductsDAO proDAO = new ProductsDAO();
+		CategoriesDAO cateDAO = new CategoriesDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		try {
 			System.out.println(cid);
@@ -43,11 +43,11 @@ public class SearchProductAction extends ActionSupport {
 			List lc = cateDAO.findAll();
 			request.setAttribute("products", l);
 			for (int i = 0; i < lc.size(); i++) {
-				Category cate = (Category) lc.get(i);
+				Categories cate = (Categories) lc.get(i);
 				String name = cate.getName().replaceAll(" ", "&nbsp;");
-				String desc = cate.getDescrip().replaceAll(" ", "&nbsp;");
+				String desc = cate.getDescription().replaceAll(" ", "&nbsp;");
 				cate.setName(name);
-				cate.setDescrip(desc);
+				cate.setDescription(desc);
 			}
 			request.setAttribute("categories", lc);
 			HttpSession session = request.getSession();

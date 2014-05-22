@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
   <h1>CATEGORY</h1>
-  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
+  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("customer")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
   <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ 
     if(request.getAttribute("isSucc") != null && request.getAttribute("isSucc").equals(0))
@@ -79,12 +79,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="hidden" name="id" value=<s:property value="#newL.id" />/>
 		<!-- <td><input value=<s:property value="#newL.id"/> name="id" size="10" disabled=true/></td> -->
 		<td><input value=<s:property value="#newL.name" escape="false"/> name="name" size="10"/></td>
-		<td><input value=<s:property value="#newL.descrip" escape="false"/> name="descrip" size="20"/></td>
+		<td><input value=<s:property value="#newL.description" escape="false"/> name="descrip" size="20"/></td>
 		
 		<td><input type="submit" value="Update"></td>
 		</form>
 		
-		<s:if test="#newL.products==0">
+		<s:if test="#newL.productses.size()==0">
         <form action="DeleteCate.action" method="post">
 			<input type="hidden" name="name" value=<s:property value="#newL.name" />/>
 			<%-- Button --%>
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
- 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) {%>
+ 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("customer")) {%>
  	<div class="cartpg">
  	<form action="ListCart.action" method="get">
  	<input type="submit" value="shopping_cart"/>

@@ -19,17 +19,10 @@ import DBModel.CustomerListElement;
 import DBModel.CategoryDAO;
 
 public class FilterSearchAction extends ActionSupport {
-	private String quarter;
 	private String age;
 	private String cid;
 	private String state;
 	private String rowType;
-	public String getQuarter() {
-		return quarter;
-	}
-	public void setQuarter(String quarter) {
-		this.quarter = quarter;
-	}
 	public String getAge() {
 		return age;
 	}
