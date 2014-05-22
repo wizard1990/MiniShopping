@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td width="300"><s:property value="#newL.sku" escape="false"/></td>
 		<td width="300">
 		<s:iterator value="#request.categories">
-			<s:if test="id==#newL.cid">
+			<s:if test="id==#newL.categories.id">
 			<s:property value="name"/>
 			</s:if>
 	    </s:iterator>
