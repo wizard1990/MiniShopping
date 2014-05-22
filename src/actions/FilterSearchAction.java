@@ -16,7 +16,7 @@ import org.hibernate.Session;
 
 import DBModel.ProductListElement;
 import DBModel.CustomerListElement;
-import DBModel.CategoryDAO;
+import DBModel.CategoriesDAO;
 
 public class FilterSearchAction extends ActionSupport {
 	private String age;
@@ -51,7 +51,7 @@ public class FilterSearchAction extends ActionSupport {
 	public String execute() throws Exception{
 		Session session = null;
         boolean isSucc = false;
-        CategoryDAO cateDAO = new CategoryDAO();
+        CategoriesDAO cateDAO = new CategoriesDAO();
         String stateFilter = "";
         if (state.length() > 0) {
         	stateFilter = String.format("and u.state = '%s' ", state);
