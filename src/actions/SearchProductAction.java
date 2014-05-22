@@ -35,7 +35,7 @@ public class SearchProductAction extends ActionSupport {
 		try {
 			System.out.println(keyWord);
 			Integer cateId = -1;
-			if (cid != null && cid.length() > 0) {
+			if (cid != null && !cid.equals("null") && cid.length() > 0) {
 				System.out.println(cid);
 				cateId = Integer.parseInt(cid);
 			}
