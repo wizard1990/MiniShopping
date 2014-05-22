@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <h1>PURCHASE CONFIRMATION</h1>
     <%
-  if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) { %>
+  if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("customer")) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     <h3>Please confirm the following transaction information:</h3>
     <table border="1">
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
- 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) {%>
+ 	<%if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("customer")) {%>
  	<div class="cartpg">
  	<form action="ListCart.action" method="get">
  	<input type="submit" value="shopping_cart"/>

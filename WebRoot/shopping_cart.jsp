@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <h1>SHOPPING CART</h1>
     <%
-  if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("1")) { %>
+  if(session.getAttribute("username") != null && session.getAttribute("userrole").equals("customer")) { %>
     <h2>Hello, <%=session.getAttribute("username")%></h2> 
     
     <table border="1">

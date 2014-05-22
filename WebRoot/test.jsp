@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	session.setAttribute("username", name);
       }
   %>
-  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("1")) {%>
+  <%if(session.getAttribute("username") == null || session.getAttribute("userrole").equals("customer")) {%>
   <h2>You are not owner and you will be redirected to main page now.</h2>
   <%response.setHeader("refresh", "2; URL=mainPage.jsp");} else{ %>
   <h2>Hello, <%=session.getAttribute("username")%></h2> 
