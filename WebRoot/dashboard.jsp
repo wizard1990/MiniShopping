@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <h1>DASHBOARD</h1>
-  <%out.println(request.getAttribute("sCate")); %>
+  <%out.println(session.getAttribute("sCate")); %>
 <%--       <%out.println(session.getAttribute("sCate"));
       out.println(session.getAttribute("sState"));%> --%>
   
@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<select name="cid">
 		<option value="">All categories</option>
 		<s:iterator value="#request.categories">
-			<%if(request.getAttribute("sCate") != null) {%>
-			<s:if test="name==#request.sCate %>">
+			<%if(session.getAttribute("sCate") != null) {%>
+			<s:if test="name==#session.sCate">
 			<option value=<s:property value="id"/> selected="selected"><s:property value="name"/></option>
 			</s:if>
 			<s:else>
@@ -431,7 +431,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- ---------------------------------------------- -->
 	<%session.setAttribute("sAge", "65"); 
 	session.setAttribute("sState", "Washington"); 
-	request.setAttribute("sCate", "video");
+	session.setAttribute("sCate", "video");
 	session.setAttribute("sRowtype", "state");
 	%>
 	<!-- ---------------------------------------------- -->
