@@ -23,7 +23,7 @@ public class ListCartAction extends ActionSupport {
 		HttpSession session = request.getSession();
 		try {
 			Integer userid = (Integer)session.getAttribute("userid");
-			List l = cartDAO.findByProperty("uid", userid);
+			List l = cartDAO.findByProperty("users.id", userid);
 			List<Carts> lt = new ArrayList<Carts>();
 			List<Products> lp = new ArrayList<Products>();
 			for (int i = 0; i < l.size(); i++) {

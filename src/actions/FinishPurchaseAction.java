@@ -41,7 +41,7 @@ public class FinishPurchaseAction extends ActionSupport {
 		try {
 			tran = transDAO.getSession().beginTransaction();
 			boolean flag = true;
-			List l = transDAO.findByProperty("uid", userid);
+			List l = transDAO.findByProperty("users.id", userid);
 			if (l.size() == 0) return ERROR;
 			for (int i = 0; i < l.size(); i++) {
 				Carts c = (Carts)l.get(i);
