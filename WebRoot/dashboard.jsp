@@ -61,12 +61,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Minishopping</a>
+          <a class="navbar-brand" href="mainPage.jsp">Minishopping</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="mainPage.jsp">Home</a></li>
-            <li><a href="http://db.ucsd.edu/CSE135S14/">About</a></li>
+            <li class="active"><a href="#">DASHBOARD</a></li>
+            <li><a href="http://db.ucsd.edu/CSE135S14/handouts/project.pdf">About</a></li>
             <li><a href="https://github.com/wizard1990/">resource</a></li>
             <li class="developers">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Members <b class="caret"></b></a>
@@ -74,10 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li><a href="#">Yan Zhang</a></li>
                 <li><a href="#">Yingyan Hua</a></li>
                 <li><a href="#">Ding Sun</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
           </ul>
