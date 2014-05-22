@@ -54,7 +54,7 @@ public class SearchProductAction extends ActionSupport {
 			String userrole = (String) session.getAttribute("userrole");
 			System.out.println(userrole);
 			request.setAttribute("currentcid", cid);
-			if (userrole.equals("0")) return "admin_succ";
+			if (userrole.equals("owner")) return "admin_succ";
 			else return "customer_succ";
 		} catch (RuntimeException re) {
         	System.out.println(re);
