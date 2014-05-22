@@ -7,31 +7,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import DBModel.Product;
-import DBModel.ProductDAO;
-import DBModel.Transaction;
-import DBModel.TransactionDAO;
+import DBModel.Products;
+import DBModel.ProductsDAO;
+import DBModel.Carts;
+import DBModel.CartsDAO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ListCartAction extends ActionSupport {
 	private String po;
 	public String execute() throws Exception{
-		TransactionDAO transDAO = new TransactionDAO();
-		ProductDAO proDAO = new ProductDAO();
+		CartsDAO cartDAO = new CartsDAO();
+		ProductsDAO proDAO = new ProductsDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		try {
-			List l = transDAO.findByUid(session.getAttribute("userid"));
-			List<Transaction> lt = new ArrayList<Transaction>();
-			List<Product> lp = new ArrayList<Product>();
+			Integer userid = (Integer)session.getAttribute("userid");
+			List l = cartDAO.findByProperty("uid", userid);
+			List<Carts> lt = new ArrayList<Carts>();
+			List<Products> lp = new ArrayList<Products>();
 			for (int i = 0; i < l.size(); i++) {
-				Transaction trans = (Transaction)l.get(i);
-				if(!trans.getFinished()) {
-					Product prod = proDAO.findById(trans.getPid());
-					lt.add(trans);
-					lp.add(prod);
-				}
+				Carts trans = (Carts)l.get(i);
+				Products prod = proDAO.findById(trans.getProducts().getId());
+				lt.add(trans);
+				lp.add(prod);
 			}
 			request.setAttribute("transactions", lt);
 			request.setAttribute("products", lp);

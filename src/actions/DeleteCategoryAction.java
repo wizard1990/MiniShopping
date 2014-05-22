@@ -8,7 +8,6 @@ import org.apache.struts2.ServletActionContext;
 
 import DBModel.Categories;
 import DBModel.CategoriesDAO;
-import DBModel.Category;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteCategoryAction extends ActionSupport{

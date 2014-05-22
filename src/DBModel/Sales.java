@@ -20,5 +20,4 @@ public class Sales extends AbstractSales implements java.io.Serializable {
 	public Sales(Users users, Products products, Integer quantity, Integer price) {
 		super(users, products, quantity, price);
 	}
-
 }
