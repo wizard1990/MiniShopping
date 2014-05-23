@@ -9,8 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="theme.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<!--     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="theme.css" rel="stylesheet"> -->
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
   	<link href="topright.css" type="text/css" rel="stylesheet">

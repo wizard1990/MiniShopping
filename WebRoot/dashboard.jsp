@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
 
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 		<td>
 		row type:
-		<select name="rowType">
+		<select name="rowType"  class="form-control">
 			<%if (session.getAttribute("sRowtype") != null && session.getAttribute("sRowtype").equals("customer")) {%>
 			<option value="customer" selected="selected">customer</option>
 			<%} else{%>
@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 	    <td>
 		category:
-		<select name="cid">
+		<select name="cid"  class="form-control">
 			<option value="">All categories</option>
 			<s:iterator value="#request.categories">
 				<%if(session.getAttribute("sCate") != null) {%>
@@ -138,10 +138,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </s:iterator>
 	    </select>
 		</td> 
-		
+		<td>
+		&nbsp;
+		</td>
+
 		<td>
 		state:
-		<select name="state">
+		<select name="state"  class="form-control">
 			<option value="">All states</option>
 			<%if (session.getAttribute("sState") != null && session.getAttribute("sState").equals("Alabama")) {%>
 			<option value="Alabama" selected="selected">Alabama</option>
@@ -449,7 +452,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 		<td>
 		age:
-		<select name="age">
+		<select name="age"  class="form-control">
 			<option value="">All ages</option>
 		
 			<%if (session.getAttribute("sAge") != null && session.getAttribute("sAge").equals("12")) {%>
