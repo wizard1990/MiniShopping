@@ -18,22 +18,18 @@ public class ListCartAction extends ActionSupport {
 	private String po;
 	public String execute() throws Exception{
 		CartsDAO cartDAO = new CartsDAO();
-		ProductsDAO proDAO = new ProductsDAO();
+		//ProductsDAO proDAO = new ProductsDAO();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		try {
 			Integer userid = (Integer)session.getAttribute("userid");
 			List l = cartDAO.findByProperty("users.id", userid);
 			List<Carts> lt = new ArrayList<Carts>();
-			List<Products> lp = new ArrayList<Products>();
 			for (int i = 0; i < l.size(); i++) {
 				Carts trans = (Carts)l.get(i);
-				Products prod = proDAO.findById(trans.getProducts().getId());
 				lt.add(trans);
-				lp.add(prod);
 			}
 			request.setAttribute("transactions", lt);
-			request.setAttribute("products", lp);
 			if (po != null && po.equals("1")) {
 				return "order";
 			}
