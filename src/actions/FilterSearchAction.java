@@ -61,7 +61,7 @@ public class FilterSearchAction extends ActionSupport {
         hSession.setAttribute("sAge", age); 
         hSession.setAttribute("sState", state); 
         hSession.setAttribute("sCate", cid);
-        hSession.setAttribute("sRowtype", "state");
+        hSession.setAttribute("sRowtype", rowType);
         String stateFilter = "";
         if (state.length() > 0) {
         	stateFilter = String.format("where u.state = '%s' ", state);
