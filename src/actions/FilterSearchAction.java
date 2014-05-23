@@ -67,13 +67,39 @@ public class FilterSearchAction extends ActionSupport {
         	stateFilter = String.format("where u.state = '%s' ", state);
         }
         String ageFilter = "";
+        Integer lb = Integer.parseInt(age);
+        Integer ub = 0;
+        switch (lb) {
+        	case 12: ub = 18;
+        			 break;
+        	case 18: ub = 45;
+        			 break;
+        	case 45: ub = 65;
+        			 break;
+        	case 65: ub = 999;
+        			 break;
+        	default:
+        			 break;
+        }
+        
         if (age.length() > 0) {
-        	ageFilter = String.format("and u.age >= %d and u.age < %d ", Integer.parseInt(age), Integer.parseInt(age) + 10);
+        	ageFilter = String.format("u.age >= %d and u.age < %d ", lb, ub);
         }
         String categoryFilter = "";
         if (cid.length() > 0) {
-        	categoryFilter = String.format("where p.categories.id = %d", Integer.parseInt(cid));
+        	categoryFilter = String.format("p.categories.id = %d", Integer.parseInt(cid));
         }
+
+        if (stateFilter.length() > 0) {
+        	stateFilter = "where " + stateFilter;
+        	if(ageFilter.length() > 0) {
+        		ageFilter = "and " + ageFilter;
+        	}
+        }
+        else if (ageFilter.length() > 0) {
+        	ageFilter = "where " + ageFilter;
+        }
+        
         //String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from Users u, Sales t, Products p where t.uid = u.id and t.pid = p.id and t.finished = 't' " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
         String rowhql = "from Users u " + stateFilter + ageFilter + "order by u.name";
         //String colhql = "select p.id, p.name as pName, sum(t.quantity * p.price) from Transaction t, Product p where t.pid = p.id " + categoryFilter + "group by p.id order by sum(t.quantity * p.price) desc";
