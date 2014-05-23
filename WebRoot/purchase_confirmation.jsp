@@ -44,21 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:sort comparator="sortref" source="#request.transactions" var="newList">
 	<s:iterator var="newL" value="#attr.newList">
 	<tr>
-		<s:set var="break" value="%{false}"/>
-		<s:iterator value="#request.products">
-		<s:if test="!#break">
-			<s:if test="id==#newL.pid">
-			<s:set var = "break" value="%{true}"/>
-			<td>
-			<s:property value="name"/>
-			</td>
-			<td>
-			<s:property value="price"/>
-			<s:set var="prc" value="price"/>
-			</td>
-			</s:if>
-		</s:if>
-	    </s:iterator>
+	    <td width="300"><s:property value="#newL.products.name"/></td>	 
+		<td width="300"><s:property value="#newL.price"/></td>	    
+		<s:set var="prc" value="#newL.price"/>
 		<td width="300"><s:property value="#newL.quantity"/></td>
 		<td width="300"><s:property value="%{#newL.quantity * #attr.prc}"/></td>
 		<s:set var="totprc" value="%{#attr.totprc + #newL.quantity * #attr.prc}"/>
