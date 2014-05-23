@@ -45,7 +45,7 @@ public class FinishPurchaseAction extends ActionSupport {
 			if (l.size() == 0) return ERROR;
 			for (int i = 0; i < l.size(); i++) {
 				Carts c = (Carts)l.get(i);
-				if(c.getProducts() == null || proDAO.findById(c.getProducts().getId()) != null) {
+				if(c.getProducts() == null || proDAO.findById(c.getProducts().getId()) == null) {
 					flag = false;
 					transDAO.delete(c);
 				}

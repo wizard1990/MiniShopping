@@ -45,6 +45,8 @@ public class InsertTransactionAction extends ActionSupport {
 			UsersDAO usersDAO = new UsersDAO();
 			Users user = usersDAO.findById((Integer)session.getAttribute("userid"));
 			Carts cs = new Carts(user, prod, quantity, prod.getPrice());
+			System.out.println(quantity);
+			System.out.println(prod.getPrice());
 			transDAO.save(cs);
 			tran.commit();
 			return SUCCESS;
