@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import DBModel.HibernateSessionFactory;
 
@@ -55,6 +56,12 @@ public class FilterSearchAction extends ActionSupport {
 		Session session = null;
         boolean isSucc = false;
         CategoriesDAO cateDAO = new CategoriesDAO();
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpSession hSession = request.getSession();
+        hSession.setAttribute("sAge", age); 
+        hSession.setAttribute("sState", state); 
+        hSession.setAttribute("sCate", cid);
+        hSession.setAttribute("sRowtype", "state");
         String stateFilter = "";
         if (state.length() > 0) {
         	stateFilter = String.format("where u.state = '%s' ", state);
@@ -68,7 +75,7 @@ public class FilterSearchAction extends ActionSupport {
         	categoryFilter = String.format("where p.categories.id = %d", Integer.parseInt(cid));
         }
         //String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from Users u, Sales t, Products p where t.uid = u.id and t.pid = p.id and t.finished = 't' " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
-        String rowhql = "from Users u " + /*stateFilter + ageFilter +*/ "order by u.name";
+        String rowhql = "from Users u " + stateFilter + ageFilter + "order by u.name";
         //String colhql = "select p.id, p.name as pName, sum(t.quantity * p.price) from Transaction t, Product p where t.pid = p.id " + categoryFilter + "group by p.id order by sum(t.quantity * p.price) desc";
         String colhql = "from Products p " + categoryFilter + "order by p.name";
         try {
@@ -117,7 +124,6 @@ public class FilterSearchAction extends ActionSupport {
                 }
                 colList.add(new ProductListElement(prod.getId(), prod.getName(), profit));
             }
-            HttpServletRequest request = ServletActionContext.getRequest();
             List cateList = cateDAO.findAll();
             request.setAttribute("categories", cateList);
             
@@ -148,10 +154,6 @@ public class FilterSearchAction extends ActionSupport {
 //				//System.out.println("result:"+count.size());
 //			}
 			request.setAttribute("bigResult", resultList);
-			System.out.println(rowList.size());
-			System.out.println(rowList.get(19).getName());
-			System.out.println(colList.size());
-			System.out.println(resultList.size());
             isSucc = true;
         } catch (RuntimeException re) {
             System.out.println(re);
