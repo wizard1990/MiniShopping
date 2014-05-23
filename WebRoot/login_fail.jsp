@@ -41,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </label>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-  <div class="mainpg">
+    </div>
+  	<div class="mainpg">
  	<button type="button" onclick="window.location='mainPage.jsp'">mainPage</button>
  	</div>
-  <div class="container">
   </body>
 </html>
