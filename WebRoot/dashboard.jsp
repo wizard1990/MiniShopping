@@ -518,7 +518,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <td style="font-weight:bold;"><%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getName() %></td>
 	    <%} %>
 	    </tr>
-<%-- 	    <tr>
+	    <tr>
 	    <td>&nbsp;</td>
 	    <td>&nbsp;</td>
 	    <%for(j=0;j<colnum;j++) { %>
@@ -526,13 +526,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <%} %>
 	    <td><form action="nextProd.action" method="get">
 	    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("colPage")+1 %>"/>
-	    <%if((Integer)request.getAttribute("colPage") < (Integer)request.getAttribute("maxColPage")) {%>
 	    <input type="submit" value="next10">
-	    <%} else{ %>
-	    <input type="submit" value="next10" disabled="true">
-	    <%} %>
 	    </form></td>
-	    </tr> --%>
+	    </tr> 
 	    <%for(i=0;i<rownum;i++) { %>
 	    <tr>
 	    <td style="font-weight:bold;"><%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getName() %></td>
@@ -546,11 +542,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
 	    <form action="nextCus.action" method="get" style="left:90px;">
 	    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("rowPage")+1 %>"/>
-	    <%if((Integer)request.getAttribute("rowPage") < (Integer)request.getAttribute("maxRowPage")) {%>
 	    <input type="submit" value="next20">
-	    <%} else{ %>
-	    <input type="submit" value="next20" disabled="true">
-	    <%} %>
 	    </form>
 	
 	  <%} } %>

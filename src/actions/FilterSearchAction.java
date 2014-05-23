@@ -84,24 +84,25 @@ public class FilterSearchAction extends ActionSupport {
 			
 			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
             List<CustomerListElement> rowList = new ArrayList<CustomerListElement>(rowlist.size());
-            System.out.println(rowlist.size());
+            
             for(Object obj:rowlist){
                 Users user = (Users)obj;
                 Integer cost = 0;
                 for(Object sale: user.getSaleses()){  
                     Sales s = (Sales)sale;
                     cost += s.getPrice() * s.getQuantity();
-                    boolean flag = false;
-                    for (int i = 0; i < colLen; i++) {
-                    	Integer pid = ((Products)(collist.get(i))).getId();
-                    	if (s.getProducts().getId().equals(pid)) {
-                    		flag = true;
-                    		resultList.add(s.getPrice() * s.getQuantity());
+                }
+                for (int i = 0; i < colLen; i++) {
+                	Integer pid = ((Products)(collist.get(i))).getId();
+                	Integer purchase = 0;
+                	for(Object sale: user.getSaleses()){
+                        Sales s = (Sales)sale;
+                        if (s.getProducts().getId().equals(pid)) {
+                    		purchase += s.getPrice() * s.getQuantity();
                     	}
                     }
-                    if (!flag) resultList.add(0);
+                	resultList.add(purchase);
                 }
-                System.out.println(user.getSaleses().size());
                 rowList.add(new CustomerListElement(user.getId(), user.getName(), cost));
             }
             
@@ -147,6 +148,10 @@ public class FilterSearchAction extends ActionSupport {
 //				//System.out.println("result:"+count.size());
 //			}
 			request.setAttribute("bigResult", resultList);
+			System.out.println(rowList.size());
+			System.out.println(rowList.get(19).getName());
+			System.out.println(colList.size());
+			System.out.println(resultList.size());
             isSucc = true;
         } catch (RuntimeException re) {
             System.out.println(re);
