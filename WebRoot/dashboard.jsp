@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="">All categories</option>
 			<s:iterator value="#request.categories">
 				<%if(session.getAttribute("sCate") != null) {%>
-				<s:if test="name==#session.sCate">
+				<s:if test="id==#session.sCate">
 				<option value=<s:property value="id"/> selected="selected"><s:property value="name"/></option>
 				</s:if>
 				<s:else>
