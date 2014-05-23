@@ -17,6 +17,9 @@ import org.hibernate.Session;
 import DBModel.ProductListElement;
 import DBModel.CustomerListElement;
 import DBModel.CategoriesDAO;
+import DBModel.Products;
+import DBModel.Sales;
+import DBModel.Users;
 
 public class FilterSearchAction extends ActionSupport {
 	private String age;
@@ -54,7 +57,7 @@ public class FilterSearchAction extends ActionSupport {
         CategoriesDAO cateDAO = new CategoriesDAO();
         String stateFilter = "";
         if (state.length() > 0) {
-        	stateFilter = String.format("and u.state = '%s' ", state);
+        	stateFilter = String.format("where u.state = '%s' ", state);
         }
         String ageFilter = "";
         if (age.length() > 0) {
@@ -62,60 +65,88 @@ public class FilterSearchAction extends ActionSupport {
         }
         String categoryFilter = "";
         if (cid.length() > 0) {
-        	categoryFilter = String.format("and p.cid = %d", Integer.parseInt(cid));
+        	categoryFilter = String.format("where p.categories.id = %d", Integer.parseInt(cid));
         }
-        String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from User u, Transaction t, Product p where t.uid = u.id and t.pid = p.id and t.finished = 't' " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
-        String colhql = "select p.id, p.name as pName, sum(t.quantity * p.price) from Transaction t, Product p where t.pid = p.id " + categoryFilter + "group by p.id order by sum(t.quantity * p.price) desc";
+        //String rowhql = "select u.id, u.name as uName, sum(t.quantity * p.price) from Users u, Sales t, Products p where t.uid = u.id and t.pid = p.id and t.finished = 't' " + stateFilter + ageFilter + "group by u.id order by sum(t.quantity * p.price) desc";
+        String rowhql = "from Users u " + /*stateFilter + ageFilter +*/ "order by u.name";
+        //String colhql = "select p.id, p.name as pName, sum(t.quantity * p.price) from Transaction t, Product p where t.pid = p.id " + categoryFilter + "group by p.id order by sum(t.quantity * p.price) desc";
+        String colhql = "from Products p " + categoryFilter + "order by p.name";
         try {
             session = HibernateSessionFactory.getSession();
             Query rowQuery = session.createQuery(rowhql);
+            rowQuery.setMaxResults(20);
             Query colQuery = session.createQuery(colhql);
+            colQuery.setMaxResults(10);
             List rowlist = rowQuery.list();
-            List<CustomerListElement> rowList = new ArrayList<CustomerListElement>(rowlist.size());
-            for(Object obj:rowlist){
-                Object[] objs = (Object[])obj;
-                rowList.add(new CustomerListElement((Integer)objs[0], (String)objs[1], ((Long)objs[2]).intValue()));
-            }
             List collist = colQuery.list();
+            Integer rowLen = rowlist.size();
+			Integer colLen = collist.size();
+			
+			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
+            List<CustomerListElement> rowList = new ArrayList<CustomerListElement>(rowlist.size());
+            System.out.println(rowlist.size());
+            for(Object obj:rowlist){
+                Users user = (Users)obj;
+                Integer cost = 0;
+                for(Object sale: user.getSaleses()){  
+                    Sales s = (Sales)sale;
+                    cost += s.getPrice() * s.getQuantity();
+                    boolean flag = false;
+                    for (int i = 0; i < colLen; i++) {
+                    	Integer pid = ((Products)(collist.get(i))).getId();
+                    	if (s.getProducts().getId().equals(pid)) {
+                    		flag = true;
+                    		resultList.add(s.getPrice() * s.getQuantity());
+                    	}
+                    }
+                    if (!flag) resultList.add(0);
+                }
+                System.out.println(user.getSaleses().size());
+                rowList.add(new CustomerListElement(user.getId(), user.getName(), cost));
+            }
+            
+            //System.out.println(rowlist.size());
             List<ProductListElement> colList = new ArrayList<ProductListElement>(collist.size());
             for(Object obj:collist){
-                Object[] objs = (Object[])obj;
-                colList.add(new ProductListElement((Integer)objs[0], (String)objs[1], ((Long)objs[2]).intValue()));
+                Products prod = (Products)obj;
+                Integer profit = 0;
+                for (Object sale: prod.getSaleses()) {
+                	Sales s = (Sales)sale;
+                	profit += s.getPrice() * s.getQuantity();
+                }
+                colList.add(new ProductListElement(prod.getId(), prod.getName(), profit));
             }
             HttpServletRequest request = ServletActionContext.getRequest();
             List cateList = cateDAO.findAll();
             request.setAttribute("categories", cateList);
             
 			request.setAttribute("rowPage", 1);
-			Integer maxRowPage = rowList.size() / 10;
-			if (rowList.size() % 10 != 0) maxRowPage++;
-			request.setAttribute("maxRowPage", maxRowPage);
-			Integer rowLen = 10;
-			if (rowList.size() < 10) rowLen = rowList.size();
-			request.setAttribute("rowlist", rowList.subList(0, rowLen));
+//			Integer maxRowPage = rowList.size() / 10;
+//			if (rowList.size() % 10 != 0) maxRowPage++;
+//			request.setAttribute("maxRowPage", maxRowPage);
+//			Integer rowLen = 10;
+//			if (rowList.size() < 10) rowLen = rowList.size();
+			request.setAttribute("rowlist", rowList);
 			
 			request.setAttribute("colPage", 1);
-			Integer maxColPage = colList.size() / 10;
-			if (colList.size() % 10 != 0) maxColPage++;
-			request.setAttribute("maxColPage", maxColPage);
-			Integer colLen = 10;
-			if (colList.size() < 10) colLen = colList.size();
-			request.setAttribute("collist", colList.subList(0, colLen));
-			
-			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
-			for (int i = 0; i < rowLen*colLen; i++) {
-				Integer uid = (Integer)((Object[])rowlist.get(i / colLen))[0];
-				Integer pid = (Integer)((Object[])collist.get(i % colLen))[0];
-				String hql = String.format("select sum(t.quantity) from Transaction t where t.uid = %d and t.pid = %d", uid, pid);
-				Query q = session.createQuery(hql);
-				List sales = q.list();
-				if (sales.get(0) == null) resultList.add(0);
-				else resultList.add(((Long)sales.get(0)).intValue());
-				//System.out
-				//System.out.println("result:"+count.size());
-			}
+//			Integer maxColPage = colList.size() / 10;
+//			if (colList.size() % 10 != 0) maxColPage++;
+//			request.setAttribute("maxColPage", maxColPage);
+//			Integer colLen = 10;
+//			if (colList.size() < 10) colLen = colList.size();
+			request.setAttribute("collist", colList);
+//			for (int i = 0; i < rowLen*colLen; i++) {
+//				Integer uid = rowList.get(i / colLen).getId();
+//				Integer pid = colList.get(i % colLen).getId();
+////				String hql = String.format("select sum(t.quantity) from Transaction t where t.uid = %d and t.pid = %d", uid, pid);
+////				Query q = session.createQuery(hql);
+//				//List sales = q.list();
+//				if (sales.get(0) == null) resultList.add(0);
+//				else resultList.add(((Long)sales.get(0)).intValue());
+//				//System.out
+//				//System.out.println("result:"+count.size());
+//			}
 			request.setAttribute("bigResult", resultList);
-			System.out.println(resultList);
             isSucc = true;
         } catch (RuntimeException re) {
             System.out.println(re);

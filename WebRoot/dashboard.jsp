@@ -479,13 +479,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</td>
 		</tr>
 		
-		<!-- ---------------------------------------------- -->
+<%-- 		<!-- ---------------------------------------------- -->
 		<%session.setAttribute("sAge", "65"); 
 		session.setAttribute("sState", "Washington"); 
 		session.setAttribute("sCate", "C1");
 		session.setAttribute("sRowtype", "state");
 		%>
-		<!-- ---------------------------------------------- -->
+		<!-- ---------------------------------------------- --> --%>
 		<tr>
 		<td>
 		&nbsp;
@@ -518,7 +518,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <td style="font-weight:bold;"><%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getName() %></td>
 	    <%} %>
 	    </tr>
-	    <tr>
+<%-- 	    <tr>
 	    <td>&nbsp;</td>
 	    <td>&nbsp;</td>
 	    <%for(j=0;j<colnum;j++) { %>
@@ -532,7 +532,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <input type="submit" value="next10" disabled="true">
 	    <%} %>
 	    </form></td>
-	    </tr>
+	    </tr> --%>
 	    <%for(i=0;i<rownum;i++) { %>
 	    <tr>
 	    <td style="font-weight:bold;"><%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getName() %></td>
