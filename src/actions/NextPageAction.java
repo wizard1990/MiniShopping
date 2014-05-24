@@ -1,67 +1,38 @@
 package actions;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import DBModel.HibernateSessionFactory;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import DBModel.ProductListElement;
-import DBModel.CustomerListElement;
 import DBModel.CategoriesDAO;
+import DBModel.CustomerListElement;
+import DBModel.HibernateSessionFactory;
+import DBModel.ProductListElement;
 import DBModel.Products;
 import DBModel.Sales;
 import DBModel.Users;
 
-public class FilterSearchAction extends ActionSupport {
-	private String age;
-	private String cid;
-	private String state;
-	private String rowType;
-	public String getAge() {
-		return age;
-	}
-	public void setAge(String age) {
-		this.age = age;
-	}
-	public String getCid() {
-		return cid;
-	}
-	public void setCid(String cid) {
-		this.cid = cid;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getRowType() {
-		return rowType;
-	}
-	public void setRowType(String rowType) {
-		this.rowType = rowType;
-	}
-	
+import com.opensymphony.xwork2.ActionSupport;
+
+public class NextPageAction extends ActionSupport {
+	private Integer rowPage;
+	private Integer colPage;
 	public String execute() throws Exception{
 		Session session = null;
         boolean isSucc = false;
         CategoriesDAO cateDAO = new CategoriesDAO();
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession hSession = request.getSession();
-        hSession.setAttribute("sAge", age); 
-        hSession.setAttribute("sState", state); 
-        hSession.setAttribute("sCate", cid);
-        hSession.setAttribute("sRowtype", rowType);
+        String age = (String)hSession.getAttribute("sAge"); 
+        String state = (String)hSession.getAttribute("sState"); 
+        String cid = (String)hSession.getAttribute("sCate");
+        String rowType = (String)hSession.getAttribute("sRowtype");
         String stateFilter = "";
         if (state.length() > 0) {
         	stateFilter = String.format("where u.state = '%s' ", state);
@@ -87,7 +58,7 @@ public class FilterSearchAction extends ActionSupport {
         }
         String categoryFilter = "";
         if (cid.length() > 0) {
-        	categoryFilter = String.format("where p.categories.id = %d ", Integer.parseInt(cid));
+        	categoryFilter = String.format("p.categories.id = %d", Integer.parseInt(cid));
         }
 
         if (stateFilter.length() > 0) {
@@ -106,10 +77,13 @@ public class FilterSearchAction extends ActionSupport {
         String colhql = "from Products p " + categoryFilter + "order by p.name";
         try {
             session = HibernateSessionFactory.getSession();
+            
             Query rowQuery = session.createQuery(rowhql);
             rowQuery.setMaxResults(20);
+            rowQuery.setFirstResult((rowPage - 1) * 20);
             Query colQuery = session.createQuery(colhql);
             colQuery.setMaxResults(10);
+            colQuery.setFirstResult((colPage - 1) * 20);
             List rowlist = rowQuery.list();
             List collist = colQuery.list();
             Integer rowLen = rowlist.size();
@@ -153,7 +127,7 @@ public class FilterSearchAction extends ActionSupport {
             List cateList = cateDAO.findAll();
             request.setAttribute("categories", cateList);
             
-			request.setAttribute("rowPage", 1);
+//			request.setAttribute("rowPage", 1);
 //			Integer maxRowPage = rowList.size() / 10;
 //			if (rowList.size() % 10 != 0) maxRowPage++;
 //			request.setAttribute("maxRowPage", maxRowPage);
@@ -161,7 +135,7 @@ public class FilterSearchAction extends ActionSupport {
 //			if (rowList.size() < 10) rowLen = rowList.size();
 			request.setAttribute("rowlist", rowList);
 			
-			request.setAttribute("colPage", 1);
+//			request.setAttribute("colPage", 1);
 //			Integer maxColPage = colList.size() / 10;
 //			if (colList.size() % 10 != 0) maxColPage++;
 //			request.setAttribute("maxColPage", maxColPage);
@@ -192,4 +166,16 @@ public class FilterSearchAction extends ActionSupport {
         if (isSucc) return SUCCESS;
         else return ERROR;
     }
+	public Integer getRowPage() {
+		return rowPage;
+	}
+	public void setRowPage(Integer rowPage) {
+		this.rowPage = rowPage;
+	}
+	public Integer getColPage() {
+		return colPage;
+	}
+	public void setColPage(Integer colPage) {
+		this.colPage = colPage;
+	}
 }
