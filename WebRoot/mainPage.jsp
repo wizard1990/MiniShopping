@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="author" content="">
     <link rel="shortcut icon" href="/ico/favicon.ico">
 
-    <title>Dashboard</title>
+    <title>main page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
