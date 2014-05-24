@@ -27,7 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<% 
           response.setHeader("refresh", "2; URL=signup.jsp");
     %>
-    Your signup failed!
+    <img align="center" src="ico/fail.jpg" />
+    <h1 align="center">Your signup failed!</h1>
     
   </body>
 </html>
