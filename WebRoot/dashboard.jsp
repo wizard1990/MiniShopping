@@ -527,8 +527,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <%for(j=0;j<colnum;j++) { %>
 	    <td style="font-weight:bold;">($<%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getProfit() %>)</td>
 	    <%} %>
-	    <td><form action="nextProd.action" method="get">
-	    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("colPage")+1 %>"/>
+	    <td><form action="NextPage.action" method="get">
+	    <input type="hidden" name="colPage" value="<%=(Integer)request.getAttribute("colPage")+1 %>"/>
+	    <input type="hidden" name="rowPage" value="<%=(Integer)request.getAttribute("rowPage") %>"/>	    
 	    <input type="submit" value="next10">
 	    </form></td>
 	    </tr> 
@@ -543,8 +544,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <%} %>
 	    </table>
 	    
-	    <form action="nextCus.action" method="get" style="left:90px;">
-	    <input type="hidden" name="pagenum" value="<%=(Integer)request.getAttribute("rowPage")+1 %>"/>
+	    <form action="NextPage.action" method="get" style="left:90px;">
+	    <input type="hidden" name="colPage" value="<%=(Integer)request.getAttribute("colPage") %>"/>
+	    <input type="hidden" name="rowPage" value="<%=(Integer)request.getAttribute("rowPage")+1 %>"/>
 	    <input type="submit" value="next20">
 	    </form>
 	

@@ -85,6 +85,9 @@
               <result name="success">/dashboard.jsp</result>
               <result name="error">/dashboard.jsp</result>
 		  </action>
-		  
+		  <action name="NextPage" class="actions.NextPageAction">
+              <result name="success">/dashboard.jsp</result>
+              <result name="error">/dashboard.jsp</result>
+		  </action>
 </package>
 </struts>
