@@ -164,23 +164,54 @@ public class NextPageAction extends ActionSupport {
         	try {
         		session = HibernateSessionFactory.getSession();
         		Query rowQuery = session.createQuery(rowhql);
-        		rowQuery.setMaxResults(20);
-        		rowQuery.setFirstResult((rowPage - 1) * 20);
+        		rowQuery.setMaxResults(20*rowPage);
         		List rowlist = rowQuery.list();
+        		Integer rowLen = rowlist.size();
+        		if (rowLen == 0) rowLen = 1;
         		
         		Query colQuery = session.createQuery(colhql);
                 colQuery.setMaxResults(10);
                 colQuery.setFirstResult((colPage - 1) * 20);
                 List collist = colQuery.list();
-                Integer rowLen = rowlist.size();
     			Integer colLen = collist.size();
-        		
-        		List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
-                List<StateListElement> rowList = new ArrayList<StateListElement>(rowlist.size());
+    			
+    			String[] stateList = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"};
+    			List<StateListElement> rowList = new ArrayList<StateListElement>();
+    			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
+                if (stateStateFilter.length() > 0) {
+                	if (rowlist.size() > 0) {
+                		Object[] ele = (Object[])rowlist.get(0);
+                		rowList.add(new StateListElement((String)ele[0], ((Long)ele[1]).intValue()));
+                	}
+                	else {
+                		rowList.add(new StateListElement(state, 0));
+                	}
+                }
+                else {
+                	if (rowPage == 2) {
+        				for (int i = 20; i < 40; i++) {
+                        	rowList.add(new StateListElement(stateList[i], 0));
+                        }
+        			}
+        			else {
+        				for (int i = 40; i < 50; i++) {
+        					rowList.add(new StateListElement(stateList[i], 0));
+        				}
+        			}
+                }
+    			
                 for (Object obj:rowlist) {
                 	Object[] stateElement = (Object[])obj;
-                	rowList.add(new StateListElement((String)stateElement[0], ((Long)stateElement[1]).intValue()));
+                	Integer cost = ((Long)stateElement[1]).intValue();
+                	for (Object element:rowList) {
+                		StateListElement ele = (StateListElement)element;
+                		if(ele.getName().equals(stateElement[0])) {
+                			ele.setCost(cost);
+                			break;
+                		}
+                	}
                 }
+    			
                 List<ProductListElement> colList = new ArrayList<ProductListElement>(collist.size());
                 for(Object obj:collist){
                     Products prod = (Products)obj;

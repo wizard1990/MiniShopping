@@ -199,17 +199,17 @@ public class FilterSearchAction extends ActionSupport {
         else {
         	String stateAgeFilter = "";
         	if (lb > 0) {
-        		stateAgeFilter = String.format("and u.age >= %d and u.age < %d ", lb, ub);
+        		stateAgeFilter = String.format("and s.users.age >= %d and s.users.age < %d ", lb, ub);
         	}
         	String stateStateFilter = "";
         	if (state.length() > 0) {
-        		stateStateFilter = String.format("and u.state = '%s' ", state);
+        		stateStateFilter = String.format("and s.users.state = '%s' ", state);
         	}
         	String stateCategoryFilter = "";
         	if (cid.length() > 0) {
         		stateCategoryFilter = String.format("and s.products.categories.id = %d ", Integer.parseInt(cid));
         	}
-        	String rowhql = "select u.state, sum(s.price * s.quantity) from Users u, Sales s where u.id = s.users.id " + stateAgeFilter + stateStateFilter + stateCategoryFilter + "group by u.state";
+        	String rowhql = "select s.users.state, sum(s.price * s.quantity) from Sales s where 1 = 1 " + stateAgeFilter + stateStateFilter + stateCategoryFilter + "group by s.users.state order by s.users.state";
         	String colhql = "from Products p " + categoryFilter + "order by p.name";
         	try {
         		session = HibernateSessionFactory.getSession();
@@ -221,14 +221,39 @@ public class FilterSearchAction extends ActionSupport {
                 colQuery.setMaxResults(10);
                 List collist = colQuery.list();
                 Integer rowLen = rowlist.size();
+                if (rowLen == 0) rowLen = 1;
     			Integer colLen = collist.size();
         		
-        		List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
-                List<StateListElement> rowList = new ArrayList<StateListElement>(rowlist.size());
+    			String[] stateList = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"};
+    			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
+                List<StateListElement> rowList = new ArrayList<StateListElement>(20);
+                if (stateStateFilter.length() > 0) {
+                	if (rowlist.size() > 0) {
+                		Object[] ele = (Object[])rowlist.get(0);
+                		rowList.add(new StateListElement((String)ele[0], ((Long)ele[1]).intValue()));
+                	}
+                	else {
+                		rowList.add(new StateListElement(state, 0));
+                	}
+                }
+                else {
+                	for (int i = 0; i < 20; i++) {
+                    	rowList.add(new StateListElement(stateList[i], 0));
+                    }
+                }
+        		
                 for (Object obj:rowlist) {
                 	Object[] stateElement = (Object[])obj;
-                	rowList.add(new StateListElement((String)stateElement[0], ((Long)stateElement[1]).intValue()));
+                	Integer cost = ((Long)stateElement[1]).intValue();
+                	for (Object element:rowList) {
+                		StateListElement ele = (StateListElement)element;
+                		if(ele.getName().equals(stateElement[0])) {
+                			ele.setCost(cost);
+                			break;
+                		}
+                	}
                 }
+                
                 List<ProductListElement> colList = new ArrayList<ProductListElement>(collist.size());
                 for(Object obj:collist){
                     Products prod = (Products)obj;
