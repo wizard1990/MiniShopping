@@ -39,9 +39,11 @@ public class NextPageAction extends ActionSupport {
         }
         String ageFilter = "";
         
+        Integer lb = -1;
+        Integer ub = 999;
         if (age.length() > 0) {
-        	Integer lb = Integer.parseInt(age);
-            Integer ub = 0;
+        	lb = Integer.parseInt(age);
+            ub = 0;
             switch (lb) {
             	case 12: ub = 18;
             			 break;
@@ -97,7 +99,9 @@ public class NextPageAction extends ActionSupport {
                 Integer cost = 0;
                 for(Object sale: user.getSaleses()){  
                     Sales s = (Sales)sale;
-                    cost += s.getPrice() * s.getQuantity();
+                    if (cid.length() == 0 || s.getProducts().getCategories().getId().equals(Integer.parseInt(cid))) {
+                    	cost += s.getPrice() * s.getQuantity();
+                    }
                 }
                 for (int i = 0; i < colLen; i++) {
                 	Integer pid = ((Products)(collist.get(i))).getId();
@@ -120,39 +124,16 @@ public class NextPageAction extends ActionSupport {
                 Integer profit = 0;
                 for (Object sale: prod.getSaleses()) {
                 	Sales s = (Sales)sale;
-                	profit += s.getPrice() * s.getQuantity();
+                	if (s.getUsers().getAge() >= lb && s.getUsers().getAge() < ub && (state.length() == 0 || s.getUsers().getState().equals(state))) {
+                		profit += s.getPrice() * s.getQuantity();
+                	}
                 }
                 colList.add(new ProductListElement(prod.getId(), prod.getName(), profit));
             }
             List cateList = cateDAO.findAll();
             request.setAttribute("categories", cateList);
-            
-//			request.setAttribute("rowPage", 1);
-//			Integer maxRowPage = rowList.size() / 10;
-//			if (rowList.size() % 10 != 0) maxRowPage++;
-//			request.setAttribute("maxRowPage", maxRowPage);
-//			Integer rowLen = 10;
-//			if (rowList.size() < 10) rowLen = rowList.size();
 			request.setAttribute("rowlist", rowList);
-			
-//			request.setAttribute("colPage", 1);
-//			Integer maxColPage = colList.size() / 10;
-//			if (colList.size() % 10 != 0) maxColPage++;
-//			request.setAttribute("maxColPage", maxColPage);
-//			Integer colLen = 10;
-//			if (colList.size() < 10) colLen = colList.size();
 			request.setAttribute("collist", colList);
-//			for (int i = 0; i < rowLen*colLen; i++) {
-//				Integer uid = rowList.get(i / colLen).getId();
-//				Integer pid = colList.get(i % colLen).getId();
-////				String hql = String.format("select sum(t.quantity) from Transaction t where t.uid = %d and t.pid = %d", uid, pid);
-////				Query q = session.createQuery(hql);
-//				//List sales = q.list();
-//				if (sales.get(0) == null) resultList.add(0);
-//				else resultList.add(((Long)sales.get(0)).intValue());
-//				//System.out
-//				//System.out.println("result:"+count.size());
-//			}
 			request.setAttribute("bigResult", resultList);
             isSucc = true;
         } catch (RuntimeException re) {
@@ -166,6 +147,7 @@ public class NextPageAction extends ActionSupport {
         if (isSucc) return SUCCESS;
         else return ERROR;
     }
+	
 	public Integer getRowPage() {
 		return rowPage;
 	}
