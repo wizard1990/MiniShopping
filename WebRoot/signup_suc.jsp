@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
       response.setHeader("refresh", "2; URL=mainPage.jsp");
     %>
-    <img align="center" src="ico/suc.jpg" />
-    <h1 align="center">You have successfully signed up!</h1>
+    <h1 align="center"><img src="ico/suc.jpg" />You have successfully signed up!</h1>
   </body>
 </html>

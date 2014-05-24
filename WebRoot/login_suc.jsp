@@ -31,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       response.setHeader("refresh", "2; URL=mainPage.jsp");
       
     %>
-    <img src="ico/suc.jpg" align="center"/>
-    <h1 align="center">log in successfully!</h1>
+    <h1 align="center"><img src="ico/suc.jpg"/>log in successfully!</h1>
   </body>
 </html>

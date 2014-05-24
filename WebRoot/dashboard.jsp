@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*, DBModel.CustomerListElement, DBModel.ProductListElement" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*, DBModel.CustomerListElement, DBModel.StateListElement, DBModel.ProductListElement" pageEncoding="ISO-8859-1"%>
 
 <%
 String path = request.getContextPath();
@@ -527,16 +527,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <%for(j=0;j<colnum;j++) { %>
 	    <td style="font-weight:bold;">($<%=((ProductListElement)(((List)request.getAttribute("collist")).get(j))).getProfit() %>)</td>
 	    <%} %>
+	    <%if(colnum<10) {%>
+	    <td><input type="button" value="next10" disabled="true"></td>
+	    <%} else{ %>
 	    <td><form action="NextPage.action" method="get">
 	    <input type="hidden" name="colPage" value="<%=(Integer)request.getAttribute("colPage")+1 %>"/>
 	    <input type="hidden" name="rowPage" value="<%=(Integer)request.getAttribute("rowPage") %>"/>	    
 	    <input type="submit" value="next10">
 	    </form></td>
+	    <%} %>
 	    </tr> 
 	    <%for(i=0;i<rownum;i++) { %>
 	    <tr>
+	    <%if(session.getAttribute("sRowtype").equals("customer")) {%>
 	    <td style="font-weight:bold;"><%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getName() %></td>
 	    <td style="font-weight:bold;">($<%=((CustomerListElement)(((List)request.getAttribute("rowlist")).get(i))).getCost() %>)</td>
+	    <%} else{ %>
+	    <td style="font-weight:bold;"><%=((StateListElement)(((List)request.getAttribute("rowlist")).get(i))).getName() %></td>
+	    <td style="font-weight:bold;">($<%=((StateListElement)(((List)request.getAttribute("rowlist")).get(i))).getCost() %>)</td>	    
+	    <%} %>
 	    <%for(j=0;j<colnum;j++) { %>
 	    <td class="solid"><%=((List)request.getAttribute("bigResult")).get(colnum*i+j) %></td>
 	    <%} %>
@@ -544,11 +553,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <%} %>
 	    </table>
 	    
+	    
+	    <%if(rownum<20) {%>
+	    <input type="button" value="next20" disabled="true">
+	    <%} else{%>
 	    <form action="NextPage.action" method="get" style="left:90px;">
 	    <input type="hidden" name="colPage" value="<%=(Integer)request.getAttribute("colPage") %>"/>
 	    <input type="hidden" name="rowPage" value="<%=(Integer)request.getAttribute("rowPage")+1 %>"/>
 	    <input type="submit" value="next20">
 	    </form>
+	    <%} %>
 	
 	  <%} } %>
       </div>
