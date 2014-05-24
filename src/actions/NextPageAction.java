@@ -236,8 +236,6 @@ public class NextPageAction extends ActionSupport {
     				List purchase = q.list();
     				if (purchase.get(0) == null) resultList.add(0);
     				else resultList.add(((Long)purchase.get(0)).intValue());
-    				//System.out
-    				//System.out.println("result:"+count.size());
     			}
                 
                 List cateList = cateDAO.findAll();

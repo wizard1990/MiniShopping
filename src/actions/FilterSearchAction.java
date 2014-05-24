@@ -270,14 +270,12 @@ public class FilterSearchAction extends ActionSupport {
                 for (int i = 0; i < rowLen*colLen; i++) {
     				String stateName = rowList.get(i / colLen).getName();
     				Integer pid = colList.get(i % colLen).getId();
-    				String hql = String.format("select sum(s.price*s.quantity) from Sales s where s.users.state = '%s' and s.products.id = %d and s.users.age >= %d and s.users < %d", stateName, pid, lb, ub);
-    				System.out.println(lb);
+    				String hql = String.format("select sum(s.price*s.quantity) from Sales s where s.users.state = '%s' and s.products.id = %d and s.users.age >= %d and s.users.age < %d", stateName, pid, lb.intValue(), ub.intValue());
     				Query q = session.createQuery(hql);
     				List purchase = q.list();
     				if (purchase.get(0) == null) resultList.add(0);
     				else resultList.add(((Long)purchase.get(0)).intValue());
-    				//System.out
-    				//System.out.println("result:"+count.size());
+    				System.out.println(resultList.get(resultList.size() - 1));
     			}
                 
                 List cateList = cateDAO.findAll();
