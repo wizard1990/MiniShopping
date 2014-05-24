@@ -271,6 +271,7 @@ public class FilterSearchAction extends ActionSupport {
     				String stateName = rowList.get(i / colLen).getName();
     				Integer pid = colList.get(i % colLen).getId();
     				String hql = String.format("select sum(s.price*s.quantity) from Sales s where s.users.state = '%s' and s.products.id = %d and s.users.age >= %d and s.users < %d", stateName, pid, lb, ub);
+    				System.out.println(lb);
     				Query q = session.createQuery(hql);
     				List purchase = q.list();
     				if (purchase.get(0) == null) resultList.add(0);
