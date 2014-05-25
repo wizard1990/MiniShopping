@@ -1,6 +1,7 @@
 package actions;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class FilterSearchAction extends ActionSupport {
 	
 	public String execute() throws Exception{
 		System.out.println("start query");
+		java.util.Date begin = new Date(System.currentTimeMillis());
 		Session session = null;
         boolean isSucc = false;
         CategoriesDAO cateDAO = new CategoriesDAO();
@@ -317,6 +319,9 @@ public class FilterSearchAction extends ActionSupport {
         	}
         }
         
+        java.util.Date end = new Date(System.currentTimeMillis());
+//        int between = (end.getTime() - begin.getTime());
+        System.out.println(end.getTime() - begin.getTime());
         if (isSucc) return SUCCESS;
         else return ERROR;
     }
