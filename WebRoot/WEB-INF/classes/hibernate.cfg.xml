@@ -23,10 +23,6 @@
 		<property name="myeclipse.connection.profile">
 			MiniShoppingDB
 		</property>
-		<mapping resource="DBModel/User.hbm.xml" />
-		<mapping resource="DBModel/Category.hbm.xml" />
-		<mapping resource="DBModel/Product.hbm.xml" />
-		<mapping resource="DBModel/Transaction.hbm.xml" />
 		<mapping resource="DBModel/Carts.hbm.xml" />
 		<mapping resource="DBModel/Categories.hbm.xml" />
 		<mapping resource="DBModel/Products.hbm.xml" />

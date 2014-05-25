@@ -54,6 +54,7 @@ public class FilterSearchAction extends ActionSupport {
 	}
 	
 	public String execute() throws Exception{
+		System.out.println("start query");
 		Session session = null;
         boolean isSucc = false;
         CategoriesDAO cateDAO = new CategoriesDAO();

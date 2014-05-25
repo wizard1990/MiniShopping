@@ -179,7 +179,6 @@ public class NextPageAction extends ActionSupport {
     			List<StateListElement> rowList = new ArrayList<StateListElement>();
     			List<Integer> resultList = new ArrayList<Integer>(rowLen * colLen);
     			
-    			System.out.println("start row");
                 if (stateStateFilter.length() > 0) {
                 	if (rowlist.size() > 0) {
                 		
