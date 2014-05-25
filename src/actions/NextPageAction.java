@@ -214,7 +214,12 @@ public class NextPageAction extends ActionSupport {
                 		}
                 	}
                 }
-    			System.out.println("start col");
+    			
+                rowLen = rowList.size();
+                for (int i = 0; i < rowLen*colLen; i++) {
+                	resultList.add(0);
+                }
+                
                 List<ProductListElement> colList = new ArrayList<ProductListElement>(collist.size());
                 for(Object obj:collist){
                     Products prod = (Products)obj;
@@ -225,20 +230,34 @@ public class NextPageAction extends ActionSupport {
                     		profit += s.getPrice() * s.getQuantity();
                     	}
                     }
+                    
+                    for (Object sale: prod.getSaleses()) {
+                    	Sales s = (Sales)sale;
+                    	for (StateListElement stateEle:rowList) {
+                    		if (stateEle.getName().equals(s.getUsers().getState()) && s.getUsers().getAge() >= lb && s.getUsers().getAge() < ub && (state.length() == 0 || s.getUsers().getState().equals(state))) {
+                    			Integer rowIndex = rowList.indexOf(stateEle);
+                    			Integer colIndex = collist.indexOf(prod);
+                    			Integer index = rowIndex * colLen + colIndex;
+                    			resultList.set(index, resultList.get(index) + s.getPrice() * s.getQuantity());
+                    		}
+                    	}
+                    }
+                    
                     colList.add(new ProductListElement(prod.getId(), prod.getName(), profit));
                 }
-                rowLen = rowList.size();
-                for (int i = 0; i < rowLen*colLen; i++) {
-    				String stateName = rowList.get(i / colLen).getName();
-    				Integer pid = colList.get(i % colLen).getId();
-    				String hql = String.format("select sum(s.price*s.quantity) from Sales s where s.users.state = '%s' and s.products.id = %d and s.users.age >= %d and s.users.age < %d", stateName, pid, lb, ub);
-    				Query q = session.createQuery(hql);
-    				List purchase = q.list();
-    				if (purchase.get(0) == null) resultList.add(0);
-    				else resultList.add(((Long)purchase.get(0)).intValue());
-    				//System.out
-    				//System.out.println("result:"+count.size());
-    			}
+                
+//                rowLen = rowList.size();
+//                for (int i = 0; i < rowLen*colLen; i++) {
+//    				String stateName = rowList.get(i / colLen).getName();
+//    				Integer pid = colList.get(i % colLen).getId();
+//    				String hql = String.format("select sum(s.price*s.quantity) from Sales s where s.users.state = '%s' and s.products.id = %d and s.users.age >= %d and s.users.age < %d", stateName, pid, lb, ub);
+//    				Query q = session.createQuery(hql);
+//    				List purchase = q.list();
+//    				if (purchase.get(0) == null) resultList.add(0);
+//    				else resultList.add(((Long)purchase.get(0)).intValue());
+//    				//System.out
+//    				//System.out.println("result:"+count.size());
+//    			}
                 
                 List cateList = cateDAO.findAll();
                 request.setAttribute("categories", cateList);
