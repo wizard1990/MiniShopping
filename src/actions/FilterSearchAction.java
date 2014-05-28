@@ -321,7 +321,8 @@ public class FilterSearchAction extends ActionSupport {
         
         java.util.Date end = new Date(System.currentTimeMillis());
 //        int between = (end.getTime() - begin.getTime());
-        System.out.println(end.getTime() - begin.getTime());
+        System.out.print(end.getTime() - begin.getTime());
+        System.out.println("ms");
         if (isSucc) return SUCCESS;
         else return ERROR;
     }
